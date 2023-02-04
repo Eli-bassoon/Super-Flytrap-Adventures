@@ -107,6 +107,12 @@ public class CharacterController : MonoBehaviour
             springJoint.frequency = freeSpringFreq;
         }
 
+        // Mouth move to center
+        if (mouthFull && stuckToCollider.GetComponent<FitsInMouth>().centerMe)
+        {
+            stuckToCollider.transform.position = transform.position;
+        }
+
         // Move our character
         if (mousePressed && canGrab)
         {
@@ -313,17 +319,26 @@ public class CharacterController : MonoBehaviour
                     mouthFull = true;
                     if (fitsInMouth.centerMe)
                     {
-                        stuckToCollider.attachedRigidbody.position = rb.position;
+                        stuckToCollider.transform.position = transform.position;
+                    }
+                    fixedJoint.enabled = true;
+                    fixedJoint.autoConfigureConnectedAnchor = false;
+                    if (tongueFixedJoint.connectedBody != null)
+                    {
+                        fixedJoint.connectedBody = tongueFixedJoint.connectedBody;
+                        fixedJoint.connectedAnchor = Vector2.zero;
                     }
                 }
-
-                fixedJoint.enabled = true;
-                fixedJoint.autoConfigureConnectedAnchor = true;
-
-                if (tongueFixedJoint.connectedBody != null)
+                else
                 {
-                    fixedJoint.connectedBody = tongueFixedJoint.connectedBody;
-                    fixedJoint.autoConfigureConnectedAnchor = false;
+                    fixedJoint.enabled = true;
+                    fixedJoint.autoConfigureConnectedAnchor = true;
+
+                    if (tongueFixedJoint.connectedBody != null)
+                    {
+                        fixedJoint.connectedBody = tongueFixedJoint.connectedBody;
+                        fixedJoint.autoConfigureConnectedAnchor = false;
+                    }
                 }
 
                 transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(retractingDirection.y, retractingDirection.x) * Mathf.Rad2Deg - 90);
