@@ -2,7 +2,7 @@
 
 **BEFORE YOU BEGIN**
 
-Here's how to get set up: [Setup](setup.md)
+Here's how to get set up: [Setup](Setup.md)
 
 ## How 2 Github
 
