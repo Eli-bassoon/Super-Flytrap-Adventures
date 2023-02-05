@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Base class for an enemy
 public abstract class Enemy : MonoBehaviour
 {
     public bool edible = true;
