@@ -8,8 +8,8 @@ Here's how to get set up: [Setup](Setup.md)
 
 I don't care that much about how you style your code but please adhere to the following conventions so people know what functions and variables are called.
 
-* All classes and functions are in PascalCase
-* All variables are in camelCase
+* All classes and functions are in *PascalCase*
+* All variables are in *camelCase*
 
 ## How 2 Github
 
