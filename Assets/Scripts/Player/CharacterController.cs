@@ -48,7 +48,7 @@ public class CharacterController : MonoBehaviour
     [HideInInspector] public Rigidbody2D stuckTo = null;
     [HideInInspector] public Collider2D stuckToCollider = null;
     [HideInInspector] public bool stuck = false;
-    private bool mouthFull = false;
+    public bool mouthFull = false;
     private bool retractingTongue = false;
     private Vector2 retractingDirection;
     [HideInInspector] public bool canGrab = true;
