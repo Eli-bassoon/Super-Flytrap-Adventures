@@ -50,7 +50,12 @@ public class EdibleBird : MonoBehaviour
 
             Vector2 moveTowards;
             // Go towards the center if too far away
-            if (wanderDistance > maxWanderDistance)
+            if (inMouth)
+            {
+                moveTowards = Vector2.left;
+                print("going left!");
+            }
+            else if (wanderDistance > maxWanderDistance)
             {
                 moveTowards = towardsCenter.normalized;
             }
@@ -62,11 +67,16 @@ public class EdibleBird : MonoBehaviour
             rb.velocity = moveTowards * speed;
             currMoveTime = Random.Range(minMoveTime, maxMoveTime);
         }
-
-        if (CharacterController.instance.stuckTo == rb && CharacterController.instance.mouthFull)
+        
+        if (!inMouth && CharacterController.instance.mouthFull && CharacterController.instance.stuckTo == rb)
         {
             inMouth = true;
         }
+        else if (inMouth && CharacterController.instance.stuckTo != rb)
+        {
+            inMouth = false;
+        }
+
     }
 }
    
