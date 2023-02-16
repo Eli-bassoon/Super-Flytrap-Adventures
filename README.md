@@ -29,4 +29,4 @@ Pushing uploads your changes to Github so anyone else can download them. You wan
 
 Branches let multiple people work on parallel instances of the project. They are a more advanced technique that you can use if you want but aren't necessary for this.
 
-To avoid merge conflicts, we will be committing directly to main most of the time.
+To avoid merge conflicts, I recommend committing directly to main most of the time.
