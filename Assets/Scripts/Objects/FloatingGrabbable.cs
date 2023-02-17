@@ -9,7 +9,7 @@ public class FloatingGrabbable : MonoBehaviour, IGrabHandler
 
     CircleCollider2D thisCollider;
 
-    void Start()
+    void Awake()
     {
         thisCollider = GetComponent<CircleCollider2D>();
     }
@@ -19,6 +19,7 @@ public class FloatingGrabbable : MonoBehaviour, IGrabHandler
 
     }
 
+    // On release, deactivates the collider for a short time period so the player doesn't double grab it
     public void OnRelease()
     {
         Deactivate();
