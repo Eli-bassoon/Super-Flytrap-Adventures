@@ -321,8 +321,10 @@ public class CharacterController : MonoBehaviour
             {
                 PointAt(retractingDirection);
 
+                // Thing we're stuck to fits in mouth
                 if (stuckToCollider.gameObject.TryGetComponent(out FitsInMouth fitsInMouth))
                 {
+                    stuckTo.excludeLayers = LayerMask.GetMask(new string[] {"Player"});
                     mouthFull = true;
                     if (fitsInMouth.centerMe)
                     {
@@ -370,6 +372,10 @@ public class CharacterController : MonoBehaviour
             if (stuckTo.TryGetComponent(out IGrabHandler grabHandler))
             {
                 grabHandler.OnRelease();
+            }
+            if (mouthFull)
+            {
+                stuckTo.excludeLayers = new LayerMask();
             }
         }
 

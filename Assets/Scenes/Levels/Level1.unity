@@ -697,7 +697,7 @@ GameObject:
   - component: {fileID: 545662691}
   - component: {fileID: 545662690}
   - component: {fileID: 545662694}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2690,22 +2690,6 @@ PrefabInstance:
     - target: {fileID: 1615993913322844170, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
       propertyPath: m_Name
       value: Head
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615993913322844170, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615993913322844172, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-      propertyPath: m_Radius
-      value: 0.08898354
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615993913322844172, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615993913322844172, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.0047874153
       objectReference: {fileID: 0}
     - target: {fileID: 1615993913322844210, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
       propertyPath: m_RootOrder
