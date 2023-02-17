@@ -17,11 +17,11 @@ public class CharacterController : MonoBehaviour
 
     [SerializeField] private float headPullForce = 8f;
     [SerializeField] private float headPullVelocity = 15f;
-    [Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f;
-    [Range(0, 8f)] [SerializeField] private float maxNeckLength = 3.4f;
+    [Range(0, .3f)][SerializeField] private float movementSmoothing = .05f;
+    [Range(0, 8f)][SerializeField] private float maxNeckLength = 3.4f;
     [SerializeField] private LayerMask grabbableLayers;
     [SerializeField] private float mouseChatterThreshold = 0.5f;
-    [Range(-0.5f, 0)] [SerializeField] private float comOffset = -0.2f;
+    [Range(-0.5f, 0)][SerializeField] private float comOffset = -0.2f;
 
     public Rigidbody2D flowerpot;
     public Rigidbody2D tongue;
@@ -147,7 +147,7 @@ public class CharacterController : MonoBehaviour
         {
             springJoint.enabled = true;
             springJoint.frequency = attachedSpringFreq;
-            
+
             // Tests for falling off
             if (!stuckToCollider.enabled)
             {
@@ -212,7 +212,7 @@ public class CharacterController : MonoBehaviour
                     // Mouth should be about a max tongue length behind the tongue
                     if (flowerpotToTongue.magnitude >= maxTongueLength)
                     {
-                        targetMouthPosition = tongue.position - flowerpotToTongue.normalized * maxTongueLength * tongueSlack; 
+                        targetMouthPosition = tongue.position - flowerpotToTongue.normalized * maxTongueLength * tongueSlack;
                     }
                     // Mouth should be by the flowerpot
                     else
