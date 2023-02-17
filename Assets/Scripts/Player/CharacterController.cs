@@ -296,7 +296,14 @@ public class CharacterController : MonoBehaviour
                         tongueFixedJoint.connectedBody = hit.rigidbody;
                         tongueFixedJoint.autoConfigureConnectedAnchor = false;
                         stuckTo = hit.collider.attachedRigidbody;
+
+                        // Broadcast that it has stuck to an object
+                        if (stuckTo.TryGetComponent(out IGrabHandler grabHandler))
+                        {
+                            grabHandler.OnGrab();
+                        }
                     }
+
                     return;
                 }
             }
@@ -360,7 +367,10 @@ public class CharacterController : MonoBehaviour
         // Stuck to a rigid body
         if (stuckTo != null)
         {
-
+            if (stuckTo.TryGetComponent(out IGrabHandler grabHandler))
+            {
+                grabHandler.OnRelease();
+            }
         }
 
         stuck = false;
