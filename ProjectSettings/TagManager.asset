@@ -54,6 +54,9 @@ TagManager:
   - name: Player
     uniqueID: 1489627431
     locked: 0
+  - name: Slightly Closer
+    uniqueID: 343791357
+    locked: 0
   - name: Foreground
     uniqueID: 1930564515
     locked: 0
