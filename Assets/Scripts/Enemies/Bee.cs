@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Debug = UnityEngine.Debug;
@@ -26,7 +27,10 @@ public class Bee : RandomWalkFlyingEnemy
 
         if (dist < trigger)
         {
-            speed = 0;
+            maxWanderDistance = 100f;
+            speed = 1;
+            Vector3 towardsPlayer = (CharacterController.instance.transform.position - transform.position);
+            rb.velocity = towardsPlayer.normalized * speed;
         }
     }
 }
