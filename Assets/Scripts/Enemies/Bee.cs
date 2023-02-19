@@ -29,18 +29,13 @@ public class Bee : RandomWalkFlyingEnemy
         {
             chase = true;
             maxWanderDistance = 100f;
-<<<<<<< Updated upstream
-            speed = 1;
-            Vector3 towardsPlayer = (PlayerMovement.instance.transform.position - transform.position);
-=======
             speed = 4;
-            Vector3 towardsPlayer = (CharacterController.instance.transform.position - transform.position);
->>>>>>> Stashed changes
+            Vector3 towardsPlayer = (PlayerMovement.instance.transform.position - transform.position);
             rb.velocity = towardsPlayer.normalized * speed;
         }
         if (chase == true)
         {
-            Vector3 towardsPlayer = (CharacterController.instance.transform.position - transform.position);
+            Vector3 towardsPlayer = (PlayerMovement.instance.transform.position - transform.position);
             rb.velocity = towardsPlayer.normalized * speed;
         }
         if (dist < 1)
