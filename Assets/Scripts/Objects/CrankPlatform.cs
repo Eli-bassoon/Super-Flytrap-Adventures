@@ -2,27 +2,41 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Splines;
+using UnityEngine.U2D;
 
 public class CrankPlatform : MonoBehaviour
 {
     [SerializeField] [Required] Crank crank;
-    [SerializeField] [Tooltip("The direction that a clockwise turn will go")] Vector2 moveDir;
+    [SerializeField] SplineContainer splineContainer;
     [SerializeField] [Tooltip("Units per crank")] float gearRatio;
+    [SerializeField] CrankDirs forwardDir = CrankDirs.Clockwise; // Make clockwise considered "forward"
+
+    enum CrankDirs
+    {
+        Clockwise = -1,
+        Counterclockwise = +1,
+    }
 
     Rigidbody2D rb;
 
-    Vector2 startPos;
+    float splineLength;
+    float crankSign;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        moveDir = moveDir.normalized;
-        startPos = rb.position;
+
+        splineLength = splineContainer.CalculateLength();
+        crankSign = (int)forwardDir;
     }
 
     void FixedUpdate()
     {
-        float moveBy = -crank.turns * gearRatio; // Make clockwise considered "forward"
-        rb.MovePosition(startPos + moveDir * moveBy);
+        // Move the platform according to the cranked distance
+        float moveBy = crankSign * crank.turns * gearRatio / splineLength;
+        float t = Mathf.Clamp01(moveBy);
+        var pos = (Vector3)splineContainer.EvaluatePosition(t);
+        rb.MovePosition(pos);
     }
 }
