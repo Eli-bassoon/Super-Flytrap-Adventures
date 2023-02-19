@@ -4,6 +4,12 @@
 
 Here's how to get set up: [Setup](Setup.md)
 
+## Getting Visual Studio to Recognize Unity
+
+* Go to Edit > Preferences
+* Go to the "External Tools" tab
+* Change the External Script Editor from "Open by file extension" to "Microsoft Visual Studio 2022"
+
 ## Code Style
 
 I don't care that much about how you style your code but please adhere to the following conventions so people know what functions and variables are called.
