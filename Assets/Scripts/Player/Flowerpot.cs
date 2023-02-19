@@ -11,7 +11,7 @@ public class Flowerpot : MonoBehaviour
     public Rigidbody2D head;
 
     private Rigidbody2D rb;
-    private CharacterController controller;
+    private PlayerMovement controller;
 
     private float distanceToHead;
 
@@ -19,7 +19,7 @@ public class Flowerpot : MonoBehaviour
     {
         // Change the center of mass to be lower
         rb = GetComponent<Rigidbody2D>();
-        controller = head.GetComponent<CharacterController>();
+        controller = head.GetComponent<PlayerMovement>();
         rb.centerOfMass = new Vector2(0, comOffset);
     }
 

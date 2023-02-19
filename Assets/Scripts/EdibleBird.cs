@@ -68,11 +68,11 @@ public class EdibleBird : MonoBehaviour
             currMoveTime = Random.Range(minMoveTime, maxMoveTime);
         }
         
-        if (!inMouth && CharacterController.instance.mouthFull && CharacterController.instance.stuckTo == rb)
+        if (!inMouth && PlayerMovement.instance.mouthFull && PlayerMovement.instance.stuckTo == rb)
         {
             inMouth = true;
         }
-        else if (inMouth && CharacterController.instance.stuckTo != rb)
+        else if (inMouth && PlayerMovement.instance.stuckTo != rb)
         {
             inMouth = false;
         }
