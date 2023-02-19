@@ -27,10 +27,25 @@ public class Bee : RandomWalkFlyingEnemy
 
         if (dist < trigger)
         {
+            chase = true;
             maxWanderDistance = 100f;
+<<<<<<< Updated upstream
             speed = 1;
             Vector3 towardsPlayer = (PlayerMovement.instance.transform.position - transform.position);
+=======
+            speed = 4;
+            Vector3 towardsPlayer = (CharacterController.instance.transform.position - transform.position);
+>>>>>>> Stashed changes
             rb.velocity = towardsPlayer.normalized * speed;
+        }
+        if (chase == true)
+        {
+            Vector3 towardsPlayer = (CharacterController.instance.transform.position - transform.position);
+            rb.velocity = towardsPlayer.normalized * speed;
+        }
+        if (dist < 1)
+        {
+           Destroy(rb.gameObject);
         }
     }
 }
