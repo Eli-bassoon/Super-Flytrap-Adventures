@@ -15,6 +15,7 @@ public abstract class RandomWalkFlyingEnemy : Enemy
     protected float minMoveTime;
     protected float maxMoveTime;
     protected float maxWanderDistance;
+    protected bool chase = false;
 
     protected override void Start()
     {
@@ -40,7 +41,7 @@ public abstract class RandomWalkFlyingEnemy : Enemy
             Vector3 towardsCenter = startPos - transform.position;
             float wanderDistance = towardsCenter.magnitude;
 
-            Vector2 moveTowards;
+            Vector2 moveTowards = Vector2.zero;
             // Go towards the center if too far away
             if (wanderDistance > maxWanderDistance)
             {
@@ -49,7 +50,10 @@ public abstract class RandomWalkFlyingEnemy : Enemy
             // Move in a random direction
             else
             {
-                moveTowards = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+                if (chase == false)
+                {
+                    moveTowards = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+                }
             }
             rb.velocity = moveTowards * speed;
             currMoveTime = Random.Range(minMoveTime, maxMoveTime);
