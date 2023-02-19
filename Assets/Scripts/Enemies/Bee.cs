@@ -23,13 +23,13 @@ public class Bee : RandomWalkFlyingEnemy
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        float dist = Vector2.Distance(transform.position, CharacterController.instance.transform.position);
+        float dist = Vector2.Distance(transform.position, PlayerMovement.instance.transform.position);
 
         if (dist < trigger)
         {
             maxWanderDistance = 100f;
             speed = 1;
-            Vector3 towardsPlayer = (CharacterController.instance.transform.position - transform.position);
+            Vector3 towardsPlayer = (PlayerMovement.instance.transform.position - transform.position);
             rb.velocity = towardsPlayer.normalized * speed;
         }
     }

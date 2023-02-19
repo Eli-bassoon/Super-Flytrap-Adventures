@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
-    public CharacterController controller;
+    public PlayerMovement controller;
     private Vector3 mousePosition;
     private bool mousePressed;
     private bool mouseButtonUp;

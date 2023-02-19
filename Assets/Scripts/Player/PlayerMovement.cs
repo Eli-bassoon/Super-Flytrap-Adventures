@@ -4,7 +4,7 @@ using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-public class CharacterController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     enum MouthStates
     {
@@ -12,7 +12,7 @@ public class CharacterController : MonoBehaviour
         Open,
         Grabbing,
     }
-    public static CharacterController instance;
+    public static PlayerMovement instance;
     public static int mouthStateAnim = Animator.StringToHash("mouthState");
 
     [SerializeField] private float headPullForce = 8f;
