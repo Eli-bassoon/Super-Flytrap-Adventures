@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 545662694}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: Center in Mouth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -436,7 +436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545662689}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.46, y: 3.34, z: 0}
+  m_LocalPosition: {x: 4.18, y: 3.5, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -455,7 +455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f732f1d95cc9afd408668fff631c62d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerMe: 1
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,6 +2554,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5691666279212415539, guid: 20d4fea6ab9c82841af53e07fdd36371, type: 3}
+      propertyPath: m_TagString
+      value: Center in Mouth
+      objectReference: {fileID: 0}
     - target: {fileID: 6006528840815065848, guid: 20d4fea6ab9c82841af53e07fdd36371, type: 3}
       propertyPath: splineContainer
       value: 
@@ -2611,7 +2614,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2133532370481505456, guid: 20d4fea6ab9c82841af53e07fdd36371, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

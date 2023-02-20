@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Not Grabbable
+  - Center in Mouth
   layers:
   - Default
   - TransparentFX

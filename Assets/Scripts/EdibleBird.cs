@@ -46,7 +46,6 @@ public class EdibleBird : MonoBehaviour
     protected void Update()
     {
         //base.Update();
-
     }
 
     protected void RandomMove()
@@ -105,7 +104,7 @@ public class EdibleBird : MonoBehaviour
             PathMove();
         }
         
-        if (!inMouth && PlayerMovement.instance.mouthFull && PlayerMovement.instance.stuckTo == rb)
+        if (!inMouth && !PlayerMovement.instance.retractingTongue && PlayerMovement.instance.stuckTo == rb)
         {
             inMouth = true;
         }

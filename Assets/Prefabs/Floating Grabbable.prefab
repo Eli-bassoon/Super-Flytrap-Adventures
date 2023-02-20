@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2510825472262446884}
   m_Layer: 8
   m_Name: Floating Grabbable
-  m_TagString: Untagged
+  m_TagString: Center in Mouth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

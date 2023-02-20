@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public Collider2D stuckToCollider = null;
     [HideInInspector] public bool stuck = false;
     public bool mouthFull = false;
-    private bool retractingTongue = false;
+    public bool retractingTongue = false;
     private Vector2 retractingDirection;
     [HideInInspector] public bool canGrab = true;
     private Coroutine tongueCoroutine;
@@ -105,12 +105,6 @@ public class PlayerMovement : MonoBehaviour
         if (!stuck)
         {
             springJoint.frequency = freeSpringFreq;
-        }
-
-        // Mouth move to center
-        if (mouthFull && stuckToCollider.GetComponent<FitsInMouth>().centerMe)
-        {
-            stuckToCollider.transform.position = transform.position;
         }
 
         // Move our character
@@ -296,12 +290,6 @@ public class PlayerMovement : MonoBehaviour
                         tongueFixedJoint.connectedBody = hit.rigidbody;
                         tongueFixedJoint.autoConfigureConnectedAnchor = false;
                         stuckTo = hit.collider.attachedRigidbody;
-
-                        // Broadcast that it has stuck to an object
-                        if (stuckTo.TryGetComponent(out IGrabHandler grabHandler))
-                        {
-                            grabHandler.OnGrab();
-                        }
                     }
 
                     return;
@@ -321,15 +309,18 @@ public class PlayerMovement : MonoBehaviour
             {
                 PointAt(retractingDirection);
 
+                // Center in mouth
+                if (stuckTo != null && stuckTo.CompareTag("Center in Mouth"))
+                {
+                    stuckTo.excludeLayers = LayerMask.GetMask(new string[] { "Player" });
+                    rb.position = stuckTo.position;
+                }
+
                 // Thing we're stuck to fits in mouth
-                if (stuckToCollider.gameObject.TryGetComponent(out FitsInMouth fitsInMouth))
+                if (stuckToCollider.gameObject.TryGetComponent(out FitsInMouth _))
                 {
                     stuckTo.excludeLayers = LayerMask.GetMask(new string[] {"Player"});
                     mouthFull = true;
-                    if (fitsInMouth.centerMe)
-                    {
-                        stuckToCollider.transform.position = transform.position;
-                    }
                     fixedJoint.enabled = true;
                     fixedJoint.autoConfigureConnectedAnchor = false;
                     if (tongueFixedJoint.connectedBody != null)
@@ -348,6 +339,12 @@ public class PlayerMovement : MonoBehaviour
                         fixedJoint.connectedBody = tongueFixedJoint.connectedBody;
                         fixedJoint.autoConfigureConnectedAnchor = false;
                     }
+                }
+
+                // Broadcast that it has stuck to an object
+                if (stuckToCollider.TryGetComponent(out IGrabHandler grabHandler))
+                {
+                    grabHandler.OnGrab();
                 }
 
                 transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(retractingDirection.y, retractingDirection.x) * Mathf.Rad2Deg - 90);
@@ -373,7 +370,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 grabHandler.OnRelease();
             }
-            if (mouthFull)
+            if (mouthFull || stuckTo.CompareTag("Center in Mouth"))
             {
                 stuckTo.excludeLayers = new LayerMask();
             }
