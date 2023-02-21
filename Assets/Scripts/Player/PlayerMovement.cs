@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [Range(0, 8f)] [SerializeField] float maxNeckLength = 3.4f;
     [SerializeField] LayerMask grabbableLayers;
     [SerializeField] float mouseChatterThreshold = 0.5f;
+    [SerializeField] float extraWallCheckRadius = 0.2f;
     [Range(-0.5f, 0)] [SerializeField] float comOffset = -0.2f;
     [SerializeField] float targetFreeDist = 1f;
     [SerializeField] float freeForceP = 1;
@@ -45,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
     bool mouseButtonUp;
 
     Vector3 zeroVelocity = new Vector3(0, 0, 0);
-    float extraWallCheckRadius = 0.2f;
     float maxTongueLength;
     float distanceToPot = 0f;
     float behindTongueChatterThreshold = 0.2f;
@@ -337,6 +337,8 @@ public class PlayerMovement : MonoBehaviour
                     stuck = true;
                     stuckToCollider = hit.collider;
 
+                    tongue.position = hit.point;
+                    tongueCollider.enabled = false;
                     tongueFixedJoint.enabled = true;
                     tongueFixedJoint.autoConfigureConnectedAnchor = true;
 
@@ -361,7 +363,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref zeroVelocity, movementSmoothing);
 
             // Fully retract the tongue
-            if (Vector2.Distance(tongue.position, rb.position) < 0.2f)
+            if (Vector2.Distance(tongue.position, rb.position) < 0.1f)
             {
                 PointAt(retractingDirection);
 
@@ -439,7 +441,6 @@ public class PlayerMovement : MonoBehaviour
         springJoint.enabled = false;
         fixedJoint.enabled = false;
         fixedJoint.connectedBody = null;
-        rb.centerOfMass = new Vector2(comOffset, 0);
 
         DisableTongue();
         GetFreeDelt();
@@ -451,6 +452,7 @@ public class PlayerMovement : MonoBehaviour
     {
         retractingTongue = false;
 
+        tongueCollider.enabled = true;
         tongueFixedJoint.enabled = false;
         tongueFixedJoint.connectedBody = null;
 
