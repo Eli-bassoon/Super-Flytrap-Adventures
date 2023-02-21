@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D flowerpot;
     public Rigidbody2D tongue;
+    public GameObject rightMouthHalf;
 
     CircleCollider2D tongueCollider;
     FixedJoint2D tongueFixedJoint;
@@ -49,13 +50,13 @@ public class PlayerMovement : MonoBehaviour
     float distanceToPot = 0f;
     float behindTongueChatterThreshold = 0.2f;
 
-    float targetFreeAngle = -90;
+    float restingAngle = -90;
     Vector2 freePosDelt;
     float freeAngleDelt;
 
     [HideInInspector] public Rigidbody2D stuckTo = null;
     [HideInInspector] public Collider2D stuckToCollider = null;
-    [HideInInspector] public bool stuck = false;
+    [ReadOnly] public bool stuck = false;
     [ReadOnly] public bool mouthFull = false;
     [ReadOnly] public bool retractingTongue = false;
     [HideInInspector] public bool canGrab = true;
@@ -99,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
             mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             mousePressed = true;
+            if (!stuck || mouthFull) ChangeRestingAngle();
         }
         // If we let go of the mouse button, see if we get launched
         if (Input.GetMouseButtonUp(0))
@@ -130,6 +132,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Changes the head's direction to left/right depending on where was last clicked
+    void ChangeRestingAngle()
+    {
+        SpriteRenderer rightMouthHalfRenderer = rightMouthHalf.GetComponent<SpriteRenderer>();
+
+        if (((Vector2)mousePosition - flowerpot.position).x < 0)
+        {
+            restingAngle = +90;
+            rightMouthHalfRenderer.sortingOrder = 1;
+        }
+        else
+        {
+            restingAngle = -90;
+            rightMouthHalfRenderer.sortingOrder = 0;
+        }
+    }
 
     // Makes the jaws look at a certain position
     void PointAt(Vector3 pointDirection, bool includeTongue = false)
@@ -249,14 +267,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Gets changes since previous frame for PD control
     void GetFreeDelt()
     {
         Vector2 targetPos = flowerpot.position + Vector2.up*targetFreeDist + flowerpot.velocity*flowerpotVBias;
         freePosDelt = targetPos - rb.position;
 
-        freeAngleDelt = targetFreeAngle - rb.rotation;
+        freeAngleDelt = restingAngle - rb.rotation;
     }
     
+    // When not grabbing, tries to move the head to a resting position
     public void MoveToRest()
     {
         // Get values

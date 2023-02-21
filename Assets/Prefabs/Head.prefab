@@ -663,6 +663,7 @@ MonoBehaviour:
   flowerpotVBias: {x: 0.1, y: -0.05}
   flowerpot: {fileID: 1615993911643782221}
   tongue: {fileID: 1615993912969288472}
+  rightMouthHalf: {fileID: 1615993912622745077}
   stuckTo: {fileID: 0}
   stuckToCollider: {fileID: 0}
   stuck: 0
