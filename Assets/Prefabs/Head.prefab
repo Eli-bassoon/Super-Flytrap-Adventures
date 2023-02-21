@@ -658,8 +658,9 @@ MonoBehaviour:
   targetFreeDist: 1
   freeForceP: 30
   freeForceD: 300
-  freeAngleP: 1
+  freeAngleP: 3
   freeAngleD: 0
+  flowerpotVBias: {x: 0.1, y: -0.05}
   flowerpot: {fileID: 1615993911643782221}
   tongue: {fileID: 1615993912969288472}
   stuckTo: {fileID: 0}

@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float freeForceD = 0;
     [SerializeField] float freeAngleP = 1;
     [SerializeField] float freeAngleD = 0;
+    [SerializeField] Vector2 flowerpotVBias;
 
     public Rigidbody2D flowerpot;
     public Rigidbody2D tongue;
@@ -250,7 +251,7 @@ public class PlayerMovement : MonoBehaviour
 
     void GetFreeDelt()
     {
-        Vector2 targetPos = flowerpot.position + Vector2.up * targetFreeDist;
+        Vector2 targetPos = flowerpot.position + Vector2.up*targetFreeDist + flowerpot.velocity*flowerpotVBias;
         freePosDelt = targetPos - rb.position;
 
         freeAngleDelt = targetFreeAngle - rb.rotation;
