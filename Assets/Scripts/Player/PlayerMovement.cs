@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,44 +15,52 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement instance;
     public static int mouthStateAnim = Animator.StringToHash("mouthState");
 
-    [SerializeField] private float headPullForce = 8f;
-    [SerializeField] private float headPullVelocity = 15f;
-    [Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f;
-    [Range(0, 8f)] [SerializeField] private float maxNeckLength = 3.4f;
-    [SerializeField] private LayerMask grabbableLayers;
-    [SerializeField] private float mouseChatterThreshold = 0.5f;
-    [Range(-0.5f, 0)] [SerializeField] private float comOffset = -0.2f;
+    [SerializeField] float headPullForce = 8f;
+    [SerializeField] float headPullVelocity = 15f;
+    [Range(0, .3f)] [SerializeField] float movementSmoothing = 0.05f;
+    [Range(0, 8f)] [SerializeField] float maxNeckLength = 3.4f;
+    [SerializeField] LayerMask grabbableLayers;
+    [SerializeField] float mouseChatterThreshold = 0.5f;
+    [Range(-0.5f, 0)] [SerializeField] float comOffset = -0.2f;
+    [SerializeField] float targetFreeDist = 1f;
+    [SerializeField] float freeForceP = 1;
+    [SerializeField] float freeForceD = 0;
+    [SerializeField] float freeAngleP = 1;
+    [SerializeField] float freeAngleD = 0;
 
     public Rigidbody2D flowerpot;
     public Rigidbody2D tongue;
 
-    private CircleCollider2D tongueCollider;
-    private FixedJoint2D tongueFixedJoint;
-    private SpringJoint2D springJoint;
-    private FixedJoint2D fixedJoint;
-    private Rigidbody2D rb;
-    private Animator anim;
+    CircleCollider2D tongueCollider;
+    FixedJoint2D tongueFixedJoint;
+    SpringJoint2D springJoint;
+    FixedJoint2D fixedJoint;
+    Rigidbody2D rb;
+    Animator anim;
 
-    private Vector3 mousePosition;
-    private bool mousePressed;
-    private bool mouseButtonUp;
+    Vector3 mousePosition;
+    bool mousePressed;
+    bool mouseButtonUp;
 
-    private Vector3 zeroVelocity = new Vector3(0, 0, 0);
-    private float extraWallCheckRadius = 0.2f;
-    private float attachedSpringFreq = 2f;
-    private float freeSpringFreq = 0.7f;
-    private float maxTongueLength;
-    private float distanceToPot = 0f;
-    private float behindTongueChatterThreshold = 0.2f;
-    private Rigidbody2D prevStuckTo = null;
+    Vector3 zeroVelocity = new Vector3(0, 0, 0);
+    float extraWallCheckRadius = 0.2f;
+    float maxTongueLength;
+    float distanceToPot = 0f;
+    float behindTongueChatterThreshold = 0.2f;
+
+    float targetFreeAngle = -90;
+    Vector2 freePosDelt;
+    float freeAngleDelt;
+
     [HideInInspector] public Rigidbody2D stuckTo = null;
     [HideInInspector] public Collider2D stuckToCollider = null;
     [HideInInspector] public bool stuck = false;
-    public bool mouthFull = false;
-    public bool retractingTongue = false;
-    private Vector2 retractingDirection;
+    [ReadOnly] public bool mouthFull = false;
+    [ReadOnly] public bool retractingTongue = false;
     [HideInInspector] public bool canGrab = true;
-    private Coroutine tongueCoroutine;
+
+    Vector2 retractingDirection;
+    Coroutine tongueCoroutine;
 
     private void Awake()
     {
@@ -104,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!stuck)
         {
-            springJoint.frequency = freeSpringFreq;
+            MoveToRest();
         }
 
         // Move our character
@@ -140,7 +148,6 @@ public class PlayerMovement : MonoBehaviour
         if (stuck)
         {
             springJoint.enabled = true;
-            springJoint.frequency = attachedSpringFreq;
             
             // Tests for falling off
             if (!stuckToCollider.enabled)
@@ -239,6 +246,34 @@ public class PlayerMovement : MonoBehaviour
             }
             PointAt(pointDirection, includeTongue: true);
         }
+    }
+
+    void GetFreeDelt()
+    {
+        Vector2 targetPos = flowerpot.position + Vector2.up * targetFreeDist;
+        freePosDelt = targetPos - rb.position;
+
+        freeAngleDelt = targetFreeAngle - rb.rotation;
+    }
+    
+    public void MoveToRest()
+    {
+        // Get values
+        Vector2 prevFreePosDelt = freePosDelt;
+        float prevFreeAngleDelt = freeAngleDelt;
+        GetFreeDelt();
+
+        // Force PD control
+        Vector2 appliedForceP = freePosDelt * freeForceP;
+        Vector2 appliedForceD = (freePosDelt - prevFreePosDelt) * freeForceD;
+        Vector2 appliedForce = appliedForceP + appliedForceD;
+        rb.AddForce(appliedForce);
+
+        // Angle PD control
+        float appliedAngleP = freeAngleDelt * freeAngleP;
+        float appliedAngleD = (freeAngleDelt - prevFreeAngleDelt) * freeAngleD;
+        float newOmega = appliedAngleP + appliedAngleD;
+        rb.angularVelocity = newOmega;
     }
 
     // Sticks to a wall
@@ -361,8 +396,6 @@ public class PlayerMovement : MonoBehaviour
     // We just let go of something
     public void LetGo()
     {
-        prevStuckTo = stuckTo;
-
         // Stuck to a rigid body
         if (stuckTo != null)
         {
@@ -382,13 +415,13 @@ public class PlayerMovement : MonoBehaviour
         stuckTo = null;
         stuckToCollider = null;
 
-        springJoint.enabled = true;
-        springJoint.frequency = freeSpringFreq;
+        springJoint.enabled = false;
         fixedJoint.enabled = false;
         fixedJoint.connectedBody = null;
         rb.centerOfMass = new Vector2(comOffset, 0);
 
         DisableTongue();
+        GetFreeDelt();
         anim.SetInteger(mouthStateAnim, (int)MouthStates.Closed);
     }
 

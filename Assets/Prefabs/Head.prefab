@@ -172,8 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comOffset: -0.25
-  upwardsForceThreshold: 1.5
-  upwardsForce: 10
   head: {fileID: 1615993913322844211}
 --- !u!1 &1615993912012993845
 GameObject:
@@ -657,12 +655,18 @@ MonoBehaviour:
     m_Bits: 1793
   mouseChatterThreshold: 0.5
   comOffset: -0.25
+  targetFreeDist: 1
+  freeForceP: 30
+  freeForceD: 300
+  freeAngleP: 1
+  freeAngleD: 0
   flowerpot: {fileID: 1615993911643782221}
   tongue: {fileID: 1615993912969288472}
   stuckTo: {fileID: 0}
   stuckToCollider: {fileID: 0}
   stuck: 0
   mouthFull: 0
+  retractingTongue: 0
   canGrab: 1
 --- !u!231 &1615993913322844174
 SpringJoint2D:
@@ -671,7 +675,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615993913322844170}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 1615993911643782221}
@@ -684,7 +688,7 @@ SpringJoint2D:
   m_AutoConfigureDistance: 0
   m_Distance: 0.1
   m_DampingRatio: 0.1
-  m_Frequency: 0.7
+  m_Frequency: 2
 --- !u!232 &1615993913322844175
 DistanceJoint2D:
   m_ObjectHideFlags: 0
