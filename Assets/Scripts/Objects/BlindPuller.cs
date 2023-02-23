@@ -16,7 +16,11 @@ public class BlindPuller : MonoBehaviour, IGrabHandler
     Rigidbody2D rb;
     LineRenderer lineRenderer;
     bool grabbed;
+    float prevLength;
     [ReadOnly] public float length;
+
+    [SerializeField] GameObject[] subscriberObjects;
+    List<IFloatAcceptor> subscribers;
 
     void Start()
     {
@@ -31,6 +35,7 @@ public class BlindPuller : MonoBehaviour, IGrabHandler
         // Joints
         segmentJoints = new List<DistanceJoint2D>(numSegments);
         length = startLength;
+        prevLength = length;
 
         // Construct rope segments
         Vector2 position = transform.parent.position;
@@ -60,16 +65,29 @@ public class BlindPuller : MonoBehaviour, IGrabHandler
 
         segmentJoints.Add(comp2);
         segmentTransforms.Add(transform);
+
+        // Process subscribers
+        subscribers = new List<IFloatAcceptor>(subscriberObjects.Length);
+        foreach (var sub in subscriberObjects)
+        {
+            subscribers.Add(sub.GetComponent<IFloatAcceptor>());
+        }
     }
 
     void Update()
     {
         if (grabbed && (length < maxLength))
         {
+            prevLength = length;
             length += Time.deltaTime * lengtheningSpeed;
             foreach (var segment in segmentJoints)
             {
                 segment.distance = length / numSegments;
+            }
+
+            foreach (var sub in subscribers)
+            {
+                sub.TakeFloat((length - prevLength) / (maxLength - startLength));
             }
         }
 

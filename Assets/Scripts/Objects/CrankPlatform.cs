@@ -9,8 +9,9 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
 {
     //[SerializeField] [Required] Crank crank;
     [SerializeField] SplineContainer splineContainer;
-    [SerializeField] [Tooltip("Units per crank")] float gearRatio;
     [SerializeField] CrankDirs forwardDir = CrankDirs.Clockwise; // Make clockwise considered "forward"
+    [SerializeField] MoveTypes moveType = MoveTypes.ConstantSpeed;
+    [SerializeField] [ShowIf("moveType", MoveTypes.ConstantSpeed)] [Tooltip("Units per crank")] float gearRatio;
 
     float along = 0;
 
@@ -18,6 +19,11 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
     {
         Clockwise = -1,
         Counterclockwise = +1,
+    }
+    enum MoveTypes
+    {
+        ConstantSpeed,
+        FractionComplete,
     }
 
     Rigidbody2D rb;
@@ -33,10 +39,17 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
         crankSign = (int)forwardDir;
     }
 
-    public void TakeFloat(float turnsChange)
+    public void TakeFloat(float f)
     {
         // Move the platform according to the cranked distance
-        along += crankSign * turnsChange * gearRatio / splineLength;
+        if (moveType == MoveTypes.ConstantSpeed)
+        {
+            along += crankSign * f * gearRatio / splineLength;
+        }
+        else if (moveType == MoveTypes.FractionComplete)
+        {
+            along += crankSign * f;
+        }
         along = Mathf.Clamp01(along);
         var pos = (Vector3)splineContainer.EvaluatePosition(along);
         rb.MovePosition(pos);

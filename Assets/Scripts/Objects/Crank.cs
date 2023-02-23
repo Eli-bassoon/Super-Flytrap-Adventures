@@ -16,7 +16,7 @@ public class Crank : MonoBehaviour
     [ReadOnly] public float turns;
     [ReadOnly] public int wholeTurns;
 
-    [SerializeField] GameObject[] turnSubscribersGO;
+    [SerializeField] GameObject[] turnSubscriberObjects;
 
     List<IFloatAcceptor> turnSubscribers;
 
@@ -28,8 +28,8 @@ public class Crank : MonoBehaviour
     {
         startAngle = GetAbsAngle();
 
-        turnSubscribers = new List<IFloatAcceptor>(turnSubscribersGO.Length);
-        foreach (var sub in turnSubscribersGO)
+        turnSubscribers = new List<IFloatAcceptor>(turnSubscriberObjects.Length);
+        foreach (var sub in turnSubscriberObjects)
         {
             turnSubscribers.Add(sub.GetComponent<IFloatAcceptor>());
         }
