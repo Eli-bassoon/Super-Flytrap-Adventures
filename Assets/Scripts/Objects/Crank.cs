@@ -16,17 +16,30 @@ public class Crank : MonoBehaviour
     [ReadOnly] public float turns;
     [ReadOnly] public int wholeTurns;
 
+    [SerializeField] GameObject[] turnSubscribersGO;
+
+    List<IFloatAcceptor> turnSubscribers;
+
     private float startAngle;
     private float prevClampedAngle;
+    private float prevTurns;
 
     void Start()
     {
         startAngle = GetAbsAngle();
+
+        turnSubscribers = new List<IFloatAcceptor>(turnSubscribersGO.Length);
+        foreach (var sub in turnSubscribersGO)
+        {
+            turnSubscribers.Add(sub.GetComponent<IFloatAcceptor>());
+        }
     }
 
     void FixedUpdate()
     {
         prevClampedAngle = clampedAngle;
+        prevTurns = turns;
+
         clampedAngle = GetRelAngle();
         absAngle = GetAbsAngle();
 
@@ -46,6 +59,13 @@ public class Crank : MonoBehaviour
 
         angle = wholeTurns * 360 + clampedAngle;
         turns = angle / 360;
+        if (prevTurns != turns)
+        {
+            foreach (var sub in turnSubscribers)
+            {
+                sub.TakeFloat(turns - prevTurns);
+            }
+        }
     }
 
     float GetAbsAngle()

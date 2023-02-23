@@ -5,12 +5,14 @@ using UnityEngine;
 using UnityEngine.Splines;
 using UnityEngine.U2D;
 
-public class CrankPlatform : MonoBehaviour
+public class CrankPlatform : MonoBehaviour, IFloatAcceptor
 {
-    [SerializeField] [Required] Crank crank;
+    //[SerializeField] [Required] Crank crank;
     [SerializeField] SplineContainer splineContainer;
     [SerializeField] [Tooltip("Units per crank")] float gearRatio;
     [SerializeField] CrankDirs forwardDir = CrankDirs.Clockwise; // Make clockwise considered "forward"
+
+    float along = 0;
 
     enum CrankDirs
     {
@@ -31,12 +33,12 @@ public class CrankPlatform : MonoBehaviour
         crankSign = (int)forwardDir;
     }
 
-    void FixedUpdate()
+    public void TakeFloat(float turnsChange)
     {
         // Move the platform according to the cranked distance
-        float moveBy = crankSign * crank.turns * gearRatio / splineLength;
-        float t = Mathf.Clamp01(moveBy);
-        var pos = (Vector3)splineContainer.EvaluatePosition(t);
+        along += crankSign * turnsChange * gearRatio / splineLength;
+        along = Mathf.Clamp01(along);
+        var pos = (Vector3)splineContainer.EvaluatePosition(along);
         rb.MovePosition(pos);
     }
 }
