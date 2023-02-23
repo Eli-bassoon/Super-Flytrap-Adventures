@@ -7,11 +7,11 @@ public class FloatingGrabbable : MonoBehaviour, IGrabHandler
 {
     float reactivateDelay = 0.4f; // s
 
-    CircleCollider2D thisCollider;
+    Collider2D thisCollider;
 
     void Awake()
     {
-        thisCollider = GetComponent<CircleCollider2D>();
+        thisCollider = GetComponent<Collider2D>();
     }
 
     public void OnGrab()
