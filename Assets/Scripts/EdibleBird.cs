@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 
-// A generic enemy that moves in a random walk flying pattern
+// A bird that takes the flytrap on a flight of predetermined path
 public class EdibleBird : MonoBehaviour
 {
     protected Vector3 startPos;
