@@ -32,32 +32,35 @@ public class FlytrapHead : MonoBehaviour
         {
             mousePos = Vector2.zero;
         }
-        // pullForce = (mousePos - rb.position);
-        // if (Input.GetMouseButton(0))
-        // {
-        //     if (pullForce.magnitude > pullRadius)
-        //     {
-        //         pullForce = pullForce.normalized * pullRadius;
-        //     }
-        // }
-        // else
-        // {
-        //     pullForce *= 0;
-        // }
+        pullForce = (mousePos - rb.position);
+        if (Input.GetMouseButton(0))
+        {
+            if (pullForce.magnitude > pullRadius)
+            {
+                pullForce = pullForce.normalized * pullRadius;
+            }
+        }
+        else
+        {
+            pullForce *= 0;
+        }
 
-        // pullForce *= pullStrength;
-        // Debug.Log(pullForce.ToString());
+        pullForce *= pullStrength;
+        Debug.Log(pullForce.ToString());
+
+
 
     }
 
     private void FixedUpdate()
     {
-        // rb.AddForce(pullForce, ForceMode2D.Impulse);
-        if (Input.GetMouseButton(0))
-        {
-            rb.MovePosition(mousePos);
-        }
+        rb.AddForce(pullForce, ForceMode2D.Impulse);
+        // if (Input.GetMouseButton(0))
+        // {
+        //     rb.MovePosition(mousePos);
+        // }
 
     }
+
 
 }
