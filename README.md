@@ -4,6 +4,12 @@
 
 Here's how to get set up: [Setup](Setup.md)
 
+## Getting Visual Studio to Recognize Unity
+
+* Go to Edit > Preferences
+* Go to the "External Tools" tab
+* Change the External Script Editor from "Open by file extension" to "Microsoft Visual Studio 2022"
+
 ## Code Style
 
 I don't care that much about how you style your code but please adhere to the following conventions so people know what functions and variables are called.
@@ -29,4 +35,4 @@ Pushing uploads your changes to Github so anyone else can download them. You wan
 
 Branches let multiple people work on parallel instances of the project. They are a more advanced technique that you can use if you want but aren't necessary for this.
 
-To avoid merge conflicts, we will be committing directly to main most of the time.
+To avoid merge conflicts, I recommend committing directly to main most of the time.
