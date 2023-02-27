@@ -203,12 +203,12 @@ public class PlayerMovement : MonoBehaviour
                 if (mouthFull)
                 {
                     stuckTo.AddForce(targetForce);
+                    flowerpot.AddForce(-targetForce);
                 }
                 else
                 {
                     movingRigidbody.AddForce(targetForce);
                 }
-                flowerpot.AddForce(-targetForce);
                 changeAngleToMouse = true;
             }
             // If we're inside the head's free range of motion, change the velocity to go towards the mouse
