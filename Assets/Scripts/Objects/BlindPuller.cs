@@ -28,7 +28,6 @@ public class BlindPuller : MonoBehaviour, IGrabHandler
         }
 
         startLength = rope.length;
-        print(startLength);
     }
 
     void Update()

@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float freeAngleD = 0;
     [SerializeField] Vector2 flowerpotVBias;
 
+    public Transform neck;
     public Rigidbody2D flowerpot;
     public Rigidbody2D tongue;
     public GameObject rightMouthHalf;
@@ -83,6 +84,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Unlock flowerpot from this
         flowerpot.transform.parent = null;
+        neck.transform.parent = null;
+        neck.transform.position = Vector3.zero;
     }
 
     void Update()
