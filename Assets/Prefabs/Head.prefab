@@ -539,9 +539,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1615993913322844210}
+  - component: {fileID: 1615993913322844173}
   - component: {fileID: 1615993913322844211}
   - component: {fileID: 1615993913322844172}
-  - component: {fileID: 1615993913322844173}
   - component: {fileID: 1615993913322844174}
   - component: {fileID: 1615993913322844175}
   - component: {fileID: 1615993913322844168}
@@ -574,6 +574,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1615993913322844173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615993913322844170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd2a47bbe3ae8f0419202e498eeeb928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headPullForce: 75
+  headPullVelocity: 15
+  movementSmoothing: 0
+  maxNeckLength: 3.2
+  grabbableLayers:
+    serializedVersion: 2
+    m_Bits: 1793
+  mouseChatterThreshold: 0.5
+  minMousePotSwingDist: 0.5
+  maxMousePotSwingDist: 2
+  maxPotSwingForce: 75
+  extraWallCheckRadius: 0.2
+  comOffset: -0.25
+  targetFreeDist: 1
+  freeForceP: 30
+  freeForceD: 300
+  freeAngleP: 3
+  freeAngleD: 0
+  flowerpotVBias: {x: 0.1, y: -0.05}
+  neck: {fileID: 5403534888202816348}
+  flowerpot: {fileID: 1615993911643782221}
+  tongue: {fileID: 1615993912969288472}
+  rightMouthHalf: {fileID: 1615993912622745077}
+  stuckTo: {fileID: 0}
+  stuckToCollider: {fileID: 0}
+  stuck: 0
+  mouthFull: 0
+  retractingTongue: 0
+  canGrab: 1
 --- !u!50 &1615993913322844211
 Rigidbody2D:
   serializedVersion: 4
@@ -636,44 +677,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.15528977}
   serializedVersion: 2
   m_Radius: 0.07714206
---- !u!114 &1615993913322844173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615993913322844170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd2a47bbe3ae8f0419202e498eeeb928, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  headPullForce: 75
-  headPullVelocity: 15
-  movementSmoothing: 0
-  maxNeckLength: 3.2
-  grabbableLayers:
-    serializedVersion: 2
-    m_Bits: 1793
-  mouseChatterThreshold: 0.5
-  extraWallCheckRadius: 0.2
-  comOffset: -0.25
-  targetFreeDist: 1
-  freeForceP: 30
-  freeForceD: 300
-  freeAngleP: 3
-  freeAngleD: 0
-  flowerpotVBias: {x: 0.1, y: -0.05}
-  neck: {fileID: 5403534888202816348}
-  flowerpot: {fileID: 1615993911643782221}
-  tongue: {fileID: 1615993912969288472}
-  rightMouthHalf: {fileID: 1615993912622745077}
-  stuckTo: {fileID: 0}
-  stuckToCollider: {fileID: 0}
-  stuck: 0
-  mouthFull: 0
-  retractingTongue: 0
-  canGrab: 1
 --- !u!231 &1615993913322844174
 SpringJoint2D:
   m_ObjectHideFlags: 0

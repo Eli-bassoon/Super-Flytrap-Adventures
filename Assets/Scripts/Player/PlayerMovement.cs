@@ -15,24 +15,41 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement instance;
     public static int mouthStateAnim = Animator.StringToHash("mouthState");
 
+    [Foldout("HeadMovement")]
     [SerializeField] float headPullForce = 8f;
+    [Foldout("HeadMovement")]
     [SerializeField] float headPullVelocity = 15f;
+    [Foldout("HeadMovement")]
     [Range(0, .3f)][SerializeField] float movementSmoothing = 0.05f;
+    [Foldout("HeadMovement")]
     [Range(0, 8f)][SerializeField] float maxNeckLength = 3.4f;
+    [Foldout("HeadMovement")]
     [SerializeField] LayerMask grabbableLayers;
+    [Foldout("HeadMovement")]
     [SerializeField] float mouseChatterThreshold = 0.5f;
 
+    [Foldout("PotMovement")]
     [SerializeField] float minMousePotSwingDist = 0.5f;
+    [Foldout("PotMovement")]
     [SerializeField] float maxMousePotSwingDist = 2f;
+    [Foldout("PotMovement")]
     [SerializeField] float maxPotSwingForce = 75f;
 
+    [Foldout("Misc")]
     [SerializeField] float extraWallCheckRadius = 0.2f;
+    [Foldout("Misc")]
     [Range(-0.5f, 0)][SerializeField] float comOffset = -0.2f;
+    [Foldout("Misc")]
     [SerializeField] float targetFreeDist = 1f;
+    [Foldout("Misc")]
     [SerializeField] float freeForceP = 1;
+    [Foldout("Misc")]
     [SerializeField] float freeForceD = 0;
+    [Foldout("Misc")]
     [SerializeField] float freeAngleP = 1;
+    [Foldout("Misc")]
     [SerializeField] float freeAngleD = 0;
+    [Foldout("Misc")]
     [SerializeField] Vector2 flowerpotVBias;
 
     public Transform neck;
