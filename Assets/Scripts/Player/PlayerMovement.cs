@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float freeAngleD = 0;
     [SerializeField] Vector2 flowerpotVBias;
 
+    public Transform neck;
     public Rigidbody2D flowerpot;
     public Rigidbody2D tongue;
     public GameObject rightMouthHalf;
@@ -83,6 +84,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Unlock flowerpot from this
         flowerpot.transform.parent = null;
+        neck.transform.parent = null;
+        neck.transform.position = Vector3.zero;
     }
 
     void Update()
@@ -153,10 +156,10 @@ public class PlayerMovement : MonoBehaviour
     void PointAt(Vector3 pointDirection, bool includeTongue = false)
     {
         float angle = Mathf.Atan2(pointDirection.y, pointDirection.x) * Mathf.Rad2Deg;
-        transform.eulerAngles = new Vector3(0, 0, angle - 90);
+        rb.SetRotation(angle - 90);
         if (includeTongue)
         {
-            tongue.transform.eulerAngles = new Vector3(0, 0, angle);
+            tongue.rotation = angle;
         }
     }
 
@@ -190,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
             }
             springJoint.enabled = false;
 
-            Vector2 moveDirection = mousePosition - movingRigidbody.transform.position;
+            Vector2 moveDirection = (Vector2)mousePosition - movingRigidbody.position;
             float distanceToMouse = moveDirection.magnitude;
 
             Vector3 targetForce = moveDirection.normalized * headPullForce;
@@ -203,12 +206,12 @@ public class PlayerMovement : MonoBehaviour
                 if (mouthFull)
                 {
                     stuckTo.AddForce(targetForce);
+                    flowerpot.AddForce(-targetForce);
                 }
                 else
                 {
                     movingRigidbody.AddForce(targetForce);
                 }
-                flowerpot.AddForce(-targetForce);
                 changeAngleToMouse = true;
             }
             // If we're inside the head's free range of motion, change the velocity to go towards the mouse
@@ -303,7 +306,7 @@ public class PlayerMovement : MonoBehaviour
         // If not already stuck, checks if we're aiming at a wall and close
         if (!stuck && canGrab)
         {
-            Vector2 moveDirection = mousePosition - tongue.transform.position;
+            Vector2 moveDirection = (Vector2)mousePosition - tongue.position;
             // Tongue test for wall
             RaycastHit2D[] tongueHits = Physics2D.RaycastAll(tongue.position, moveDirection,
                 tongueCollider.radius + extraWallCheckRadius, grabbableLayers);
@@ -358,7 +361,7 @@ public class PlayerMovement : MonoBehaviour
         if (retractingTongue)
         {
             // Move towards the tongue
-            Vector2 moveDirection = tongue.transform.position - transform.position;
+            Vector2 moveDirection = tongue.position - rb.position;
             Vector2 targetVelocity = moveDirection.normalized * headPullVelocity;
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref zeroVelocity, movementSmoothing);
 
@@ -400,12 +403,12 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 // Broadcast that it has stuck to an object
-                if (stuckToCollider.TryGetComponent(out IGrabHandler grabHandler))
+                foreach (var grabHandler in stuckToCollider.GetComponents<IGrabHandler>())
                 {
                     grabHandler.OnGrab();
                 }
 
-                transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(retractingDirection.y, retractingDirection.x) * Mathf.Rad2Deg - 90);
+                rb.rotation = Mathf.Atan2(retractingDirection.y, retractingDirection.x) * Mathf.Rad2Deg - 90;
                 DisableTongue();
                 anim.SetInteger(mouthStateAnim, (int)MouthStates.Grabbing);
             }
@@ -422,7 +425,7 @@ public class PlayerMovement : MonoBehaviour
         // Stuck to a rigid body
         if (stuckTo != null)
         {
-            if (stuckTo.TryGetComponent(out IGrabHandler grabHandler))
+            foreach (var grabHandler in stuckToCollider.GetComponents<IGrabHandler>())
             {
                 grabHandler.OnRelease();
             }
@@ -467,7 +470,7 @@ public class PlayerMovement : MonoBehaviour
     public void ExtendTongue()
     {
         tongue.transform.parent = null;
-        tongue.position = transform.position;
+        tongue.position = rb.position;
         tongue.gameObject.SetActive(true);
 
         if (tongueCoroutine != null)
@@ -487,12 +490,12 @@ public class PlayerMovement : MonoBehaviour
         int steps = 10;
         for (int i = 0; i < steps; i++)
         {
-            tongue.transform.position = Vector2.Lerp(tongue.transform.position, transform.position, lerpStep);
+            tongue.MovePosition(Vector2.Lerp(tongue.position, rb.position, lerpStep));
             yield return null;
         }
 
         // Disables the tongue
-        tongue.transform.position = transform.position;
+        tongue.position = rb.position;
         tongue.transform.parent = transform;
         tongue.gameObject.SetActive(false);
     }
