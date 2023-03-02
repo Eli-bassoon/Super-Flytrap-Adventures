@@ -400,7 +400,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 // Broadcast that it has stuck to an object
-                if (stuckToCollider.TryGetComponent(out IGrabHandler grabHandler))
+                foreach (var grabHandler in stuckToCollider.GetComponents<IGrabHandler>())
                 {
                     grabHandler.OnGrab();
                 }
@@ -422,7 +422,7 @@ public class PlayerMovement : MonoBehaviour
         // Stuck to a rigid body
         if (stuckTo != null)
         {
-            if (stuckTo.TryGetComponent(out IGrabHandler grabHandler))
+            foreach (var grabHandler in stuckToCollider.GetComponents<IGrabHandler>())
             {
                 grabHandler.OnRelease();
             }
