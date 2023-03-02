@@ -1,8 +1,8 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Rope : MonoBehaviour
 {
@@ -10,10 +10,12 @@ public class Rope : MonoBehaviour
     public Rigidbody2D start;
     public Rigidbody2D end;
 
-    LineRenderer lineRenderer;
+    [ReadOnly] public float length;
 
-    List<Transform> segmentTransforms;
-    List<DistanceJoint2D> segmentJoints;
+    [HideInInspector] public LineRenderer lineRenderer;
+
+    [HideInInspector] public List<Transform> segmentTransforms;
+    [HideInInspector] public List<DistanceJoint2D> segmentJoints;
 
     void Start()
     {
@@ -34,7 +36,7 @@ public class Rope : MonoBehaviour
 
         // Construct rope segments
         Vector2 startPos = start.position;
-        float length = (end.position - start.position).magnitude;
+        length = (end.position - start.position).magnitude;
         Rigidbody2D segmentRb = start;
         for (int i = 0; i < numSegments - 1; i++)
         {
@@ -71,5 +73,14 @@ public class Rope : MonoBehaviour
     {
         Vector3[] points = segmentTransforms.Select(x => x.position).ToArray();
         lineRenderer.SetPositions(points);
+    }
+
+    public void UniformlyLengthen(float newLength)
+    {
+        length = newLength;
+        foreach (var segment in segmentJoints)
+        {
+            segment.distance = length / numSegments;
+        }
     }
 }
