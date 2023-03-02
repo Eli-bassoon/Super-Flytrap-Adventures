@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     [Foldout("PotMovement")]
     [SerializeField] float minMousePotSwingDist = 0.5f;
     [Foldout("PotMovement")]
-    [SerializeField] float maxMousePotSwingDist = 2f;
+    [SerializeField] float mousePotSwingRadius = 2f;
     [Foldout("PotMovement")]
     [SerializeField] float maxPotSwingForce = 75f;
 
@@ -205,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
             Vector2 potToMouseDir = potToMouse.normalized;
 
             potToMouseDist -= minMousePotSwingDist;
-            potToMouseDist = Mathf.Clamp01(potToMouseDist / (maxMousePotSwingDist - minMousePotSwingDist));
+            potToMouseDist = Mathf.Clamp01(potToMouseDist / (mousePotSwingRadius));
 
             Vector2 potSwingForce = -potToMouseDir * potToMouseDist * maxPotSwingForce;
 
