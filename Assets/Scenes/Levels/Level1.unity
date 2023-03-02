@@ -4899,6 +4899,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2677557ac44e87f47a6e4618f45fbcb8, type: 3}
+--- !u!1001 &2397778179731552075
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3082659034752696002, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082659034752696002, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082659034752696002, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082659034752696002, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082659034752696002, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082659034752696002, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082659034752696002, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082659034752696002, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082659034752696002, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082659034752696002, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082659034752696002, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082659034752696006, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
+      propertyPath: m_Name
+      value: Hanging Pot Rope
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0a47ee8831e3c6344b4287f712f0c1f9, type: 3}
 --- !u!1001 &2510825471049677232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5021,67 +5082,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 897c2d726caabae439abadafd15ef8e4, type: 3}
---- !u!1001 &4456322922433401125
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4456322921006741546, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_RootOrder
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456322921006741546, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 18.625
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456322921006741546, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456322921006741546, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456322921006741546, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456322921006741546, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456322921006741546, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456322921006741546, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456322921006741546, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456322921006741546, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456322921006741546, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456322921006741551, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
-      propertyPath: m_Name
-      value: Hanging Pot
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 04cd91a50855ff3478e642843ed88471, type: 3}
 --- !u!1001 &9222634374658340676
 PrefabInstance:
   m_ObjectHideFlags: 0
