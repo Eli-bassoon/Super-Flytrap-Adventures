@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RopeSegment : MonoBehaviour
+public class RopeSegmentDom : MonoBehaviour
 {
     public GameObject connectedAbove, connectedBelow;
 
@@ -10,7 +10,7 @@ public class RopeSegment : MonoBehaviour
     void Start()
     {
         connectedAbove = GetComponent<HingeJoint2D>().connectedBody.gameObject;
-        RopeSegment aboveSegment = connectedAbove.GetComponent<RopeSegment>();
+        RopeSegmentDom aboveSegment = connectedAbove.GetComponent<RopeSegmentDom>();
         if (aboveSegment != null)
         {
             aboveSegment.connectedBelow = gameObject;

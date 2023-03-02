@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rope : MonoBehaviour
+public class RopeDom : MonoBehaviour
 {
     [SerializeField] public int numLinks = 10;
     [SerializeField] public Rigidbody2D head;
