@@ -187,6 +187,7 @@ public class PlayerMovement : MonoBehaviour
                 canGrab = false;
             }
 
+            // Swinging
             Vector2 potToMouse = ((Vector2)mousePosition - flowerpot.position);
             float potToMouseDist = potToMouse.magnitude;
             Vector2 potToMouseDir = potToMouse.normalized;
@@ -194,10 +195,9 @@ public class PlayerMovement : MonoBehaviour
             potToMouseDist -= minMousePotSwingDist;
             potToMouseDist = Mathf.Clamp01(potToMouseDist / (mousePotSwingRadius));
 
-            Vector2 potSwingForce = -potToMouseDir * potToMouseDist * maxPotSwingForce;
+            Vector2 potSwingForce = maxPotSwingForce * potToMouseDist * -potToMouseDir;
 
             flowerpot.AddForce(potSwingForce);
-
         }
         // Move the head towards the mouse
         if ((!stuck || mouthFull) && canGrab)
@@ -519,5 +519,11 @@ public class PlayerMovement : MonoBehaviour
         tongue.position = rb.position;
         tongue.transform.parent = transform;
         tongue.gameObject.SetActive(false);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Draw minimum swing radius
+        //Gizmos.DrawWireSphere(transform.position, minMousePotSwingDist);
     }
 }
