@@ -15,19 +15,41 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement instance;
     public static int mouthStateAnim = Animator.StringToHash("mouthState");
 
+    [Foldout("HeadMovement")]
     [SerializeField] float headPullForce = 8f;
+    [Foldout("HeadMovement")]
     [SerializeField] float headPullVelocity = 15f;
-    [Range(0, .3f)] [SerializeField] float movementSmoothing = 0.05f;
-    [Range(0, 8f)] [SerializeField] float maxNeckLength = 3.4f;
+    [Foldout("HeadMovement")]
+    [Range(0, .3f)][SerializeField] float movementSmoothing = 0.05f;
+    [Foldout("HeadMovement")]
+    [Range(0, 8f)][SerializeField] float maxNeckLength = 3.4f;
+    [Foldout("HeadMovement")]
     [SerializeField] LayerMask grabbableLayers;
+    [Foldout("HeadMovement")]
     [SerializeField] float mouseChatterThreshold = 0.5f;
+
+    [Foldout("PotMovement")]
+    [SerializeField] float minMousePotSwingDist = 0.5f;
+    [Foldout("PotMovement")]
+    [SerializeField] float mousePotSwingRadius = 2f;
+    [Foldout("PotMovement")]
+    [SerializeField] float maxPotSwingForce = 75f;
+
+    [Foldout("Misc")]
     [SerializeField] float extraWallCheckRadius = 0.2f;
-    [Range(-0.5f, 0)] [SerializeField] float comOffset = -0.2f;
+    [Foldout("Misc")]
+    [Range(-0.5f, 0)][SerializeField] float comOffset = -0.2f;
+    [Foldout("Misc")]
     [SerializeField] float targetFreeDist = 1f;
+    [Foldout("Misc")]
     [SerializeField] float freeForceP = 1;
+    [Foldout("Misc")]
     [SerializeField] float freeForceD = 0;
+    [Foldout("Misc")]
     [SerializeField] float freeAngleP = 1;
+    [Foldout("Misc")]
     [SerializeField] float freeAngleD = 0;
+    [Foldout("Misc")]
     [SerializeField] Vector2 flowerpotVBias;
 
     public Transform neck;
@@ -170,13 +192,25 @@ public class PlayerMovement : MonoBehaviour
         if (stuck)
         {
             springJoint.enabled = true;
-            
+
             // Tests for falling off
             if (!stuckToCollider.enabled)
             {
                 LetGo();
                 canGrab = false;
             }
+
+            Vector2 potToMouse = ((Vector2)mousePosition - flowerpot.position);
+            float potToMouseDist = potToMouse.magnitude;
+            Vector2 potToMouseDir = potToMouse.normalized;
+
+            potToMouseDist -= minMousePotSwingDist;
+            potToMouseDist = Mathf.Clamp01(potToMouseDist / (mousePotSwingRadius));
+
+            Vector2 potSwingForce = -potToMouseDir * potToMouseDist * maxPotSwingForce;
+
+            flowerpot.AddForce(potSwingForce);
+
         }
         // Move the head towards the mouse
         if ((!stuck || mouthFull) && canGrab)
@@ -235,7 +269,7 @@ public class PlayerMovement : MonoBehaviour
                     // Mouth should be about a max tongue length behind the tongue
                     if (flowerpotToTongue.magnitude >= maxTongueLength)
                     {
-                        targetMouthPosition = tongue.position - flowerpotToTongue.normalized * maxTongueLength * tongueSlack; 
+                        targetMouthPosition = tongue.position - flowerpotToTongue.normalized * maxTongueLength * tongueSlack;
                     }
                     // Mouth should be by the flowerpot
                     else
@@ -273,12 +307,12 @@ public class PlayerMovement : MonoBehaviour
     // Gets changes since previous frame for PD control
     void GetFreeDelt()
     {
-        Vector2 targetPos = flowerpot.position + Vector2.up*targetFreeDist + flowerpot.velocity*flowerpotVBias;
+        Vector2 targetPos = flowerpot.position + Vector2.up * targetFreeDist + flowerpot.velocity * flowerpotVBias;
         freePosDelt = targetPos - rb.position;
 
         freeAngleDelt = restingAngle - rb.rotation;
     }
-    
+
     // When not grabbing, tries to move the head to a resting position
     public void MoveToRest()
     {
@@ -380,7 +414,7 @@ public class PlayerMovement : MonoBehaviour
                 // Thing we're stuck to fits in mouth
                 if (stuckToCollider.gameObject.TryGetComponent(out FitsInMouth _))
                 {
-                    stuckTo.excludeLayers = LayerMask.GetMask(new string[] {"Player"});
+                    stuckTo.excludeLayers = LayerMask.GetMask(new string[] { "Player" });
                     mouthFull = true;
                     fixedJoint.enabled = true;
                     fixedJoint.autoConfigureConnectedAnchor = false;
