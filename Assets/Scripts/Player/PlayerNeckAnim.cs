@@ -7,9 +7,11 @@ using Unity.Mathematics;
 public class PlayerNeckAnim : MonoBehaviour
 {
     SplineContainer neckSpline;
+    LineRenderer lineRenderer;
 
     [SerializeField] [Range(0, 2f)] float headTangentStrength;
     [SerializeField] [Range(0, 1f)] float potTangentStrength;
+    [SerializeField] int segmentsPerUnit = 8;
     [SerializeField] Transform head;
     [SerializeField] Transform flowerpot;
 
@@ -18,6 +20,7 @@ public class PlayerNeckAnim : MonoBehaviour
     private void Awake()
     {
         neckSpline = GetComponent<SplineContainer>();
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     void Start()
@@ -38,5 +41,26 @@ public class PlayerNeckAnim : MonoBehaviour
         Vector3 headTangent = head.transform.TransformVector(Vector2.down * headTangentStrength);
         BezierKnot headKnot = new BezierKnot(headPos, headTangent, zeroF3, Quaternion.identity);
         neckSpline.Spline.SetKnot(1, headKnot);
+
+        // Render neck
+        RenderNeck();
+    }
+
+    void RenderNeck()
+    {
+        // Get number of points to render
+        float length = neckSpline.CalculateLength();
+        int numPoints = (int)(length * segmentsPerUnit);
+
+        // Get positions
+        var points = new Vector3[numPoints];
+        for (int i = 0; i < numPoints; i++)
+        {
+            points[i] = neckSpline.EvaluatePosition(i / (float)(numPoints-1));
+        }
+
+        // Set points of line renderer
+        lineRenderer.positionCount = numPoints;
+        lineRenderer.SetPositions(points);
     }
 }
