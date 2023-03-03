@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("States")]
     [ReadOnly] public bool stuck = false;
     [ReadOnly] public bool mouthFull = false;
+    [ReadOnly] public bool tongueOut = false;
     [ReadOnly] public bool retractingTongue = false;
     [HideInInspector] public bool canGrab = true;
 
@@ -490,6 +491,7 @@ public class PlayerMovement : MonoBehaviour
     // Lets the tongue be free from the mouth
     public void ExtendTongue()
     {
+        tongueOut = true;
         tongue.transform.parent = null;
         tongue.position = rb.position;
         tongue.gameObject.SetActive(true);
@@ -519,6 +521,7 @@ public class PlayerMovement : MonoBehaviour
         tongue.position = rb.position;
         tongue.transform.parent = transform;
         tongue.gameObject.SetActive(false);
+        tongueOut = false;
     }
 
     private void OnDrawGizmosSelected()
