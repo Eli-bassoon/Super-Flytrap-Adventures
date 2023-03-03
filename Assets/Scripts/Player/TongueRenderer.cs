@@ -19,12 +19,7 @@ public class TongueRenderer : MonoBehaviour
         // Rendering tongue
         if (PlayerMovement.instance.tongueOut)
         {
-            lineRenderer.enabled = true;
             RenderTongue();
-        }
-        else
-        {
-            lineRenderer.enabled = false;
         }
     }
     
@@ -34,5 +29,15 @@ public class TongueRenderer : MonoBehaviour
         positions[1] = transform.position;
 
         lineRenderer.SetPositions(positions);
+    }
+
+    void OnEnable()
+    {
+        lineRenderer.positionCount = 2;
+    }
+
+    void OnDisable()
+    {
+        lineRenderer.positionCount = 0;
     }
 }

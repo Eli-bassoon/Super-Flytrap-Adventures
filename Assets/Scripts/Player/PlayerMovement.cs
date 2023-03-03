@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask grabbableLayers;
     [SerializeField] float mouseChatterThreshold = 0.5f;
     [SerializeField] float extraWallCheckRadius = 0.2f;
+    [SerializeField] [Range(0, 1)] float tongueRetractTime = 0.25f;
 
     [Header("Swinging")]
     [SerializeField] float minMousePotSwingDist = 0.5f;
@@ -509,12 +510,16 @@ public class PlayerMovement : MonoBehaviour
     // Gradually bring the tongue back into the mouth
     IEnumerator RetractTongue()
     {
-        float lerpStep = 0.1f;
-        int steps = 10;
-        for (int i = 0; i < steps; i++)
+        float initialDist = (tongue.position - rb.position).magnitude;
+        float timeLeft = tongueRetractTime;
+        while (timeLeft > 0)
         {
-            tongue.MovePosition(Vector2.Lerp(tongue.position, rb.position, lerpStep));
-            yield return null;
+            // Move tongue to new position in front of mouth
+            float newDist = initialDist * (timeLeft / tongueRetractTime);
+            Vector2 newPos = transform.TransformPoint(Vector2.up * newDist);
+            tongue.MovePosition(newPos);
+            timeLeft -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
 
         // Disables the tongue

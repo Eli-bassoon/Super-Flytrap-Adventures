@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1489627431
   m_SortingLayer: 1
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: d2769ffad1c5f6b4a9ef02e4daed411d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -553,7 +553,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615993912969288473}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -598,7 +598,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.025
+        value: 0.05
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -715,6 +715,7 @@ MonoBehaviour:
     m_Bits: 1793
   mouseChatterThreshold: 0.5
   extraWallCheckRadius: 0.2
+  tongueRetractTime: 0.1
   minMousePotSwingDist: 3
   mousePotSwingRadius: 2
   maxPotSwingForce: 50
