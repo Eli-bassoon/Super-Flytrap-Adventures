@@ -540,13 +540,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1615993913322844210}
   - component: {fileID: 1615993913322844173}
+  - component: {fileID: 6201068726489278934}
   - component: {fileID: 1615993913322844211}
   - component: {fileID: 1615993913322844172}
   - component: {fileID: 1615993913322844174}
   - component: {fileID: 1615993913322844175}
   - component: {fileID: 1615993913322844168}
   - component: {fileID: 1615993913322844169}
-  - component: {fileID: 6201068726489278934}
   m_Layer: 6
   m_Name: Head
   m_TagString: Player
@@ -594,11 +594,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1793
   mouseChatterThreshold: 0.5
-  minMousePotSwingDist: 0.5
-  maxMousePotSwingDist: 2
-  maxPotSwingForce: 75
   extraWallCheckRadius: 0.2
-  comOffset: -0.25
+  minMousePotSwingDist: 0.5
+  mousePotSwingRadius: 2
+  maxPotSwingForce: 75
   targetFreeDist: 1
   freeForceP: 30
   freeForceD: 300
@@ -615,6 +614,19 @@ MonoBehaviour:
   mouthFull: 0
   retractingTongue: 0
   canGrab: 1
+--- !u!114 &6201068726489278934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615993913322844170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71ce7b77db7cbf45a8bfcbf0440339b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regurgitableNPC: {fileID: 0}
 --- !u!50 &1615993913322844211
 Rigidbody2D:
   serializedVersion: 4
@@ -757,19 +769,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &6201068726489278934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615993913322844170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71ce7b77db7cbf45a8bfcbf0440339b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  regurgitableNPC: {fileID: 0}
 --- !u!1 &5927822856394225587
 GameObject:
   m_ObjectHideFlags: 0
