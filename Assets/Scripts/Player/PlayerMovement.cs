@@ -527,7 +527,6 @@ public class PlayerMovement : MonoBehaviour
         // We start the sleep timer whenever we aren't moving
         if (!mousePressed && rb.velocity.magnitude < 0.01f && sleepTimer == null)
         {
-            print("Started sleep timer");
             sleepTimer = Timer.Register(timeToSleep, () =>
             {
                 print("Sleeping");
@@ -539,7 +538,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (mousePressed || rb.velocity.magnitude > joltAwakeVelocity)
         {
-            print(rb.velocity.magnitude);
             StopSleep();
         }
     }
