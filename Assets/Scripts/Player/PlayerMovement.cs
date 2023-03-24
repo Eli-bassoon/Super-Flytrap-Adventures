@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask grabbableLayers;
     [SerializeField] float mouseChatterThreshold = 0.5f;
     [SerializeField] float extraWallCheckRadius = 0.2f;
-    [SerializeField] [Range(0, 1)] float tongueRetractTime = 0.25f;
+    [SerializeField][Range(0, 1)] float tongueRetractTime = 0.25f;
 
     [Header("Swinging")]
     [SerializeField] float minMousePotSwingDist = 0.5f;
@@ -31,12 +31,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxPotSwingForce = 75f;
 
     [Header("Not Stuck")]
-    [SerializeField] float targetFreeDist = 1f;
+    [SerializeField] Vector2 targetFreePos = new Vector2(0, 1f);
     [SerializeField] float freeForceP = 1;
     [SerializeField] float freeForceD = 0;
     [SerializeField] float freeAngleP = 1;
     [SerializeField] float freeAngleD = 0;
     [SerializeField] Vector2 flowerpotVBias;
+
+    [Header("Sleeping")]
+    [SerializeField] float timeToSleep = 30;
+    [SerializeField] float sleepMoveDownTime = 5;
+    [SerializeField] Vector2 targetSleepPos = new Vector2(0, -0.2f);
+    [SerializeField] float joltAwakeVelocity = 0.2f;
 
     [Header("References")]
     public Transform neck;
@@ -61,8 +67,9 @@ public class PlayerMovement : MonoBehaviour
     float behindTongueChatterThreshold = 0.2f;
 
     float restingAngle = -90;
-    Vector2 freePosDelt;
-    float freeAngleDelt;
+    Vector2 targetRelPos;
+    Vector2 targetPosDelt;
+    float targetAngleDelt;
 
     [HideInInspector] public Rigidbody2D stuckTo = null;
     [HideInInspector] public Collider2D stuckToCollider = null;
@@ -71,10 +78,13 @@ public class PlayerMovement : MonoBehaviour
     [ReadOnly] public bool mouthFull = false;
     [ReadOnly] public bool tongueOut = false;
     [ReadOnly] public bool retractingTongue = false;
+    [ReadOnly] public bool sleeping = false;
+
     [HideInInspector] public bool canGrab = true;
 
     Vector2 retractingDirection;
     Coroutine tongueCoroutine;
+    Timer sleepTimer;
 
     private void Awake()
     {
@@ -84,6 +94,8 @@ public class PlayerMovement : MonoBehaviour
         springJoint = GetComponent<SpringJoint2D>();
         fixedJoint = GetComponent<FixedJoint2D>();
         anim = GetComponent<Animator>();
+
+        targetRelPos = targetFreePos;
     }
 
     void Start()
@@ -129,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!stuck)
         {
-            MoveToRest();
+            MoveHeadToTarget();
         }
 
         // Move our character
@@ -144,6 +156,8 @@ public class PlayerMovement : MonoBehaviour
             mouseButtonUp = false;
             canGrab = true;
         }
+
+        CheckForSleep();
     }
 
     // Changes the head's direction to left/right depending on where was last clicked
@@ -296,29 +310,29 @@ public class PlayerMovement : MonoBehaviour
     // Gets changes since previous frame for PD control
     void GetFreeDelt()
     {
-        Vector2 targetPos = flowerpot.position + Vector2.up * targetFreeDist + flowerpot.velocity * flowerpotVBias;
-        freePosDelt = targetPos - rb.position;
+        Vector2 targetPos = flowerpot.position + targetRelPos + flowerpot.velocity * flowerpotVBias;
+        targetPosDelt = targetPos - rb.position;
 
-        freeAngleDelt = restingAngle - rb.rotation;
+        targetAngleDelt = restingAngle - rb.rotation;
     }
 
-    // When not grabbing, tries to move the head to a resting position
-    public void MoveToRest()
+    // When not grabbing, tries to move the head to a target position
+    public void MoveHeadToTarget()
     {
         // Get values
-        Vector2 prevFreePosDelt = freePosDelt;
-        float prevFreeAngleDelt = freeAngleDelt;
+        Vector2 prevFreePosDelt = targetPosDelt;
+        float prevFreeAngleDelt = targetAngleDelt;
         GetFreeDelt();
 
         // Force PD control
-        Vector2 appliedForceP = freePosDelt * freeForceP;
-        Vector2 appliedForceD = (freePosDelt - prevFreePosDelt) * freeForceD;
+        Vector2 appliedForceP = targetPosDelt * freeForceP;
+        Vector2 appliedForceD = (targetPosDelt - prevFreePosDelt) * freeForceD;
         Vector2 appliedForce = appliedForceP + appliedForceD;
         rb.AddForce(appliedForce);
 
         // Angle PD control
-        float appliedAngleP = freeAngleDelt * freeAngleP;
-        float appliedAngleD = (freeAngleDelt - prevFreeAngleDelt) * freeAngleD;
+        float appliedAngleP = targetAngleDelt * freeAngleP;
+        float appliedAngleD = (targetAngleDelt - prevFreeAngleDelt) * freeAngleD;
         float newOmega = appliedAngleP + appliedAngleD;
         rb.angularVelocity = newOmega;
     }
@@ -507,6 +521,35 @@ public class PlayerMovement : MonoBehaviour
         anim.SetInteger(mouthStateAnim, (int)MouthStates.Open);
     }
 
+    // Handles sleeping
+    void CheckForSleep()
+    {
+        // We start the sleep timer whenever we aren't moving
+        if (!mousePressed && rb.velocity.magnitude < 0.01f && sleepTimer == null)
+        {
+            sleepTimer = Timer.Register(timeToSleep, () =>
+            {
+                print("Sleeping");
+                sleeping = true;
+                sleepTimer = Timer.Register(sleepMoveDownTime, 
+                    onUpdate: secondsElapsed => targetRelPos = Vector2.Lerp(targetFreePos, targetSleepPos, secondsElapsed / sleepMoveDownTime),
+                    onComplete: () => { });
+            });
+        }
+        else if (mousePressed || rb.velocity.magnitude > joltAwakeVelocity)
+        {
+            StopSleep();
+        }
+    }
+
+    void StopSleep()
+    {
+        targetRelPos = targetFreePos;
+        sleepTimer?.Cancel();
+        sleepTimer = null;
+        sleeping = false;
+    }
+
     // Gradually bring the tongue back into the mouth
     IEnumerator RetractTongue()
     {
@@ -527,6 +570,20 @@ public class PlayerMovement : MonoBehaviour
         tongue.transform.parent = transform;
         tongue.gameObject.SetActive(false);
         tongueOut = false;
+    }
+
+    public void CheckJoltAwakeCollision(Collision2D collision)
+    {
+        // Get jolted awake if we don't hit the ground and the thing is fast enough
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Ground") && collision.GetContact(0).relativeVelocity.magnitude > joltAwakeVelocity)
+        {
+            StopSleep();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        CheckJoltAwakeCollision(collision);
     }
 
     private void OnDrawGizmosSelected()

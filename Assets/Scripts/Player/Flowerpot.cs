@@ -22,6 +22,11 @@ public class Flowerpot : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerMovement.instance.CheckJoltAwakeCollision(collision);
+    }
+
     private void OnDrawGizmosSelected()
     {
         
