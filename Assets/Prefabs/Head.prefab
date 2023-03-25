@@ -944,7 +944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headTangentStrength: 0.6
   potTangentStrength: 0.25
-  segmentsPerUnit: 8
+  segmentsPerUnit: 12
   head: {fileID: 1615993913322844210}
   flowerpot: {fileID: 1615993911643782257}
 --- !u!114 &8792478529910019092
