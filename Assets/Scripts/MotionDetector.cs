@@ -9,6 +9,9 @@ public class MotionDetector : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        onTrigger.Invoke();
+        if (collision.gameObject.layer != LayerMask.GetMask("Player"))
+        {
+            onTrigger.Invoke();
+        }
     }
 }
