@@ -34,7 +34,6 @@ public class BreakableCage : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             for (int i = 0; i < numChildren; i++)
             {
-                print("hello");
                 GameObject child = gameObject.transform.GetChild(i).gameObject;
                 child.SetActive(true);
             }
