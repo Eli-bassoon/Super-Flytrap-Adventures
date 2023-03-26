@@ -43,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float sleepMoveDownTime = 5;
     [SerializeField] Vector2 targetSleepPos = new Vector2(0, -0.2f);
     [SerializeField] float joltAwakeVelocity = 0.2f;
+    [SerializeField] AudioSource snoreSource;
+    [SerializeField] ParticleSystem zzzParticles;
 
     [Header("References")]
     public Transform neck;
@@ -530,8 +532,10 @@ public class PlayerMovement : MonoBehaviour
             sleepTimer = Timer.Register(timeToSleep, () =>
             {
                 print("Sleeping");
+                snoreSource.enabled = true;
+                zzzParticles.Play();
                 sleeping = true;
-                sleepTimer = Timer.Register(sleepMoveDownTime, 
+                sleepTimer = Timer.Register(sleepMoveDownTime,
                     onUpdate: secondsElapsed => targetRelPos = Vector2.Lerp(targetFreePos, targetSleepPos, secondsElapsed / sleepMoveDownTime),
                     onComplete: () => { });
             });
@@ -539,6 +543,8 @@ public class PlayerMovement : MonoBehaviour
         else if (mousePressed || rb.velocity.magnitude > joltAwakeVelocity)
         {
             StopSleep();
+            zzzParticles.Stop();
+            snoreSource.enabled = false;
         }
     }
 

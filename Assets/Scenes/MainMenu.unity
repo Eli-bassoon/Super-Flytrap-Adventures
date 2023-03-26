@@ -7267,6 +7267,10 @@ PrefabInstance:
       value: Head
       objectReference: {fileID: 0}
     - target: {fileID: 1615993913322844173, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
+      propertyPath: timeToSleep
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1615993913322844173, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
       propertyPath: maxNeckLength
       value: 3.02
       objectReference: {fileID: 0}
