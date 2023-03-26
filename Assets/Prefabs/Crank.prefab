@@ -186,6 +186,7 @@ MonoBehaviour:
   absAngle: 0
   turns: 0
   wholeTurns: 0
+  turnSubscriberObjects: []
 --- !u!1 &9222634375634578247
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f732f1d95cc9afd408668fff631c62d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerMe: 1
+  regurgitable: 0
 --- !u!255 &9222634375634578253
 FixedJoint2D:
   m_ObjectHideFlags: 0
