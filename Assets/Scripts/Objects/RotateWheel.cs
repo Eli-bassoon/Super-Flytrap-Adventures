@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using NaughtyAttributes;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateWheel : MonoBehaviour
+public class RotateWheel : Toggleable
 {
     [SerializeField] private float rotationalSpeed = 2f;
 
@@ -15,6 +16,7 @@ public class RotateWheel : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MoveRotation(rb.rotation + rotationalSpeed * Time.fixedDeltaTime);
+        if (on)
+            rb.MoveRotation(rb.rotation + rotationalSpeed * Time.fixedDeltaTime);
     }
 }

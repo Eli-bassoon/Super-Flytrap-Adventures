@@ -1,13 +1,12 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Fan : MonoBehaviour
+public class Fan : Toggleable
 {
-    [OnValueChanged("SetState_")] public bool on = false;
-
     Animator anim;
     AreaEffector2D fanArea;
 
@@ -17,37 +16,11 @@ public class Fan : MonoBehaviour
         fanArea = GetComponent<AreaEffector2D>();
     }
 
-    private void Start()
+    public override void SetOn(bool state)
     {
-        SetState(on);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void TurnOn()
-    {
-        SetState(true);
-    }
-
-    public void TurnOff()
-    {
-        SetState(false);
-    }
-
-    public void SetState(bool state)
-    {
-        on = state;
+        base.SetOn(state);
 
         fanArea.enabled = on;
         anim.SetBool("isOn", on);
-    }
-
-    void SetState_()
-    {
-        SetState(on);
     }
 }
