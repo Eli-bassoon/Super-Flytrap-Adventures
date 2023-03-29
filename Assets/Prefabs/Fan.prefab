@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6645468309292899738}
   - component: {fileID: 6645468309292899739}
-  - component: {fileID: 6645468309292899737}
+  - component: {fileID: 6828280539651861218}
   - component: {fileID: 6645468309292899687}
   - component: {fileID: 6645468309292899741}
   - component: {fileID: 6645468309292899740}
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6645468309292899739
 SpriteRenderer:
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6645468309292899737
+--- !u!114 &6828280539651861218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,9 +97,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6645468309292899684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b1d3ffbd72c047f3a36da10f301f801, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a34ef075e111164796916f15bef7fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  on: 0
 --- !u!95 &6645468309292899687
 Animator:
   serializedVersion: 5

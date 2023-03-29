@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class Fan : MonoBehaviour
 {
-    public bool on = false;
+    [OnValueChanged("SetState_")] public bool on = false;
 
     Animator anim;
     AreaEffector2D fanArea;
@@ -14,6 +15,11 @@ public class Fan : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         fanArea = GetComponent<AreaEffector2D>();
+    }
+
+    private void Start()
+    {
+        SetState(on);
     }
 
     // Update is called once per frame
@@ -38,5 +44,10 @@ public class Fan : MonoBehaviour
 
         fanArea.enabled = on;
         anim.SetBool("isOn", on);
+    }
+
+    void SetState_()
+    {
+        SetState(on);
     }
 }
