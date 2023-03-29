@@ -7,7 +7,6 @@ using UnityEngine.U2D;
 
 public class CrankPlatform : MonoBehaviour, IFloatAcceptor
 {
-    //[SerializeField] [Required] Crank crank;
     [SerializeField] SplineContainer splineContainer;
     [SerializeField] CrankDirs forwardDir = CrankDirs.Clockwise; // Make clockwise considered "forward"
     [SerializeField] MoveTypes moveType = MoveTypes.ConstantSpeed;

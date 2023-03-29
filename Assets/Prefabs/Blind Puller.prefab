@@ -167,8 +167,7 @@ MonoBehaviour:
   maxLength: 3
   rope: {fileID: 6179121881123298261}
   length: 0
-  subscriberObjects:
-  - {fileID: 0}
+  subscriberObjects: []
 --- !u!114 &6386846012696209073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +292,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 829032333677479249, guid: 9d0296190a7ec144ebc09069b9828ce8, type: 3}
       propertyPath: m_Name
-      value: Rope
+      value: Blind Puller
       objectReference: {fileID: 0}
     - target: {fileID: 829032333677479251, guid: 9d0296190a7ec144ebc09069b9828ce8, type: 3}
       propertyPath: end
