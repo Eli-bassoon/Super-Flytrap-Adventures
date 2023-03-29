@@ -592,6 +592,12 @@ public class PlayerMovement : MonoBehaviour
         CheckJoltAwakeCollision(collision);
     }
 
+    private void OnJointBreak2D(Joint2D joint)
+    {
+        LetGo();
+        canGrab = false;
+    }
+
     private void OnDrawGizmosSelected()
     {
         // Draw minimum swing radius
