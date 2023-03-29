@@ -5741,14 +5741,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1615993913322844168, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-      propertyPath: m_BreakForce
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615993913322844168, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-      propertyPath: m_BreakAction
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1615993913322844170, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
       propertyPath: m_Name
       value: Head

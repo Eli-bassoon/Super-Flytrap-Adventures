@@ -873,9 +873,9 @@ FixedJoint2D:
   serializedVersion: 4
   m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
+  m_BreakForce: 10000
   m_BreakTorque: Infinity
-  m_BreakAction: 3
+  m_BreakAction: 2
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0.010256245, y: 0.31510112}

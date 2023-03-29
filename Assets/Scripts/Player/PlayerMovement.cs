@@ -494,7 +494,6 @@ public class PlayerMovement : MonoBehaviour
     {
         retractingTongue = false;
 
-        tongueCollider.enabled = true;
         tongueFixedJoint.enabled = false;
         tongueFixedJoint.connectedBody = null;
 
@@ -502,7 +501,10 @@ public class PlayerMovement : MonoBehaviour
         {
             StopCoroutine(tongueCoroutine);
         }
-        tongueCoroutine = StartCoroutine(RetractTongue());
+        if (tongueOut)
+        {
+            tongueCoroutine = StartCoroutine(RetractTongue());
+        }
     }
 
     // Lets the tongue be free from the mouth
@@ -511,6 +513,7 @@ public class PlayerMovement : MonoBehaviour
         tongueOut = true;
         tongue.transform.parent = null;
         tongue.position = rb.position;
+        tongueCollider.enabled = true;
         tongue.gameObject.SetActive(true);
 
         if (tongueCoroutine != null)
