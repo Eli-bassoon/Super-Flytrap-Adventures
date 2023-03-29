@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 9113602817566319613}
   - component: {fileID: 9113602817566319602}
+  - component: {fileID: 9113602817566319604}
   - component: {fileID: 9113602817566319603}
   - component: {fileID: 9113602817566319600}
   - component: {fileID: 9113602817566319601}
   - component: {fileID: 9113602817566319606}
   - component: {fileID: 9113602817566319607}
   - component: {fileID: 9113602817566319612}
-  - component: {fileID: 9113602817566319604}
   m_Layer: 0
   m_Name: Crank Platform
   m_TagString: Untagged
@@ -38,7 +38,7 @@ Transform:
   m_Children:
   - {fileID: 9113602817692156182}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9113602817566319602
 SpriteRenderer:
@@ -92,6 +92,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9113602817566319604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113602817566319605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a422be4d36416ff47bf6902a79f49780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splineContainer: {fileID: 0}
+  forwardDir: -1
+  moveType: 0
+  gearRatio: 1.5
 --- !u!50 &9113602817566319603
 Rigidbody2D:
   serializedVersion: 4
@@ -291,13 +307,13 @@ CompositeCollider2D:
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
-  - m_Collider: {fileID: 9113602817566319600}
+  - m_Collider: {fileID: 9113602817566319606}
     m_ColliderPaths:
     - - X: 15000000
-        Y: -632953
-      - X: -15000000
-        Y: -632953
-      - X: -15000000
+        Y: 2011509
+      - X: 13430185
+        Y: 2011509
+      - X: 13430185
         Y: -2500000
       - X: 15000000
         Y: -2500000
@@ -311,13 +327,13 @@ CompositeCollider2D:
         Y: -2500000
       - X: -13381333
         Y: -2500000
-  - m_Collider: {fileID: 9113602817566319606}
+  - m_Collider: {fileID: 9113602817566319600}
     m_ColliderPaths:
     - - X: 15000000
-        Y: 2011509
-      - X: 13430185
-        Y: 2011509
-      - X: 13430185
+        Y: -632953
+      - X: -15000000
+        Y: -632953
+      - X: -15000000
         Y: -2500000
       - X: 15000000
         Y: -2500000
@@ -365,23 +381,7 @@ MonoBehaviour:
   - {x: 1.5, y: -0.25, z: 0}
   m_ShapePathHash: 23982885
   m_Mesh: {fileID: 0}
-  m_InstanceId: 41224
---- !u!114 &9113602817566319604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9113602817566319605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a422be4d36416ff47bf6902a79f49780, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  splineContainer: {fileID: 0}
-  forwardDir: -1
-  moveType: 0
-  gearRatio: 1.5
+  m_InstanceId: 45292
 --- !u!1001 &110167095236700225
 PrefabInstance:
   m_ObjectHideFlags: 0
