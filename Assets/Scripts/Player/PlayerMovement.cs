@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject rightMouthHalf;
 
     CircleCollider2D tongueCollider;
+    CircleCollider2D mouthCollider;
     FixedJoint2D tongueFixedJoint;
     SpringJoint2D springJoint;
     FixedJoint2D fixedJoint;
@@ -95,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         springJoint = GetComponent<SpringJoint2D>();
         fixedJoint = GetComponent<FixedJoint2D>();
+        mouthCollider = GetComponent<CircleCollider2D>();
         anim = GetComponent<Animator>();
 
         targetRelPos = targetFreePos;
@@ -390,6 +392,12 @@ public class PlayerMovement : MonoBehaviour
                         tongueFixedJoint.connectedBody = hit.rigidbody;
                         tongueFixedJoint.autoConfigureConnectedAnchor = false;
                         stuckTo = hit.collider.attachedRigidbody;
+
+                        if (stuckTo.gameObject.TryGetComponent(out FitsInMouth _))
+                        {
+                            stuckTo.excludeLayers = LayerMask.GetMask(new string[] { "Player" });
+                            print("In mouth");
+                        }
                     }
 
                     return;
@@ -400,12 +408,14 @@ public class PlayerMovement : MonoBehaviour
         if (retractingTongue)
         {
             // Move towards the tongue
-            Vector2 moveDirection = tongue.position - rb.position;
+            Vector2 moveDirection = tongue.position - (Vector2)mouthCollider.bounds.center;
             Vector2 targetVelocity = moveDirection.normalized * headPullVelocity;
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref zeroVelocity, movementSmoothing);
 
+            print(Vector2.Distance(tongue.position, rb.position));
+
             // Fully retract the tongue
-            if (Vector2.Distance(tongue.position, rb.position) < 0.1f)
+            if (Vector2.Distance(tongue.position, mouthCollider.bounds.center) < (mouthCollider.radius + 0.05f))
             {
                 PointAt(retractingDirection);
 
@@ -417,7 +427,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 // Thing we're stuck to fits in mouth
-                if (stuckToCollider.gameObject.TryGetComponent(out FitsInMouth _))
+                if (stuckTo != null && stuckTo.gameObject.TryGetComponent(out FitsInMouth _))
                 {
                     stuckTo.excludeLayers = LayerMask.GetMask(new string[] { "Player" });
                     mouthFull = true;
@@ -501,10 +511,22 @@ public class PlayerMovement : MonoBehaviour
         {
             StopCoroutine(tongueCoroutine);
         }
-        if (tongueOut)
+        if (tongueOut && stuckToCollider == null)
         {
             tongueCoroutine = StartCoroutine(RetractTongue());
+        } else
+        {
+            FinishDisableTongue();
         }
+    }
+
+    // Disables the tongue completely
+    void FinishDisableTongue()
+    {
+        tongue.position = rb.position;
+        tongue.transform.parent = transform;
+        tongue.gameObject.SetActive(false);
+        tongueOut = false;
     }
 
     // Lets the tongue be free from the mouth
@@ -574,11 +596,7 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        // Disables the tongue
-        tongue.position = rb.position;
-        tongue.transform.parent = transform;
-        tongue.gameObject.SetActive(false);
-        tongueOut = false;
+        FinishDisableTongue();
     }
 
     public void CheckJoltAwakeCollision(Collision2D collision)
