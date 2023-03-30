@@ -4,21 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BlindPuller : MonoBehaviour, IGrabHandler
+public abstract class BlindPuller : MonoBehaviour, IGrabHandler, IFloatAcceptor
 {
-    [SerializeField] float lengtheningSpeed;
-    [SerializeField] float maxLength = 3;
-    [SerializeField] Rope rope;
+    [SerializeField] protected float lengtheningSpeed;
+    [SerializeField] protected float maxLength = 3;
+    [SerializeField] protected bool startAtBottom = false;
 
-    bool grabbed;
-    float startLength;
-    float prevLength;
-    [ReadOnly] public float length;
+    protected bool grabbed;
+    [ShowNonSerializedField] protected float startLengthOffset;
+    protected float prevLength;
+    [ReadOnly] public float length = 0;
+    protected float adjustedLength
+    {
+        get { return length + startLengthOffset; }
+    }
 
-    [SerializeField] GameObject[] subscriberObjects;
-    List<IFloatAcceptor> subscribers;
+    [SerializeField] protected GameObject[] subscriberObjects;
+    protected List<IFloatAcceptor> subscribers;
 
-    void Start()
+    protected virtual void Start()
     {
         // Process subscribers
         subscribers = new List<IFloatAcceptor>(subscriberObjects.Length);
@@ -27,7 +31,10 @@ public class BlindPuller : MonoBehaviour, IGrabHandler
             subscribers.Add(sub.GetComponent<IFloatAcceptor>());
         }
 
-        startLength = rope.length;
+        if (startAtBottom) {
+            length = maxLength;
+            startLengthOffset -= maxLength;
+        }
     }
 
     void Update()
@@ -36,14 +43,16 @@ public class BlindPuller : MonoBehaviour, IGrabHandler
         {
             prevLength = length;
             length += Time.deltaTime * lengtheningSpeed;
-            rope.UniformlyChangeLength(length);
+            ChangeLength();
 
             foreach (var sub in subscribers)
             {
-                sub.TakeFloat((length - prevLength) / (maxLength - startLength));
+                sub.TakeFloat((length - prevLength) / maxLength);
             }
         }
     }
+
+    protected abstract void ChangeLength();
 
     public void OnGrab()
     {
@@ -53,5 +62,11 @@ public class BlindPuller : MonoBehaviour, IGrabHandler
     public void OnRelease()
     {
         grabbed = false;
+    }
+
+    public void TakeFloat(float f)
+    {
+        length -= maxLength * f;
+        ChangeLength();
     }
 }

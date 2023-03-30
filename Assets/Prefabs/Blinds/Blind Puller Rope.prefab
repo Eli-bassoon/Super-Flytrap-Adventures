@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 655825046898832556}
+  - component: {fileID: 5848996615224978770}
   - component: {fileID: 8266938636928820572}
   - component: {fileID: 2624550427204306560}
   - component: {fileID: 7387024857555402929}
-  - component: {fileID: 256071141218046319}
   - component: {fileID: 6386846012696209073}
   - component: {fileID: 7203981678114113171}
   m_Layer: 8
@@ -37,6 +37,24 @@ Transform:
   m_Father: {fileID: 6179121881123298259}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5848996615224978770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8604650330404753777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85f7c1b09f448ce44ab6b511d796cbc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lengtheningSpeed: 0.75
+  maxLength: 2.75
+  startAtBottom: 0
+  length: 0
+  subscriberObjects: []
+  rope: {fileID: 6179121881123298261}
 --- !u!212 &8266938636928820572
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -151,23 +169,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.49999997
---- !u!114 &256071141218046319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8604650330404753777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2bb7dccfda46c3499e40553c0904615, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lengtheningSpeed: 0.75
-  maxLength: 3
-  rope: {fileID: 6179121881123298261}
-  length: 0
-  subscriberObjects: []
 --- !u!114 &6386846012696209073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +293,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 829032333677479249, guid: 9d0296190a7ec144ebc09069b9828ce8, type: 3}
       propertyPath: m_Name
-      value: Blind Puller
+      value: Blind Puller Rope
       objectReference: {fileID: 0}
     - target: {fileID: 829032333677479251, guid: 9d0296190a7ec144ebc09069b9828ce8, type: 3}
       propertyPath: end
@@ -304,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 829032333677479253, guid: 9d0296190a7ec144ebc09069b9828ce8, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 829032333677479253, guid: 9d0296190a7ec144ebc09069b9828ce8, type: 3}
       propertyPath: m_LocalPosition.x
