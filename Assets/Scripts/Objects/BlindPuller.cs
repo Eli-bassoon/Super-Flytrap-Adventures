@@ -36,7 +36,7 @@ public class BlindPuller : MonoBehaviour, IGrabHandler
         {
             prevLength = length;
             length += Time.deltaTime * lengtheningSpeed;
-            rope.UniformlyLengthen(length);
+            rope.UniformlyChangeLength(length);
 
             foreach (var sub in subscribers)
             {

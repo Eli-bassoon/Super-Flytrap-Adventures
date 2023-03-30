@@ -396,7 +396,6 @@ public class PlayerMovement : MonoBehaviour
                         if (stuckTo.gameObject.TryGetComponent(out FitsInMouth _))
                         {
                             stuckTo.excludeLayers = LayerMask.GetMask(new string[] { "Player" });
-                            print("In mouth");
                         }
                     }
 
@@ -411,8 +410,6 @@ public class PlayerMovement : MonoBehaviour
             Vector2 moveDirection = tongue.position - (Vector2)mouthCollider.bounds.center;
             Vector2 targetVelocity = moveDirection.normalized * headPullVelocity;
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref zeroVelocity, movementSmoothing);
-
-            print(Vector2.Distance(tongue.position, rb.position));
 
             // Fully retract the tongue
             if (Vector2.Distance(tongue.position, mouthCollider.bounds.center) < (mouthCollider.radius + 0.05f))

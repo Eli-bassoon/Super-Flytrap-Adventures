@@ -75,7 +75,7 @@ public class Rope : MonoBehaviour
         lineRenderer.SetPositions(points);
     }
 
-    public void UniformlyLengthen(float newLength)
+    public void UniformlyChangeLength(float newLength)
     {
         length = newLength;
         foreach (var segment in segmentJoints)
