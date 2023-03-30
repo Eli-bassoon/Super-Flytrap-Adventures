@@ -195,5 +195,5 @@ MonoBehaviour:
   lights: []
   blockingLayers:
     serializedVersion: 2
-    m_Bits: 769
+    m_Bits: 8961
   lightShining: 0

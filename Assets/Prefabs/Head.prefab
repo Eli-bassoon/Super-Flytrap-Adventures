@@ -715,7 +715,7 @@ MonoBehaviour:
   maxNeckLength: 3.2
   grabbableLayers:
     serializedVersion: 2
-    m_Bits: 1793
+    m_Bits: 18177
   mouseChatterThreshold: 0.5
   extraWallCheckRadius: 0.2
   tongueRetractTime: 0.1

@@ -15,6 +15,7 @@ public class BlindPullerRope : BlindPuller
 
     protected override void ChangeLength()
     {
+        GetComponent<Rigidbody2D>().WakeUp();
         rope.UniformlyChangeLength(adjustedLength);
     }
 }

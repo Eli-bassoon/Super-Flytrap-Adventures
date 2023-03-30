@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 7387024857555402929}
   - component: {fileID: 6386846012696209073}
   - component: {fileID: 7203981678114113171}
-  m_Layer: 8
-  m_Name: End
+  m_Layer: 14
+  m_Name: End (script here)
   m_TagString: Center in Mouth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

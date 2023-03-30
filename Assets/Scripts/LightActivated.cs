@@ -55,6 +55,7 @@ public class LightActivated : MonoBehaviour
         float angleToLight;
         for (int i = 0; i < lights.Length; i++)
         {
+            // This math is bad. Change it.
             toPosition = transform.position - lights[i].position;
             angleToLight = Vector2.Angle(toPosition, -lights[i].transform.up);
 
