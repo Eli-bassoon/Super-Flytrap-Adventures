@@ -11,7 +11,8 @@ public class EdibleBird : MonoBehaviour
     protected Vector3 zeroVelocity = Vector3.zero;
     protected float currMoveTime;
 
-    protected float speed;
+    [SerializeField] protected float randomSpeed = 2f;
+    [SerializeField] protected float pathSpeed = 2f;
     protected float minMoveTime;
     protected float maxMoveTime;
     protected float maxWanderDistance;
@@ -31,7 +32,6 @@ public class EdibleBird : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         startPos = transform.position;
         currMoveTime = 0;
-        speed = 2f;
         minMoveTime = 0.1f;
         maxMoveTime = 0.4f;
         maxWanderDistance = 1f;
@@ -65,7 +65,7 @@ public class EdibleBird : MonoBehaviour
         {
             moveTowards = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
         }
-        rb.velocity = moveTowards * speed;
+        rb.velocity = moveTowards * randomSpeed;
         currMoveTime = Random.Range(minMoveTime, maxMoveTime);
     }
 
@@ -77,11 +77,11 @@ public class EdibleBird : MonoBehaviour
         {
             Vector3 towardsCenter = splineStart - (Vector2)transform.position;
             Vector2 moveTowards = towardsCenter.normalized;
-            rb.velocity = moveTowards * speed;
+            rb.velocity = moveTowards * pathSpeed;
         }
         else
         {
-            splineTraveled += (Time.fixedDeltaTime * speed / splineLength) * flySign;
+            splineTraveled += (Time.fixedDeltaTime * pathSpeed / splineLength) * flySign;
             splineTraveled = Mathf.Clamp01(splineTraveled);
             Vector3 pos = (Vector3)splineContainer.EvaluatePosition(splineTraveled);
             rb.MovePosition(pos);
