@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public abstract class Fader : MonoBehaviour
 {
     [MinMaxSlider(0, 1)] [SerializeField] Vector2 minMax;
+    [SerializeField] bool useUnscaledTime;
 
     public UnityEvent onFadeIn;
     public UnityEvent onFadeOut;
@@ -52,7 +53,7 @@ public abstract class Fader : MonoBehaviour
 
     IEnumerator FadeCR(float time, int direction)
     {
-        float startTime = Time.time;
+        float startTime = GetTime();
         float startValue = InitStartValue();
         float endValue = direction == +1 ? minMax.y : minMax.x; // Set end to either min or max
         float elapsedTime;
@@ -61,10 +62,11 @@ public abstract class Fader : MonoBehaviour
         do
         {
             // Set current value to interpolated value
-            elapsedTime = Time.time - startTime;
+            elapsedTime = GetTime() - startTime;
+            print(elapsedTime);
             value = Mathf.Lerp(startValue, endValue, elapsedTime / time);
             SetValue(value);
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         while (elapsedTime < time);
 
@@ -85,5 +87,17 @@ public abstract class Fader : MonoBehaviour
         yield return new WaitForSeconds(halfTime);
         StopCoroutine(cr);
         StartCoroutine(FadeCR(halfTime, -1));
+    }
+
+    float GetTime()
+    {
+        if (useUnscaledTime)
+        {
+            return Time.unscaledTime;
+        }
+        else
+        {
+            return Time.time;
+        }
     }
 }
