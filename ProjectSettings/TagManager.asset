@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Not Grabbable
   - Center in Mouth
+  - Instant Death
   layers:
   - Default
   - TransparentFX
