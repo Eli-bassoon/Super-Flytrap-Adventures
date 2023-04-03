@@ -126,8 +126,11 @@ MonoBehaviour:
     - {x: 1, y: 1, z: 0}
     - {x: -1, y: 1, z: 0}
     m_RuleTransform: 2
+  isSlick: 0
+  isDamaging: 0
   alwaysConnect: 0
   tilesToConnect:
   - {fileID: 11400000, guid: eb4026adc83426246bda91631e753d14, type: 2}
-  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 7195d040c6050f34d82fcaa005f1192f, type: 2}
+  sharedTiles: {fileID: 0}
   checkSelf: 1

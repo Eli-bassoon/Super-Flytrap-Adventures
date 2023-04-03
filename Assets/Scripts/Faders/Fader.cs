@@ -63,7 +63,6 @@ public abstract class Fader : MonoBehaviour
         {
             // Set current value to interpolated value
             elapsedTime = GetTime() - startTime;
-            print(elapsedTime);
             value = Mathf.Lerp(startValue, endValue, elapsedTime / time);
             SetValue(value);
             yield return null;

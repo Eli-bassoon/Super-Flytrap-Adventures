@@ -4,11 +4,16 @@ using System.Linq;
 
 [CreateAssetMenu(menuName = "VinTools/Custom Tiles/Advanced Rule Tile")]
 public class AdvancedRuleTile : RuleTile<AdvancedRuleTile.Neighbor> {
+    [Header("Tile Properties")]
+    public bool isSlick = false;
+    public bool isDamaging = false;
+
     [Header("Advanced Tile")]
     [Tooltip("If enabled, the tile will connect to these tiles too when the mode is set to \"This\"")]
     public bool alwaysConnect;
     [Tooltip("Tiles to connect to")]
     public TileBase[] tilesToConnect;
+    public SharedConnectingTiles sharedTiles;
     [Space]
     [Tooltip("Check itself when the mode is set to \"any\"")]
     public bool checkSelf = true;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -361,6 +362,16 @@ public class PlayerMovement : MonoBehaviour
                     if (hit.collider.gameObject.CompareTag("Not Grabbable"))
                     {
                         continue;
+                    }
+                    if (hit.transform.TryGetComponent(out Tilemap tm))
+                    {
+                        Vector2 hitPosAdj = hit.point - 0.01f * hit.normal;
+                        Vector3Int tilePos = tm.WorldToCell(hitPosAdj);
+                        AdvancedRuleTile tile = tm.GetTile<AdvancedRuleTile>(tilePos);
+                        if (tile != null && tile.isSlick)
+                        {
+                            continue;
+                        }
                     }
 
                     // Eating something
