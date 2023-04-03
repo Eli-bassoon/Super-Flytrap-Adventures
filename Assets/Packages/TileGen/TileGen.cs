@@ -14,6 +14,8 @@ public class SpriteProcessor : AssetPostprocessor
 
     void OnPreprocessTexture()
     {
+        return;
+
         Debug.Log("Importing asset to " + assetPath);
         if(assetPath.Contains("itspkr"))
         {
@@ -28,6 +30,8 @@ public class SpriteProcessor : AssetPostprocessor
 
     public void OnPostprocessTexture(Texture2D texture)
     {
+        return;
+
         TileGen tileGen = new TileGen();
 
         int spriteSize = TileGen.tileSize;
