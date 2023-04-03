@@ -10,7 +10,7 @@ public class AdvancedRuleTile : RuleTile<AdvancedRuleTile.Neighbor> {
     [Tooltip("Tiles to connect to")]
     public TileBase[] tilesToConnect;
     [Space]
-    [Tooltip("Check itseft when the mode is set to \"any\"")]
+    [Tooltip("Check itself when the mode is set to \"any\"")]
     public bool checkSelf = true;
 
     public class Neighbor : RuleTile.TilingRule.Neighbor {
