@@ -129,8 +129,6 @@ MonoBehaviour:
   isSlick: 0
   isDamaging: 0
   alwaysConnect: 0
-  tilesToConnect:
-  - {fileID: 11400000, guid: eb4026adc83426246bda91631e753d14, type: 2}
-  - {fileID: 11400000, guid: 7195d040c6050f34d82fcaa005f1192f, type: 2}
-  sharedTiles: {fileID: 0}
+  tilesToConnect: []
+  sharedTiles: {fileID: 11400000, guid: 781f0ade9f9a9444cb6c21d22ce09fcd, type: 2}
   checkSelf: 1

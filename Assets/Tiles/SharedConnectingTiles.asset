@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dcf1ede0e9996e4593d98a662bd4fd5, type: 3}
+  m_Name: SharedConnectingTiles
+  m_EditorClassIdentifier: 
+  sharedConnectingTiles:
+  - {fileID: 11400000, guid: eb4026adc83426246bda91631e753d14, type: 2}
+  - {fileID: 11400000, guid: dbea9ea46a819e349a93ec7f34f23049, type: 2}
+  - {fileID: 11400000, guid: 7195d040c6050f34d82fcaa005f1192f, type: 2}

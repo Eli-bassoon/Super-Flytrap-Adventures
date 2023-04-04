@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 946062a9cdeefa14cb19773dbb35f10e, type: 3}
   m_Name: Mud Sharp
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 0}
+  m_DefaultSprite: {fileID: 21300012, guid: 157cbc340d2b7e64ab85168e80e95550, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:
@@ -40,8 +40,6 @@ MonoBehaviour:
   isSlick: 1
   isDamaging: 0
   alwaysConnect: 0
-  tilesToConnect:
-  - {fileID: 11400000, guid: eb4026adc83426246bda91631e753d14, type: 2}
-  - {fileID: 11400000, guid: dbea9ea46a819e349a93ec7f34f23049, type: 2}
-  sharedTiles: {fileID: 0}
+  tilesToConnect: []
+  sharedTiles: {fileID: 11400000, guid: 781f0ade9f9a9444cb6c21d22ce09fcd, type: 2}
   checkSelf: 1

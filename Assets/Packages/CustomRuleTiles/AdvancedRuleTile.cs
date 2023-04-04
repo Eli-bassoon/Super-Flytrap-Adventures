@@ -43,7 +43,7 @@ public class AdvancedRuleTile : RuleTile<AdvancedRuleTile.Neighbor> {
     bool Check_This(TileBase tile)
     {
         if (!alwaysConnect) return tile == this;
-        else return tilesToConnect.Contains(tile) || tile == this;
+        else return ConnectContains(tile) || tile == this;
 
         //.Contains requires "using System.Linq;"
     }
@@ -56,7 +56,7 @@ public class AdvancedRuleTile : RuleTile<AdvancedRuleTile.Neighbor> {
     bool Check_NotThis(TileBase tile)
     {
         if (!alwaysConnect) return tile != this;
-        else return !tilesToConnect.Contains(tile) && tile != this;
+        else return !ConnectContains(tile) && tile != this;
 
         //.Contains requires "using System.Linq;"
     }
@@ -79,7 +79,7 @@ public class AdvancedRuleTile : RuleTile<AdvancedRuleTile.Neighbor> {
     /// <returns></returns>
     bool Check_Specified(TileBase tile)
     {
-        return tilesToConnect.Contains(tile);
+        return ConnectContains(tile);
 
         //.Contains requires "using System.Linq;"
     }
@@ -93,5 +93,10 @@ public class AdvancedRuleTile : RuleTile<AdvancedRuleTile.Neighbor> {
     bool Check_Nothing(TileBase tile)
     {
         return tile == null;
+    }
+
+    bool ConnectContains(TileBase tile)
+    {
+        return tilesToConnect.Contains(tile) || sharedTiles.sharedConnectingTiles.Contains(tile);
     }
 }
