@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightShrivel : LightActivated
+public class LightPlatform : LightActivated
 {
     Animator anim;
     Collider2D myCollider;
@@ -13,17 +13,16 @@ public class LightShrivel : LightActivated
         myCollider = GetComponent<Collider2D>();
     }
 
-    protected override void OnShineStart()
+    protected override void OnActivate()
     {
         anim.SetBool("activated", true);
         myCollider.enabled = true;
     }
 
-    protected override void OnShineStay() { }
-
-    protected override void OnShineEnd()
+    protected override void OnDeactivate()
     {
         anim.SetBool("activated", false);
         myCollider.enabled = false;
     }
 }
+

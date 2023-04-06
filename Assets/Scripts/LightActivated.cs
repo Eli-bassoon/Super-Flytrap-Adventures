@@ -1,79 +1,25 @@
-using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
-public class LightActivated : MonoBehaviour
+public class LightActivated : LightDetector
 {
-    [SerializeField] protected Transform[] lights;
-    [SerializeField] protected LayerMask blockingLayers;
-    protected float[] maxAngles;
-    protected float extraSpace = 5f;
-    [ReadOnly] public bool lightShining = false;
-    protected bool prevLightShining;
+    [Tooltip("Whether the object is activated (true) or deactivated (false) by light")]
+    [SerializeField] protected bool activateOnShine = true;
 
-    protected void Start()
+    protected override void OnShineStart()
     {
-        maxAngles = new float[lights.Length];
-        for (int i = 0; i < lights.Length; i++)
-            maxAngles[i] = lights[i].GetComponentInChildren<Light2D>().pointLightOuterAngle / 2 + extraSpace;
-
-        // Initialize lights shining
-        lightShining = TestForLight();
-        prevLightShining = lightShining;
-
-        if (lightShining)
-            OnShineStart();
-        else
-            OnShineEnd();
+        if (activateOnShine) OnActivate();
+        else OnDeactivate();
     }
 
-    protected void FixedUpdate()
+    protected override void OnShineEnd()
     {
-        prevLightShining = lightShining;
-        lightShining = TestForLight();
-
-        // Currently shining
-        if (lightShining)
-        {
-            // Was previously shining
-            if (prevLightShining)
-                OnShineStay();
-            // Wasn't previously shining
-            else
-                OnShineStart();
-        }
-        // Not currently shining
-        else if (prevLightShining)
-            OnShineEnd();
+        if (activateOnShine) OnDeactivate();
+        else OnActivate();
     }
 
-    protected bool TestForLight()
-    {
-        Vector2 toPosition;
-        float angleToLight;
-        for (int i = 0; i < lights.Length; i++)
-        {
-            // This math is bad. Change it.
-            toPosition = transform.position - lights[i].position;
-            angleToLight = Vector2.Angle(toPosition, -lights[i].transform.up);
+    protected virtual void OnActivate() { }
 
-            // Tests if a particular light is shining on it
-            if ((lights[i].GetComponentInChildren<Light2D>().enabled) && // The lamp is on
-                (angleToLight <= maxAngles[i]) && // In angle range
-                !Physics2D.Linecast(transform.position, lights[i].position, blockingLayers)) // Nothing blocking
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    protected virtual void OnShineStart() { }
-
-    protected virtual void OnShineStay() { }
-
-    protected virtual void OnShineEnd() { }
+    protected virtual void OnDeactivate() { }
 }

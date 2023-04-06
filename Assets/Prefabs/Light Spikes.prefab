@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1827796759160360589}
   - component: {fileID: 4474798187393533653}
   - component: {fileID: 1827796759160360588}
-  - component: {fileID: 1827796759160360587}
+  - component: {fileID: 9184246841618941420}
   m_Layer: 10
   m_Name: Light Spikes
   m_TagString: Not Grabbable
@@ -170,7 +170,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1827796759160360587
+--- !u!114 &9184246841618941420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,11 +179,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1827796759160360586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 788999b785f7b8a439cb711560d28c58, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e375a3d5fec69247b84992d75e568e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lights: []
   blockingLayers:
     serializedVersion: 2
-    m_Bits: 8961
+    m_Bits: 8193
   lightShining: 0
+  activateOnShine: 1
