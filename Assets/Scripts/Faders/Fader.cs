@@ -6,7 +6,15 @@ using UnityEngine.Events;
 
 public abstract class Fader : MonoBehaviour
 {
+    enum StartFade
+    {
+        Min,
+        Current,
+        Max,
+    }
+
     [MinMaxSlider(0, 1)] [SerializeField] Vector2 minMax;
+    [SerializeField] StartFade startFadeSettings = StartFade.Current;
     [SerializeField] bool useUnscaledTime;
 
     public UnityEvent onFadeIn;
@@ -17,6 +25,19 @@ public abstract class Fader : MonoBehaviour
     protected virtual void Awake()
     {
 
+    }
+
+    protected virtual void Start()
+    {
+        switch (startFadeSettings)
+        {
+            case StartFade.Min:
+                SetValue(minMax.x);
+                break;
+            case StartFade.Max:
+                SetValue(minMax.y);
+                break;
+        }
     }
 
     private void Reset()

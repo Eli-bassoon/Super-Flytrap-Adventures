@@ -569,6 +569,10 @@ PrefabInstance:
       propertyPath: m_text
       value: You can grapple up walls
       objectReference: {fileID: 0}
+    - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7736542471428726207, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_SizeDelta.x
       value: 545.98
@@ -889,12 +893,8 @@ PrefabInstance:
       value: Try grabbing onto the other wall and the ceiling
       objectReference: {fileID: 0}
     - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
-      propertyPath: m_fontColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 16777215
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7736542471428726207, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1498,12 +1498,8 @@ PrefabInstance:
         it right to build up momentum'
       objectReference: {fileID: 0}
     - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
-      propertyPath: m_fontColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 16777215
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7736542471428726207, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_SizeDelta.x
