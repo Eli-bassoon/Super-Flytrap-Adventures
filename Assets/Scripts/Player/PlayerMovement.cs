@@ -440,7 +440,7 @@ public class PlayerMovement : MonoBehaviour
                     stuckTo.excludeLayers = LayerMask.GetMask(new string[] { "Player" });
                     mouthFull = true;
                     fixedJoint.enabled = true;
-                    fixedJoint.autoConfigureConnectedAnchor = false;
+                    fixedJoint.autoConfigureConnectedAnchor = true;
                     if (tongueFixedJoint.connectedBody != null)
                     {
                         fixedJoint.connectedBody = tongueFixedJoint.connectedBody;
