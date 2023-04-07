@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using Unity.VisualScripting;
 
 public class NPCIngestion : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class NPCIngestion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) { 
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(2)) { 
             if (regurgitableNPC == null && PlayerMovement.instance.stuckTo != null && PlayerMovement.instance.stuckTo.TryGetComponent(out FitsInMouth rbObj))
             {
                 //stuckTo is the rb component of whatever we are stuck to, get game component & change active state
