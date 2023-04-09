@@ -525,6 +525,9 @@ public class PlayerMovement : MonoBehaviour
         fixedJoint.enabled = false;
         fixedJoint.connectedBody = null;
 
+        canMove = false;
+        canGrab = false;
+
         DisableTongue();
         GetFreeDelt();
         anim.SetInteger(mouthStateAnim, (int)MouthStates.Closed);
