@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageCounter : MonoBehaviour
 {
-    [SerializeField] DamageHandler damageHandler;
+    [SerializeField] DamageHandling damageHandler;
     // this script only returns damage
     // all health and respawning is handled in centralized respawn script
     //[SerializeField] int fullHealth = 100;

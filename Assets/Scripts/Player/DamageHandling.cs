@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageHandler : MonoBehaviour
+public class DamageHandling : MonoBehaviour
 {
     [SerializeField] int fullHealth = 100;
     [SerializeField] int currHealth; // = fullHealth;
