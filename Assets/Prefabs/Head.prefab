@@ -110,7 +110,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
@@ -719,10 +719,12 @@ MonoBehaviour:
   mouseChatterThreshold: 0.5
   extraWallCheckRadius: 0.2
   tongueRetractTime: 0.1
+  grabCooldownTime: 0.2
   minMousePotSwingDist: 3
   mousePotSwingRadius: 2
   maxPotSwingForce: 50
   targetFreePos: {x: 0, y: 1}
+  ceilingGuard: 0.5
   freeForceP: 30
   freeForceD: 300
   freeAngleP: 3
@@ -746,6 +748,7 @@ MonoBehaviour:
   retractingTongue: 0
   sleeping: 0
   canGrab: 1
+  canMove: 1
 --- !u!114 &6201068726489278934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,7 +785,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
