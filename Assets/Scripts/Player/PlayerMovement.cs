@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
@@ -24,7 +25,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask grabbableLayers;
     [SerializeField] float mouseChatterThreshold = 0.5f;
     [SerializeField] float extraWallCheckRadius = 0.2f;
-    [SerializeField][Range(0, 1)] float tongueRetractTime = 0.25f;
+    [Range(0, 1)][SerializeField] float tongueRetractTime = 0.25f;
+    [SerializeField][Range(0, 0.5f)] float grabCooldownTime = 0.2f;
 
     [Header("Swinging")]
     [SerializeField] float minMousePotSwingDist = 0.5f;
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Not Stuck")]
     [SerializeField] Vector2 targetFreePos = new Vector2(0, 1f);
+    [SerializeField] float ceilingGuard = 0.5f;
     [SerializeField] float freeForceP = 1;
     [SerializeField] float freeForceD = 0;
     [SerializeField] float freeAngleP = 1;
@@ -85,10 +88,12 @@ public class PlayerMovement : MonoBehaviour
     [ReadOnly] public bool sleeping = false;
 
     [HideInInspector] public bool canGrab = true;
+    [HideInInspector] public bool canMove = true;
 
     Vector2 retractingDirection;
     Coroutine tongueCoroutine;
     Timer sleepTimer;
+    LayerMask groundLayer;
 
     private void Awake()
     {
@@ -101,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
 
         targetRelPos = targetFreePos;
+        groundLayer = LayerMask.GetMask(new string[] { "Ground" });
     }
 
     void Start()
@@ -123,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             ExtendTongue();
-            canGrab = true;
+            canMove = true;
         }
         // Gets a vector to the mouse's position in world if pressed down
         if (Input.GetMouseButton(0))
@@ -150,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Move our character
-        if (mousePressed && canGrab)
+        if (mousePressed && canMove)
         {
             TestForWall(mousePosition);
             Move(mousePosition);
@@ -159,7 +165,9 @@ public class PlayerMovement : MonoBehaviour
         {
             LetGo();
             mouseButtonUp = false;
-            canGrab = true;
+            canMove = true;
+            canGrab = false;
+            Timer.Register(grabCooldownTime, () => { canGrab = true; });
         }
 
         CheckForSleep();
@@ -206,6 +214,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 LetGo();
                 canGrab = false;
+                canMove = false;
             }
 
             // Swinging
@@ -221,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
             flowerpot.AddForce(potSwingForce);
         }
         // Move the head towards the mouse
-        if ((!stuck || mouthFull) && canGrab)
+        if ((!stuck || mouthFull) && canMove)
         {
             Rigidbody2D movingRigidbody;
             // Determine which object to move
@@ -315,7 +324,21 @@ public class PlayerMovement : MonoBehaviour
     // Gets changes since previous frame for PD control
     void GetFreeDelt()
     {
-        Vector2 targetPos = flowerpot.position + targetRelPos + flowerpot.velocity * flowerpotVBias;
+        Vector2 thisTargetRelPos;
+
+        // Change the position to below the pot if we're right against a ceiling
+        RaycastHit2D flowerpotHit = Physics2D.Raycast(flowerpot.position, targetFreePos.normalized, targetFreePos.magnitude + ceilingGuard, groundLayer);
+        if (flowerpotHit.collider != null)
+        {
+            thisTargetRelPos = new Vector2(0, flowerpotHit.distance - ceilingGuard);
+        }
+        // Otherwise, use the set relative pos
+        else
+        {
+            thisTargetRelPos = targetRelPos;
+        }
+
+        Vector2 targetPos = flowerpot.position + thisTargetRelPos + flowerpot.velocity * flowerpotVBias;
         targetPosDelt = targetPos - rb.position;
 
         targetAngleDelt = restingAngle - rb.rotation;
@@ -625,6 +648,7 @@ public class PlayerMovement : MonoBehaviour
     {
         LetGo();
         canGrab = false;
+        canMove = false;
     }
 
     private void OnDrawGizmosSelected()
