@@ -607,6 +607,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     void StopSleep()
     {
         targetRelPos = targetFreePos;
