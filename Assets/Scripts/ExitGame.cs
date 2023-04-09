@@ -26,7 +26,7 @@ public class ExitGame : MonoBehaviour
         }
     }
 
-    void Exit()
+    public void Exit()
     {
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;

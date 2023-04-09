@@ -1254,6 +1254,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChompSound
       objectReference: {fileID: 0}
+    - target: {fileID: 4367675915970260560, guid: a803037fdcb82da43ac329cf14334742, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4367675915970260561, guid: a803037fdcb82da43ac329cf14334742, type: 3}
       propertyPath: m_Enabled
       value: 0

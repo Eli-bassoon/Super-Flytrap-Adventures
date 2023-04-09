@@ -47,4 +47,9 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
+    public void Exit()
+    {
+        GetComponent<ExitGame>().Exit();
+    }
 }
