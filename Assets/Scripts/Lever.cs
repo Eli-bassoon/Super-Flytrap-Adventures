@@ -33,6 +33,7 @@ public class Lever : MonoBehaviour
         angle = GetAngle();
         state = GetState(angle);
         prevState = state;
+        UpdateVisuals();
 
         subscribers = new List<IBoolAcceptor>(subscriberObjects.Length);
         foreach (var sub in subscriberObjects)
@@ -46,6 +47,7 @@ public class Lever : MonoBehaviour
         prevState = state;
         angle = GetAngle();
         state = GetState(angle);
+        UpdateVisuals();
 
         if (prevState != state)
         {
@@ -69,7 +71,7 @@ public class Lever : MonoBehaviour
 
     float GetAngle()
     {
-        float givenAngle = Vector2.SignedAngle(Vector2.right, handle.position - rb.position);
+        float givenAngle = Vector2.SignedAngle(transform.TransformDirection(Vector2.right), handle.position - rb.position);
         givenAngle = Utils.Angle0To360(givenAngle);
         return givenAngle;
     }
@@ -93,5 +95,10 @@ public class Lever : MonoBehaviour
         {
             return LeverStates.Clockwise;
         }
+    }
+
+    void UpdateVisuals()
+    {
+        handle.SetRotation(angle - 90);
     }
 }
