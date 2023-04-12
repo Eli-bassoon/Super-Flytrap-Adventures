@@ -74,10 +74,9 @@ public class PlayerMovement : MonoBehaviour
     float behindTongueChatterThreshold = 0.2f;
 
     float restingAngle = -90;
-    Vector2 targetPos;
-    Vector2 prevPosDelt;
-    float targetAngle;
-    float prevAngleDelt;
+    Vector2 targetRelPos;
+    Vector2 targetPosDelt;
+    float targetAngleDelt;
 
     [HideInInspector] public Rigidbody2D stuckTo = null;
     [HideInInspector] public Collider2D stuckToCollider = null;
@@ -106,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
         mouthCollider = GetComponent<CircleCollider2D>();
         anim = GetComponent<Animator>();
 
+        targetRelPos = targetFreePos;
         groundLayer = LayerMask.GetMask(new string[] { "Ground" });
     }
 
@@ -115,8 +115,6 @@ public class PlayerMovement : MonoBehaviour
         tongueFixedJoint = tongue.GetComponent<FixedJoint2D>();
 
         maxTongueLength = tongue.GetComponent<DistanceJoint2D>().distance;
-
-        targetPos = targetFreePos + flowerpot.position;
 
         // Unlock flowerpot from this
         flowerpot.transform.parent = null;
@@ -152,19 +150,17 @@ public class PlayerMovement : MonoBehaviour
     {
         distanceToPot = Vector3.Distance(transform.position, flowerpot.position);
 
+        if (!stuck)
+        {
+            MoveHeadToTarget();
+        }
+
         // Move our character
         if (mousePressed && canMove)
         {
             TestForWall(mousePosition);
             Move(mousePosition);
         }
-        else if (!stuck)
-        {
-            GetFreeDelt();
-            MoveHeadToTarget();
-        }
-
-        // Letting go
         if (mouseButtonUp)
         {
             LetGo();
@@ -198,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
     void PointAt(Vector3 pointDirection, bool includeTongue = false)
     {
         float angle = Mathf.Atan2(pointDirection.y, pointDirection.x) * Mathf.Rad2Deg;
-        //rb.SetRotation(angle - 90);
+        rb.SetRotation(angle - 90);
         if (includeTongue)
         {
             tongue.rotation = angle;
@@ -274,9 +270,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 movingRigidbody.velocity = Vector3.SmoothDamp(movingRigidbody.velocity, targetVelocity, ref zeroVelocity, movementSmoothing);
                 changeAngleToMouse = true;
-
-                targetPos = mousePosition;
-                MoveHeadToTarget();
             }
             // We're very close to the mouse, so to reduce chatter we decrease the velocity we apply
             else
@@ -311,57 +304,65 @@ public class PlayerMovement : MonoBehaviour
                     rb.angularVelocity = 0;
                     tongue.angularVelocity = 0;
                 }
-
-                //pointDirection = tongue.position - flowerpot.position;
             }
 
-            //PointAt(pointDirection, includeTongue: true);
+            Vector3 pointDirection;
+            // Angle towards mouse
+            if (changeAngleToMouse)
+            {
+                pointDirection = tongue.position - rb.position;
+            }
+            // To reduce chatter, we point the head towards the pot if we're close to the mouse
+            else
+            {
+                pointDirection = tongue.position - flowerpot.position;
+            }
+            PointAt(pointDirection, includeTongue: true);
         }
     }
 
     // Gets changes since previous frame for PD control
     void GetFreeDelt()
     {
-        if (sleeping) return;
-
         Vector2 thisTargetRelPos;
 
         // Change the position to below the pot if we're right against a ceiling
         RaycastHit2D flowerpotHit = Physics2D.Raycast(flowerpot.position, targetFreePos.normalized, targetFreePos.magnitude + ceilingGuard, groundLayer);
         if (flowerpotHit.collider != null)
         {
-            thisTargetRelPos = flowerpot.position + new Vector2(0, flowerpotHit.distance - ceilingGuard);
+            thisTargetRelPos = new Vector2(0, flowerpotHit.distance - ceilingGuard);
         }
         // Otherwise, use the set relative pos
         else
         {
-            thisTargetRelPos = targetFreePos;
+            thisTargetRelPos = targetRelPos;
         }
-        
-        targetPos = flowerpot.position + thisTargetRelPos + flowerpot.velocity * flowerpotVBias;
-        targetAngle = restingAngle;
+
+        Vector2 targetPos = flowerpot.position + thisTargetRelPos + flowerpot.velocity * flowerpotVBias;
+        targetPosDelt = targetPos - rb.position;
+
+        targetAngleDelt = restingAngle - rb.rotation;
     }
 
-    // Tries to move the head to a target position
+    // When not grabbing, tries to move the head to a target position
     public void MoveHeadToTarget()
     {
-        Vector2 targetPosDelt = targetPos - rb.position;
-        float targetAngleDelt = targetAngle - rb.rotation;
+        // Get values
+        Vector2 prevFreePosDelt = targetPosDelt;
+        float prevFreeAngleDelt = targetAngleDelt;
+        GetFreeDelt();
 
         // Force PD control
         Vector2 appliedForceP = targetPosDelt * freeForceP;
-        Vector2 appliedForceD = (targetPosDelt - prevPosDelt) * freeForceD;
+        Vector2 appliedForceD = (targetPosDelt - prevFreePosDelt) * freeForceD;
         Vector2 appliedForce = appliedForceP + appliedForceD;
         rb.AddForce(appliedForce);
 
         // Angle PD control
         float appliedAngleP = targetAngleDelt * freeAngleP;
-        float appliedAngleD = (targetAngleDelt - prevAngleDelt) * freeAngleD;
+        float appliedAngleD = (targetAngleDelt - prevFreeAngleDelt) * freeAngleD;
         float newOmega = appliedAngleP + appliedAngleD;
         rb.angularVelocity = newOmega;
-
-        prevPosDelt = targetPosDelt;
-        prevAngleDelt = targetAngleDelt;
     }
 
     // Sticks to a wall
@@ -528,13 +529,7 @@ public class PlayerMovement : MonoBehaviour
         canGrab = false;
 
         DisableTongue();
-
         GetFreeDelt();
-        Vector2 targetPosDelt = targetPos - rb.position;
-        float targetAngleDelt = targetAngle - rb.rotation;
-        prevPosDelt = targetPosDelt;
-        prevAngleDelt = targetAngleDelt;
-
         anim.SetInteger(mouthStateAnim, (int)MouthStates.Closed);
     }
 
@@ -600,7 +595,7 @@ public class PlayerMovement : MonoBehaviour
                 zzzParticles.Play();
                 sleeping = true;
                 sleepTimer = Timer.Register(sleepMoveDownTime,
-                    onUpdate: secondsElapsed => targetPos = flowerpot.position + Vector2.Lerp(targetFreePos, targetSleepPos, secondsElapsed / sleepMoveDownTime),
+                    onUpdate: secondsElapsed => targetRelPos = Vector2.Lerp(targetFreePos, targetSleepPos, secondsElapsed / sleepMoveDownTime),
                     onComplete: () => { });
             });
         }
@@ -612,8 +607,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     void StopSleep()
     {
+        targetRelPos = targetFreePos;
         sleepTimer?.Cancel();
         sleepTimer = null;
         sleeping = false;
