@@ -219,16 +219,19 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // Swinging
-            Vector2 potToMouse = ((Vector2)mousePosition - flowerpot.position);
-            float potToMouseDist = potToMouse.magnitude;
-            Vector2 potToMouseDir = potToMouse.normalized;
+            if (!mouthFull)
+            {
+                Vector2 potToMouse = ((Vector2)mousePosition - flowerpot.position);
+                float potToMouseDist = potToMouse.magnitude;
+                Vector2 potToMouseDir = potToMouse.normalized;
 
-            potToMouseDist -= minMousePotSwingDist;
-            potToMouseDist = Mathf.Clamp01(potToMouseDist / (mousePotSwingRadius));
+                potToMouseDist -= minMousePotSwingDist;
+                potToMouseDist = Mathf.Clamp01(potToMouseDist / (mousePotSwingRadius));
 
-            Vector2 potSwingForce = maxPotSwingForce * potToMouseDist * -potToMouseDir;
+                Vector2 potSwingForce = maxPotSwingForce * potToMouseDist * -potToMouseDir;
 
-            flowerpot.AddForce(potSwingForce);
+                flowerpot.AddForce(potSwingForce);
+            }
         }
         // Move the head towards the mouse
         if ((!stuck || mouthFull) && canMove)
