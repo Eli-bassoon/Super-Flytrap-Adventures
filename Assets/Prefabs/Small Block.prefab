@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regurgitable: 0
+  constrained: 0
 --- !u!212 &3489454100657753164
 SpriteRenderer:
   m_ObjectHideFlags: 0
