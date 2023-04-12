@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class Lever : MonoBehaviour
 {
-    enum LeverStates
+    public enum LeverStates
     {
-        Clockwise,
-        Counterclockwise,
+        Clockwise = +1,
+        Counterclockwise = -1,
     }
 
     [SerializeField] float triggerAngle = 90f;
@@ -23,8 +24,9 @@ public class Lever : MonoBehaviour
 
     Rigidbody2D rb;
     LeverStates prevState;
+    float length;
     [ShowNonSerializedField] float angle;
-    [ShowNonSerializedField] LeverStates state;
+    [OnValueChanged("SetState_")] public LeverStates state = LeverStates.Clockwise;
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class Lever : MonoBehaviour
         angle = GetAngle();
         state = GetState(angle);
         prevState = state;
+        length = Vector2.Distance(rb.position, handle.position);
         UpdateVisuals();
 
         subscribers = new List<IBoolAcceptor>(subscriberObjects.Length);
@@ -74,6 +77,42 @@ public class Lever : MonoBehaviour
         float givenAngle = Vector2.SignedAngle(transform.TransformDirection(Vector2.right), handle.position - rb.position);
         givenAngle = Utils.Angle0To360(givenAngle);
         return givenAngle;
+    }
+
+    public void SetAngle(float newAngle)
+    {
+        angle = newAngle;
+        Vector3 newHandleRelPos = Quaternion.Euler(0, 0, angle) * transform.right * length;
+        handle.transform.localPosition = newHandleRelPos;
+        handle.transform.localEulerAngles = new Vector3(0, 0, angle - 90);
+    }
+
+    public void SetState(LeverStates newState)
+    {
+        float angleOffset = deadZone * 1.5f;
+
+        switch (newState)
+        {
+            case LeverStates.Clockwise:
+                SetAngle(triggerAngle - angleOffset);
+                break;
+
+            case LeverStates.Counterclockwise:
+                SetAngle(triggerAngle + angleOffset);
+                break;
+        }
+    }
+
+    public void SetState(int newState)
+    {
+        SetState((LeverStates)newState);
+    }
+
+    void SetState_()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        length = Vector2.Distance(transform.position, handle.transform.position);
+        SetState(state);
     }
 
     LeverStates GetState(float rotation)
