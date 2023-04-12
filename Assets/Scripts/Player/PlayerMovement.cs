@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float headPullForce = 8f;
     [SerializeField] float headPullVelocity = 15f;
     [Range(0, .3f)][SerializeField] float movementSmoothing = 0.05f;
-    [Range(0, 8f)][SerializeField] float maxNeckLength = 3.4f;
+    [Range(0, 8f)] public float maxNeckLength = 3.4f;
     [SerializeField] LayerMask grabbableLayers;
     [SerializeField] float mouseChatterThreshold = 0.5f;
     [SerializeField] float extraWallCheckRadius = 0.2f;
@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     bool mouseButtonUp;
 
     Vector3 zeroVelocity = new Vector3(0, 0, 0);
-    float maxTongueLength;
+    [HideInInspector] public float maxTongueLength;
     float distanceToPot = 0f;
     float behindTongueChatterThreshold = 0.2f;
 
