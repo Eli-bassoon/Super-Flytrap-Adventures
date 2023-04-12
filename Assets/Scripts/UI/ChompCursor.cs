@@ -20,7 +20,7 @@ public class ChompCursor : MonoBehaviour
     void Update()
     {
         // When mouth is full, disable cursor rendering
-        if (PlayerMovement.instance.mouthFull)
+        if (PlayerMovement.instance.mouthFull || PlayerMovement.instance.tongueOut)
         {
             cursor.enabled = false;
             clampedCursor.enabled = false;
@@ -39,7 +39,6 @@ public class ChompCursor : MonoBehaviour
 
             if (dist <= (PlayerMovement.instance.maxNeckLength + PlayerMovement.instance.maxTongueLength))
             {
-                clampedCursor.enabled = false;
                 cursor.sprite = validCursor;
             }
             else
