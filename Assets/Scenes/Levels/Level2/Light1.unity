@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regurgitable: 0
+  constrained: 0
 --- !u!50 &79798433
 Rigidbody2D:
   serializedVersion: 4
@@ -10643,6 +10644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regurgitable: 0
+  constrained: 0
 --- !u!50 &1916692175
 Rigidbody2D:
   serializedVersion: 4
@@ -10920,7 +10922,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1935285192508586869, guid: 8dac0b2135c9c1b4b89f6e9d428cb282, type: 3}
       propertyPath: m_Distance
-      value: 1.25701
+      value: 1.2570115
       objectReference: {fileID: 0}
     - target: {fileID: 5402805091959626200, guid: 8dac0b2135c9c1b4b89f6e9d428cb282, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10944,11 +10946,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5402805091959626202, guid: 8dac0b2135c9c1b4b89f6e9d428cb282, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -19.839241
+      value: -19.659756
       objectReference: {fileID: 0}
     - target: {fileID: 5402805091959626202, guid: 8dac0b2135c9c1b4b89f6e9d428cb282, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -39.880825
+      value: -39.755146
       objectReference: {fileID: 0}
     - target: {fileID: 5402805093267551360, guid: 8dac0b2135c9c1b4b89f6e9d428cb282, type: 3}
       propertyPath: m_Name
