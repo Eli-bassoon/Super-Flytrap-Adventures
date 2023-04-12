@@ -80,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector] public Rigidbody2D stuckTo = null;
     [HideInInspector] public Collider2D stuckToCollider = null;
+    [HideInInspector] public FitsInMouth stuckToFiM = null;
     [Header("States")]
     [ReadOnly] public bool stuck = false;
     [ReadOnly] public bool mouthFull = false;
@@ -218,16 +219,19 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // Swinging
-            Vector2 potToMouse = ((Vector2)mousePosition - flowerpot.position);
-            float potToMouseDist = potToMouse.magnitude;
-            Vector2 potToMouseDir = potToMouse.normalized;
+            if (!mouthFull)
+            {
+                Vector2 potToMouse = ((Vector2)mousePosition - flowerpot.position);
+                float potToMouseDist = potToMouse.magnitude;
+                Vector2 potToMouseDir = potToMouse.normalized;
 
-            potToMouseDist -= minMousePotSwingDist;
-            potToMouseDist = Mathf.Clamp01(potToMouseDist / (mousePotSwingRadius));
+                potToMouseDist -= minMousePotSwingDist;
+                potToMouseDist = Mathf.Clamp01(potToMouseDist / (mousePotSwingRadius));
 
-            Vector2 potSwingForce = maxPotSwingForce * potToMouseDist * -potToMouseDir;
+                Vector2 potSwingForce = maxPotSwingForce * potToMouseDist * -potToMouseDir;
 
-            flowerpot.AddForce(potSwingForce);
+                flowerpot.AddForce(potSwingForce);
+            }
         }
         // Move the head towards the mouse
         if ((!stuck || mouthFull) && canMove)
@@ -304,20 +308,27 @@ public class PlayerMovement : MonoBehaviour
                     rb.angularVelocity = 0;
                     tongue.angularVelocity = 0;
                 }
+                else
+                {
+                    movingRigidbody.angularVelocity = 0;
+                }
             }
 
-            Vector3 pointDirection;
-            // Angle towards mouse
-            if (changeAngleToMouse)
+            if (!mouthFull || (mouthFull && !stuckToFiM.constrained))
             {
-                pointDirection = tongue.position - rb.position;
+                Vector3 pointDirection;
+                // Angle towards mouse
+                if (changeAngleToMouse)
+                {
+                    pointDirection = (Vector2)mousePosition - rb.position;
+                }
+                // To reduce chatter, we point the head towards the pot if we're close to the mouse
+                else
+                {
+                    pointDirection = (Vector2)mousePosition - flowerpot.position;
+                }
+                PointAt(pointDirection, includeTongue: true);
             }
-            // To reduce chatter, we point the head towards the pot if we're close to the mouse
-            else
-            {
-                pointDirection = tongue.position - flowerpot.position;
-            }
-            PointAt(pointDirection, includeTongue: true);
         }
     }
 
@@ -427,9 +438,11 @@ public class PlayerMovement : MonoBehaviour
                         tongueFixedJoint.autoConfigureConnectedAnchor = false;
                         stuckTo = hit.collider.attachedRigidbody;
 
-                        if (stuckTo.gameObject.TryGetComponent(out FitsInMouth _))
+                        // Hit something that fits in mouth
+                        if (stuckTo.gameObject.TryGetComponent(out FitsInMouth fim))
                         {
                             stuckTo.excludeLayers = LayerMask.GetMask(new string[] { "Player" });
+                            stuckToFiM = fim;
                         }
                     }
 
@@ -520,6 +533,7 @@ public class PlayerMovement : MonoBehaviour
 
         stuckTo = null;
         stuckToCollider = null;
+        stuckToFiM = null;
 
         springJoint.enabled = false;
         fixedJoint.enabled = false;

@@ -6,5 +6,5 @@ using UnityEngine;
 public class FitsInMouth : MonoBehaviour
 {
     public bool regurgitable = false;
-
+    public bool constrained = true;
 }
