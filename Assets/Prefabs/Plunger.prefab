@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4321646478174547511}
   - component: {fileID: 4321646478174547505}
   - component: {fileID: 4321646478174547504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Handle
   m_TagString: Center in Mouth
   m_Icon: {fileID: 0}
@@ -210,8 +210,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51da408d302ba0d468d6699fff8df34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handle: {fileID: 0}
+  handle: {fileID: 4321646478174547505}
   depressedThreshold: 0.9
+  subscriberObjects: []
+  PushedInEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  PulledOutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  activated: 0
 --- !u!50 &4321646478358019787
 Rigidbody2D:
   serializedVersion: 4
