@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4830688256324425899}
+  - component: {fileID: 3979686374701411642}
   - component: {fileID: 1829677754635261232}
   - component: {fileID: 4466227297090416512}
   - component: {fileID: 7154092450285047136}
-  - component: {fileID: 3979686374701411642}
   m_Layer: 0
   m_Name: Cockroach
   m_TagString: Center in Mouth
@@ -35,6 +35,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3979686374701411642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620295419303606998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f732f1d95cc9afd408668fff631c62d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regurgitable: 1
+  constrained: 0
 --- !u!212 &1829677754635261232
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -149,17 +163,3 @@ CapsuleCollider2D:
   m_Offset: {x: -0.12868214, y: -0.25736427}
   m_Size: {x: 8.119429, y: 10.174564}
   m_Direction: 0
---- !u!114 &3979686374701411642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3620295419303606998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f732f1d95cc9afd408668fff631c62d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  regurgitable: 1
-  constrained: 0

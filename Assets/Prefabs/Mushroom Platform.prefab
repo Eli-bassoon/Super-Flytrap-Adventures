@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2109724041673097190}
+  - component: {fileID: 5730235458762372823}
   - component: {fileID: 2109724041673097185}
   - component: {fileID: 2109724041673097184}
   - component: {fileID: 2109724041673097187}
   - component: {fileID: 2109724041673097186}
-  - component: {fileID: 5730235458762372823}
   m_Layer: 10
   m_Name: Mushroom Platform
   m_TagString: Untagged
@@ -34,8 +34,26 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5730235458762372823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109724041673097197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e375a3d5fec69247b84992d75e568e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lights: []
+  blockingLayers:
+    serializedVersion: 2
+    m_Bits: 8705
+  lightShining: 0
+  activateOnShine: 0
 --- !u!212 &2109724041673097185
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -180,21 +198,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &5730235458762372823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2109724041673097197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e375a3d5fec69247b84992d75e568e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lights: []
-  blockingLayers:
-    serializedVersion: 2
-    m_Bits: 8705
-  lightShining: 0
-  activateOnShine: 0

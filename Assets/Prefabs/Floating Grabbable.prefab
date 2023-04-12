@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2510825472262446883}
+  - component: {fileID: 2510825472262446884}
   - component: {fileID: 2510825472262446882}
   - component: {fileID: 2510825472262446881}
   - component: {fileID: 2510825472262446885}
-  - component: {fileID: 2510825472262446884}
   m_Layer: 8
   m_Name: Floating Grabbable
   m_TagString: Center in Mouth
@@ -33,8 +33,20 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2510825472262446884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510825472262446880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd9e94c6a92cfb4d87787c4c23ea676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &2510825472262446882
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -149,15 +161,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2510825472262446884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2510825472262446880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abd9e94c6a92cfb4d87787c4c23ea676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
