@@ -26,7 +26,8 @@ public class Plunger : MonoBehaviour
 
     void Start()
     {
-        activateDist = depressedThreshold * GetComponent<SliderJoint2D>().limits.max;
+        var limits = GetComponent<SliderJoint2D>().limits;
+        activateDist = depressedThreshold * (limits.max - limits.min);
 
         subscribers = new List<IBoolAcceptor>(subscriberObjects.Length);
         foreach (var sub in subscriberObjects)
