@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float headPullVelocity = 15f;
     [Range(0, .3f)][SerializeField] float movementSmoothing = 0.05f;
     [Range(0, 8f)] public float maxNeckLength = 3.4f;
-    [SerializeField] LayerMask grabbableLayers;
+    public LayerMask grabbableLayers;
     [SerializeField] float mouseChatterThreshold = 0.5f;
     [SerializeField] float extraWallCheckRadius = 0.2f;
     [Range(0, 1)][SerializeField] float tongueRetractTime = 0.25f;
@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 zeroVelocity = new Vector3(0, 0, 0);
     [HideInInspector] public float maxTongueLength;
+    [HideInInspector] public float neckDistanceJointLength;
     float distanceToPot = 0f;
     float behindTongueChatterThreshold = 0.2f;
 
@@ -116,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
         tongueFixedJoint = tongue.GetComponent<FixedJoint2D>();
 
         maxTongueLength = tongue.GetComponent<DistanceJoint2D>().distance;
+        neckDistanceJointLength = GetComponent<DistanceJoint2D>().distance;
 
         // Unlock flowerpot from this
         flowerpot.transform.parent = null;
@@ -393,19 +395,9 @@ public class PlayerMovement : MonoBehaviour
                     // Don't grab onto //
 
                     // Not grabbable, so ignore
-                    if (hit.collider.gameObject.CompareTag("Not Grabbable"))
+                    if (!CanGrabOnto(hit))
                     {
                         continue;
-                    }
-                    if (hit.transform.TryGetComponent(out Tilemap tm))
-                    {
-                        Vector2 hitPosAdj = hit.point - 0.01f * hit.normal;
-                        Vector3Int tilePos = tm.WorldToCell(hitPosAdj);
-                        AdvancedRuleTile tile = tm.GetTile<AdvancedRuleTile>(tilePos);
-                        if (tile != null && tile.isSlick)
-                        {
-                            continue;
-                        }
                     }
 
                     // Eating something
@@ -510,6 +502,25 @@ public class PlayerMovement : MonoBehaviour
                 PointAt(retractingDirection);
             }
         }
+    }
+
+    public bool CanGrabOnto(RaycastHit2D hit)
+    {
+        if (hit.collider.gameObject.CompareTag("Not Grabbable"))
+        {
+            return false;
+        }
+        if (hit.transform.TryGetComponent(out Tilemap tm))
+        {
+            Vector2 hitPosAdj = hit.point - 0.01f * hit.normal;
+            Vector3Int tilePos = tm.WorldToCell(hitPosAdj);
+            AdvancedRuleTile tile = tm.GetTile<AdvancedRuleTile>(tilePos);
+            if (tile != null && (tile.isSlick || tile.isDamaging))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     // We just let go of something

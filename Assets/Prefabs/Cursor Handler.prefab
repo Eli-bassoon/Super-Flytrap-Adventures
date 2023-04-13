@@ -39,7 +39,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4077519014436914026}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -73,15 +73,15 @@ SpriteRenderer:
   m_SortingLayerID: 1930564515
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d00bf6546db68214fb606c62a32fbdf7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.1875, y: 0.1875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5687078557979721162
@@ -123,7 +123,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5687078557979721162}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -214,7 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c2f672aa1e04e4f8ef41ac53eba313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 0}
-  clampedCursor: {fileID: 0}
-  validCursor: {fileID: 0}
-  invalidCursor: {fileID: 0}
+  cursor: {fileID: 716311824137408051}
+  clampedCursor: {fileID: 7051209489960112198}
+  validCursor: {fileID: 21300000, guid: d00bf6546db68214fb606c62a32fbdf7, type: 3}
+  invalidCursor: {fileID: 21300000, guid: dfe26d532dc23ef4aa98dbc9aed53ae8, type: 3}
+  neutralCursor: {fileID: 21300000, guid: 7828207c10f9cc543b1fb9da9789b80a, type: 3}
+  linecastCushion: 0.25
