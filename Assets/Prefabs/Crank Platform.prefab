@@ -86,7 +86,7 @@ MonoBehaviour:
   - {x: 1.5, y: -0.25, z: 0}
   m_ShapePathHash: 23982885
   m_Mesh: {fileID: 0}
-  m_InstanceId: 163294
+  m_InstanceId: 92604
 --- !u!212 &9113602817566319602
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -461,6 +461,18 @@ PrefabInstance:
     - target: {fileID: 9222634375634578240, guid: bb36e0a66a853ff43853c94778e4b49b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.40625
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222634375634578240, guid: bb36e0a66a853ff43853c94778e4b49b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9255075
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222634375634578240, guid: bb36e0a66a853ff43853c94778e4b49b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3787293
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222634375634578240, guid: bb36e0a66a853ff43853c94778e4b49b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -44.51
       objectReference: {fileID: 0}
     - target: {fileID: 9222634375634578241, guid: bb36e0a66a853ff43853c94778e4b49b, type: 3}
       propertyPath: m_ConnectedAnchor.x
