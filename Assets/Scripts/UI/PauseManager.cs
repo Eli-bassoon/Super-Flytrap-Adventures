@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject pauseButton;
     public Fader fade;
+
+    public Slider musicSlider;
+    public Slider soundSlider;
 
     public void Start()
     {
@@ -55,5 +59,11 @@ public class PauseManager : MonoBehaviour
     {
         Unpause();
         GameManager.GM.Exit();
+    }
+
+    public void ChangeMusicVolume()
+    {
+       float vol = musicSlider.value;
+       MusicManager.MM.SetMusicVolume(vol);
     }
 }
