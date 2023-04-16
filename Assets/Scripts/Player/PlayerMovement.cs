@@ -388,7 +388,7 @@ public class PlayerMovement : MonoBehaviour
                 tongueCollider.radius + extraWallCheckRadius, grabbableLayers);
             foreach (RaycastHit2D hit in tongueHits)
             {
-                if (hit.collider != null && hit.collider.gameObject != gameObject)
+                if (hit.collider != null && hit.collider.gameObject != gameObject && !hit.collider.isTrigger)
                 {
                     // Don't grab onto //
 
