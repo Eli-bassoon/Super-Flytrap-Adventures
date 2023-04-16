@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1827796759160360591}
+  - component: {fileID: 9184246841618941420}
   - component: {fileID: 1827796759160360590}
   - component: {fileID: 1827796759160360589}
   - component: {fileID: 4474798187393533653}
   - component: {fileID: 1827796759160360588}
-  - component: {fileID: 9184246841618941420}
   m_Layer: 10
   m_Name: Light Spikes
   m_TagString: Not Grabbable
@@ -36,6 +36,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9184246841618941420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827796759160360586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e375a3d5fec69247b84992d75e568e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lights: []
+  blockingLayers:
+    serializedVersion: 2
+    m_Bits: 8193
+  lightShining: 0
+  activateOnShine: 1
 --- !u!212 &1827796759160360590
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -170,21 +188,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &9184246841618941420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1827796759160360586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e375a3d5fec69247b84992d75e568e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lights: []
-  blockingLayers:
-    serializedVersion: 2
-    m_Bits: 8193
-  lightShining: 0
-  activateOnShine: 1

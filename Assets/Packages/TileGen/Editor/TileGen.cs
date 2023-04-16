@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditorInternal;
 using UnityEditor;
 using System.IO;
 using UnityEngine.UI;
@@ -562,7 +561,7 @@ public class TileGen : MonoBehaviour
         string fileNamePNG = "itspkr" + t + i + ".png";
         fileName = "itspkr" + t + i;
 
-        string fullPath = "/Plugins/TileGen/Resources/ExportTilemap/";
+        string fullPath = "/Packages/TileGen/Editor/Resources/ExportTilemap/";
         txtrPath = fullPath + playerSetName + fileNamePNG;
         Debug.Log("Success! Exporting image to" + (fullPath + playerSetName + fileNamePNG));
         byte[] bytes = outputTex.EncodeToPNG();
@@ -847,9 +846,9 @@ public class TileGen : MonoBehaviour
 
         Debug.Log("Test 1");
 
-        AssetDatabase.CreateAsset(rTile, "Assets/Plugins/TileGen/Resources/ExportTilemap/" + playerSetName + "ruletile.asset");
+        AssetDatabase.CreateAsset(rTile, "Assets/Packages/TileGen/Editor/Resources/ExportTilemap/" + playerSetName + "ruletile.asset");
         Debug.Log("Test a");
-        ruleTilePath = "Assets/Plugins/TileGen/Resources/ExportTilemap/" + playerSetName + "ruletile.asset";
+        ruleTilePath = "Assets/Packages/TileGen/Editor/Resources/ExportTilemap/" + playerSetName + "ruletile.asset";
         Debug.Log("Test b");
         rTile.m_DefaultSprite = spriteList[0];
 

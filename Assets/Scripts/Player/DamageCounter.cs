@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class DamageCounter : MonoBehaviour
 {
-    [SerializeField] int fullHealth = 100;
-    [SerializeField] int currentHealth = 100;
+    [SerializeField] DamageHandler damageHandler;
+    // this script only returns damage
+    // all health and respawning is handled in centralized respawn script
+    //[SerializeField] int fullHealth = 100;
+    //[SerializeField] int currentHealth = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,12 +31,16 @@ public class DamageCounter : MonoBehaviour
             else return;
             if (obj.tag == "Instant Death")
             {
-                print("You died");
+                damageHandler.Respawn();
             }
             else if (obj.tag == "Enemy")
             {
-                // implement damage system
+                if (obj.TryGetComponent<Enemy>(out Enemy enemy))
+                {
+                    damageHandler.TakeDamage(enemy.damage);
+                }
             }
         }
     }
+
 }

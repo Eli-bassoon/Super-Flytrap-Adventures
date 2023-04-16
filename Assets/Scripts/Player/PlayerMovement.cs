@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float headPullForce = 8f;
     [SerializeField] float headPullVelocity = 15f;
     [Range(0, .3f)][SerializeField] float movementSmoothing = 0.05f;
-    [Range(0, 8f)][SerializeField] float maxNeckLength = 3.4f;
-    [SerializeField] LayerMask grabbableLayers;
+    [Range(0, 8f)] public float maxNeckLength = 3.4f;
+    public LayerMask grabbableLayers;
     [SerializeField] float mouseChatterThreshold = 0.5f;
     [SerializeField] float extraWallCheckRadius = 0.2f;
     [Range(0, 1)][SerializeField] float tongueRetractTime = 0.25f;
@@ -69,7 +69,8 @@ public class PlayerMovement : MonoBehaviour
     bool mouseButtonUp;
 
     Vector3 zeroVelocity = new Vector3(0, 0, 0);
-    float maxTongueLength;
+    [HideInInspector] public float maxTongueLength;
+    [HideInInspector] public float neckDistanceJointLength;
     float distanceToPot = 0f;
     float behindTongueChatterThreshold = 0.2f;
 
@@ -80,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector] public Rigidbody2D stuckTo = null;
     [HideInInspector] public Collider2D stuckToCollider = null;
+    [HideInInspector] public FitsInMouth stuckToFiM = null;
     [Header("States")]
     [ReadOnly] public bool stuck = false;
     [ReadOnly] public bool mouthFull = false;
@@ -115,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
         tongueFixedJoint = tongue.GetComponent<FixedJoint2D>();
 
         maxTongueLength = tongue.GetComponent<DistanceJoint2D>().distance;
+        neckDistanceJointLength = GetComponent<DistanceJoint2D>().distance;
 
         // Unlock flowerpot from this
         flowerpot.transform.parent = null;
@@ -213,21 +216,22 @@ public class PlayerMovement : MonoBehaviour
             if (!stuckToCollider.enabled)
             {
                 LetGo();
-                canGrab = false;
-                canMove = false;
             }
 
             // Swinging
-            Vector2 potToMouse = ((Vector2)mousePosition - flowerpot.position);
-            float potToMouseDist = potToMouse.magnitude;
-            Vector2 potToMouseDir = potToMouse.normalized;
+            if (!mouthFull)
+            {
+                Vector2 potToMouse = ((Vector2)mousePosition - flowerpot.position);
+                float potToMouseDist = potToMouse.magnitude;
+                Vector2 potToMouseDir = potToMouse.normalized;
 
-            potToMouseDist -= minMousePotSwingDist;
-            potToMouseDist = Mathf.Clamp01(potToMouseDist / (mousePotSwingRadius));
+                potToMouseDist -= minMousePotSwingDist;
+                potToMouseDist = Mathf.Clamp01(potToMouseDist / (mousePotSwingRadius));
 
-            Vector2 potSwingForce = maxPotSwingForce * potToMouseDist * -potToMouseDir;
+                Vector2 potSwingForce = maxPotSwingForce * potToMouseDist * -potToMouseDir;
 
-            flowerpot.AddForce(potSwingForce);
+                flowerpot.AddForce(potSwingForce);
+            }
         }
         // Move the head towards the mouse
         if ((!stuck || mouthFull) && canMove)
@@ -304,20 +308,27 @@ public class PlayerMovement : MonoBehaviour
                     rb.angularVelocity = 0;
                     tongue.angularVelocity = 0;
                 }
+                else
+                {
+                    movingRigidbody.angularVelocity = 0;
+                }
             }
 
-            Vector3 pointDirection;
-            // Angle towards mouse
-            if (changeAngleToMouse)
+            if (!mouthFull || (mouthFull && !stuckToFiM.constrained))
             {
-                pointDirection = tongue.position - rb.position;
+                Vector3 pointDirection;
+                // Angle towards mouse
+                if (changeAngleToMouse)
+                {
+                    pointDirection = (Vector2)mousePosition - rb.position;
+                }
+                // To reduce chatter, we point the head towards the pot if we're close to the mouse
+                else
+                {
+                    pointDirection = (Vector2)mousePosition - flowerpot.position;
+                }
+                PointAt(pointDirection, includeTongue: true);
             }
-            // To reduce chatter, we point the head towards the pot if we're close to the mouse
-            else
-            {
-                pointDirection = tongue.position - flowerpot.position;
-            }
-            PointAt(pointDirection, includeTongue: true);
         }
     }
 
@@ -382,19 +393,9 @@ public class PlayerMovement : MonoBehaviour
                     // Don't grab onto //
 
                     // Not grabbable, so ignore
-                    if (hit.collider.gameObject.CompareTag("Not Grabbable"))
+                    if (!CanGrabOnto(hit))
                     {
                         continue;
-                    }
-                    if (hit.transform.TryGetComponent(out Tilemap tm))
-                    {
-                        Vector2 hitPosAdj = hit.point - 0.01f * hit.normal;
-                        Vector3Int tilePos = tm.WorldToCell(hitPosAdj);
-                        AdvancedRuleTile tile = tm.GetTile<AdvancedRuleTile>(tilePos);
-                        if (tile != null && tile.isSlick)
-                        {
-                            continue;
-                        }
                     }
 
                     // Eating something
@@ -427,9 +428,11 @@ public class PlayerMovement : MonoBehaviour
                         tongueFixedJoint.autoConfigureConnectedAnchor = false;
                         stuckTo = hit.collider.attachedRigidbody;
 
-                        if (stuckTo.gameObject.TryGetComponent(out FitsInMouth _))
+                        // Hit something that fits in mouth
+                        if (stuckTo.gameObject.TryGetComponent(out FitsInMouth fim))
                         {
                             stuckTo.excludeLayers = LayerMask.GetMask(new string[] { "Player" });
+                            stuckToFiM = fim;
                         }
                     }
 
@@ -499,6 +502,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public bool CanGrabOnto(RaycastHit2D hit)
+    {
+        if (hit.collider.gameObject.CompareTag("Not Grabbable"))
+        {
+            return false;
+        }
+        if (hit.transform.TryGetComponent(out Tilemap tm))
+        {
+            Vector2 hitPosAdj = hit.point - 0.01f * hit.normal;
+            Vector3Int tilePos = tm.WorldToCell(hitPosAdj);
+            AdvancedRuleTile tile = tm.GetTile<AdvancedRuleTile>(tilePos);
+            if (tile != null && (tile.isSlick || tile.isDamaging))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     // We just let go of something
     public void LetGo()
     {
@@ -520,6 +542,7 @@ public class PlayerMovement : MonoBehaviour
 
         stuckTo = null;
         stuckToCollider = null;
+        stuckToFiM = null;
 
         springJoint.enabled = false;
         fixedJoint.enabled = false;
@@ -651,8 +674,6 @@ public class PlayerMovement : MonoBehaviour
     private void OnJointBreak2D(Joint2D joint)
     {
         LetGo();
-        canGrab = false;
-        canMove = false;
     }
 
     private void OnDrawGizmosSelected()

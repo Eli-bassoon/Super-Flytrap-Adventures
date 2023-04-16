@@ -325,9 +325,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3801479712729199611}
+  - component: {fileID: 1352038956025120178}
   - component: {fileID: 5025944601497935381}
   - component: {fileID: 3309248354912654338}
-  - component: {fileID: 1352038956025120178}
   m_Layer: 0
   m_Name: Breakable Cage
   m_TagString: Untagged
@@ -353,6 +353,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1352038956025120178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5493919172363621835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb4d685224ae9e2408f7f6e9e7432ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  health: 0
+  dmg: 3
+  speedThreshold: 1
 --- !u!212 &5025944601497935381
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -468,22 +484,6 @@ PolygonCollider2D:
       - {x: 0.0032065632, y: 4.663764}
       - {x: -0.0354904, y: 4.414975}
   m_UseDelaunayMesh: 0
---- !u!114 &1352038956025120178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5493919172363621835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb4d685224ae9e2408f7f6e9e7432ae2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 5
-  health: 0
-  dmg: 3
-  speedThreshold: 1
 --- !u!1 &5582724511578273822
 GameObject:
   m_ObjectHideFlags: 0

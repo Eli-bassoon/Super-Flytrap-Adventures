@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3769902953490831035}
+  - component: {fileID: 3769902953490831031}
   - component: {fileID: 3769902953490831034}
   - component: {fileID: 3769902953490831029}
   - component: {fileID: 3769902953490831028}
-  - component: {fileID: 3769902953490831031}
   m_Layer: 0
   m_Name: Bee
   m_TagString: Untagged
@@ -33,8 +33,22 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3769902953490831031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3769902953490831030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568506f8cfa81bc43833e5ee4e8320ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  edible: 1
+  damage: 10
 --- !u!212 &3769902953490831034
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -150,7 +164,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -159,16 +173,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
---- !u!114 &3769902953490831031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3769902953490831030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 568506f8cfa81bc43833e5ee4e8320ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  edible: 1

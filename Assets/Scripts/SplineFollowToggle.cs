@@ -24,7 +24,6 @@ public class SplineFollowToggle : Toggleable
         base.SetOn(state);
         if (cr != null) StopCoroutine(cr);
         StartCoroutine(Move());
-        print($"Moving to {state}");
     }
 
     IEnumerator Move()

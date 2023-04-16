@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Crank : MonoBehaviour
 {
-    [SerializeField] Transform crankBase;
-    [SerializeField] Transform crankHead;
+    [SerializeField] Rigidbody2D crankBase;
+    [SerializeField] Rigidbody2D crankHead;
 
     // In degrees
     [ReadOnly] public float angle;
@@ -33,6 +33,11 @@ public class Crank : MonoBehaviour
         {
             turnSubscribers.Add(sub.GetComponent<IFloatAcceptor>());
         }
+    }
+
+    void Update()
+    {
+        UpdateVisuals();
     }
 
     void FixedUpdate()
@@ -82,5 +87,10 @@ public class Crank : MonoBehaviour
         tempAngle -= startAngle;
         tempAngle = (tempAngle + 360) % 360;
         return tempAngle;
+    }
+
+    void UpdateVisuals()
+    {
+        crankHead.SetRotation(absAngle - 90);
     }
 }

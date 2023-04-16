@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     public bool edible = true;
+    public int damage = 10;
     protected Rigidbody2D rb;
 
     protected virtual void Start()

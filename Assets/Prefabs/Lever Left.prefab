@@ -20,13 +20,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.03125
       objectReference: {fileID: 0}
+    - target: {fileID: 5402805091959626200, guid: 8dac0b2135c9c1b4b89f6e9d428cb282, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.29237175
+      objectReference: {fileID: 0}
+    - target: {fileID: 5402805091959626200, guid: 8dac0b2135c9c1b4b89f6e9d428cb282, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 34
+      objectReference: {fileID: 0}
     - target: {fileID: 5402805091959626202, guid: 8dac0b2135c9c1b4b89f6e9d428cb282, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.71875
+      value: -12.875
       objectReference: {fileID: 0}
     - target: {fileID: 5402805091959626202, guid: 8dac0b2135c9c1b4b89f6e9d428cb282, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 1.03125
+      value: -42.86798
       objectReference: {fileID: 0}
     - target: {fileID: 5402805093267551360, guid: 8dac0b2135c9c1b4b89f6e9d428cb282, type: 3}
       propertyPath: m_Name
