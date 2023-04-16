@@ -28,13 +28,24 @@ public class DamageHandler : MonoBehaviour
     {   
     }
 
-    public void saveCheckpoint(Transform transform)
+    public void SaveCheckpoint(Transform transform)
     {
         print("this worked");
         if (transform != null)
         {
             checkpointLatest = transform;
             print("checkpoint saved");
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        print("ooga booga");
+        if (collision != null && collision.gameObject.CompareTag("Respawn"))
+        {
+            GameObject obj = collision.gameObject;
+            SaveCheckpoint(obj.transform);
+            obj.SetActive(false);
         }
     }
 
