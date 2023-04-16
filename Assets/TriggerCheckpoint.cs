@@ -16,14 +16,14 @@ public class TriggerCheckpoint : MonoBehaviour
     {
         
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        print("this worked");
-        if (collision != null && collision.gameObject.CompareTag("Player")) {
-            GameObject obj = collision.gameObject;
-            obj.GetComponent<DamageHandler>().saveCheckpoint(GetComponent<GameObject>().transform);
-            GetComponent<GameObject>().SetActive(false); 
-        }
-    }
+    // most likely dead code
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    print("this worked");
+    //    if (collision != null && collision.gameObject.CompareTag("Player")) {
+    //        GameObject obj = collision.gameObject;
+    //        obj.GetComponent<DamageHandler>().SaveCheckpoint(GetComponent<GameObject>().transform);
+    //        GetComponent<GameObject>().SetActive(false); 
+    //    }
+    //}
 }
