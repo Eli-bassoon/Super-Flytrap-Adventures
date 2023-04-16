@@ -49,6 +49,10 @@ public class PauseManager : MonoBehaviour
         
     }
 
+    public void ResetToCheckpoint()
+    {
+        //clytie plz help  D:
+    }
     public void GoToMainMenu()
     {
         Unpause();

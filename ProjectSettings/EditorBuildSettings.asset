@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Demos/Alpha.unity
     guid: 1478e3f04ed606645a82dafa956948b8
   - enabled: 1
@@ -17,9 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Level1/Hub.unity
     guid: e70cb67b22e9c774c8bd628c9e33f223
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level1/Hanging Pots.unity
-    guid: 8be26503890aff54582f01dcaf4bd9ec
   - enabled: 1
     path: Assets/Scenes/Levels/Level2/Hub.unity
     guid: 0b6fbdd47b451184e940e277c591a745

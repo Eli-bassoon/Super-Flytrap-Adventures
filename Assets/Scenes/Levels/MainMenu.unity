@@ -16160,6 +16160,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1615993911643782221, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: c1f2c77dd821a544d997ef0964d72992, type: 2}
     - target: {fileID: 1615993913322844170, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
       propertyPath: m_Name
       value: Head

@@ -103,7 +103,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 1.5
   m_GravityScale: 1.2
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c1f2c77dd821a544d997ef0964d72992, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -740,6 +740,8 @@ MonoBehaviour:
   flowerpot: {fileID: 1615993911643782221}
   tongue: {fileID: 1615993912969288472}
   rightMouthHalf: {fileID: 1615993912622745077}
+  maxTongueLength: 0
+  neckDistanceJointLength: 0
   stuckTo: {fileID: 0}
   stuckToCollider: {fileID: 0}
   stuckToFiM: {fileID: 0}
