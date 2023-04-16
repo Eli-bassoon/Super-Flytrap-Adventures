@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Level1/Hub.unity
     guid: e70cb67b22e9c774c8bd628c9e33f223
   - enabled: 1
-    path: Assets/Scenes/Levels/Level1/Sunlight.unity
+    path: Assets/Scenes/Levels/Level1/Hanging Pots.unity
     guid: 8be26503890aff54582f01dcaf4bd9ec
   - enabled: 1
     path: Assets/Scenes/Levels/Level2/Hub.unity

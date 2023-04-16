@@ -216,8 +216,6 @@ public class PlayerMovement : MonoBehaviour
             if (!stuckToCollider.enabled)
             {
                 LetGo();
-                canGrab = false;
-                canMove = false;
             }
 
             // Swinging
@@ -676,8 +674,6 @@ public class PlayerMovement : MonoBehaviour
     private void OnJointBreak2D(Joint2D joint)
     {
         LetGo();
-        canGrab = false;
-        canMove = false;
     }
 
     private void OnDrawGizmosSelected()
