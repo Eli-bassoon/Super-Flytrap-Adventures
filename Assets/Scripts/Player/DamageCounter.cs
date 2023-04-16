@@ -35,6 +35,7 @@ public class DamageCounter : MonoBehaviour
             }
             else if (obj.tag == "Enemy")
             {
+                print("ENEMYENEMY");
                 if (obj.TryGetComponent<Enemy>(out Enemy enemy))
                 {
                     damageHandler.TakeDamage(enemy.damage);

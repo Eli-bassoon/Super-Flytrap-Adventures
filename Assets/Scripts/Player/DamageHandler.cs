@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DamageHandler : MonoBehaviour
 {
-    [SerializeField] int fullHealth = 100;
-    [SerializeField] int currHealth; // = fullHealth;
+    [SerializeField] float fullHealth = 100f;
+    [SerializeField] float currHealth; // = fullHealth;
     [SerializeField] GameObject checkpointPrefab; // drag prefab here 
     [SerializeField] Transform checkpointLatest;
+    [SerializeField] Image chompyIndicator;
     Rigidbody2D rb;
     Rigidbody2D flowerpot;
     Rigidbody2D tongue;
+
+    bool damageable = true;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +29,8 @@ public class DamageHandler : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+        chompyIndicator.fillAmount = currHealth / fullHealth;
     }
 
     public void SaveCheckpoint(Transform transform)
@@ -45,14 +50,16 @@ public class DamageHandler : MonoBehaviour
         {
             GameObject obj = collision.gameObject;
             SaveCheckpoint(obj.transform);
-            obj.SetActive(false);
         }
     }
 
     public void TakeDamage(int dmg)
     {
+        if (!damageable) return;
+        damageable = false;
+        Timer.Register(1, () => { damageable = true; });
         currHealth -= dmg;
-        if (currHealth < 0)
+        if (currHealth <= 0)
         {
             Respawn();
         }
@@ -60,6 +67,7 @@ public class DamageHandler : MonoBehaviour
 
     public void Respawn()
     {
+        GetComponent<PlayerMovement>().LetGo();
         rb.position = checkpointLatest.position;
         flowerpot.position = checkpointLatest.position; // problem: we don't always land on our feet
         tongue.position = checkpointLatest.position;
