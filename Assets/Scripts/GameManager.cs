@@ -52,4 +52,9 @@ public class GameManager : MonoBehaviour
     {
         GetComponent<ExitGame>().Exit();
     }
+
+    public void ChangeVolume(float volume)
+    {
+        GetComponent<AudioSource>().volume = volume;
+    }
 }

@@ -695,7 +695,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6131550791648850588}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6131550790661153348
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,7 +1737,7 @@ RectTransform:
   - {fileID: 7343323885283823049}
   - {fileID: 6131550790816411346}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1748,6 +1760,8 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 6131550790816411345}
   pauseButton: {fileID: 6131550789939863309}
   fade: {fileID: 2637235577094662124}
+  musicSlider: {fileID: 6131550790585612004}
+  soundSlider: {fileID: 6131550790971731999}
 --- !u!223 &6131550791648850591
 Canvas:
   m_ObjectHideFlags: 0
