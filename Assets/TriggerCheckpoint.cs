@@ -4,26 +4,18 @@ using UnityEngine;
 
 public class TriggerCheckpoint : MonoBehaviour
 {
-    //[SerializeField] DamageHandler damageHandler;
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            DamageHandler.instance.SaveCheckpoint(transform);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDrawGizmos()
     {
-        
+        Gizmos.DrawIcon(transform.position, "Checkpoint.png", true);
+        Bounds bounds = GetComponent<CompositeCollider2D>().bounds;
+        Gizmos.DrawWireCube(bounds.center, bounds.size);
     }
-    // most likely dead code
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    print("this worked");
-    //    if (collision != null && collision.gameObject.CompareTag("Player")) {
-    //        GameObject obj = collision.gameObject;
-    //        obj.GetComponent<DamageHandler>().SaveCheckpoint(GetComponent<GameObject>().transform);
-    //        GetComponent<GameObject>().SetActive(false); 
-    //    }
-    //}
 }

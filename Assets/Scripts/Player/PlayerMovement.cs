@@ -133,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
         {
             ExtendTongue();
             canMove = true;
+            canGrab = true;
         }
         // Gets a vector to the mouse's position in world if pressed down
         if (Input.GetMouseButton(0))

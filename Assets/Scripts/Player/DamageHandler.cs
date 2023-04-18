@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DamageHandler : MonoBehaviour
 {
+    public static DamageHandler instance;
+
     [SerializeField] float fullHealth = 100f;
     [SerializeField] float currHealth; // = fullHealth;
     [SerializeField] GameObject checkpointPrefab; // drag prefab here 
@@ -13,10 +15,15 @@ public class DamageHandler : MonoBehaviour
     Rigidbody2D rb;
     Rigidbody2D flowerpot;
     Rigidbody2D tongue;
+    List<Rigidbody2D> rbList;
 
     bool damageable = true;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         currHealth = fullHealth;
@@ -25,32 +32,20 @@ public class DamageHandler : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         flowerpot = GetComponent<PlayerMovement>().flowerpot;
         tongue = GetComponent<PlayerMovement>().tongue;
+
+        rbList = new List<Rigidbody2D>() { rb, flowerpot, tongue };
     }
 
     // Update is called once per frame
     void Update()
     {
-        chompyIndicator.fillAmount = currHealth / fullHealth;
+        if (chompyIndicator != null) chompyIndicator.fillAmount = currHealth / fullHealth;
     }
 
     public void SaveCheckpoint(Transform transform)
     {
-        print("this worked");
-        if (transform != null)
-        {
-            checkpointLatest = transform;
-            print("checkpoint saved");
-        }
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        print("ooga booga");
-        if (collision != null && collision.gameObject.CompareTag("Respawn"))
-        {
-            GameObject obj = collision.gameObject;
-            SaveCheckpoint(obj.transform);
-        }
+        checkpointLatest = transform;
+        print("Checkpoint saved");
     }
 
     public void TakeDamage(int dmg)
@@ -67,11 +62,14 @@ public class DamageHandler : MonoBehaviour
 
     public void Respawn()
     {
+        foreach (Rigidbody2D tmpBody in rbList)
+        {
+            tmpBody.position = checkpointLatest.position;
+            tmpBody.velocity = Vector2.zero;
+            tmpBody.angularVelocity = 0;
+        }
+
         GetComponent<PlayerMovement>().LetGo();
-        rb.position = checkpointLatest.position;
-        flowerpot.position = checkpointLatest.position; // problem: we don't always land on our feet
-        tongue.position = checkpointLatest.position;
-        rb.velocity = Vector2.zero;
-        flowerpot.velocity = Vector2.zero;
+        currHealth = fullHealth;
     }
 }
