@@ -27,10 +27,5 @@ public class TileSwitcher : MonoBehaviour
         }
         EditorUtility.SetDirty(ruleTile);
     }
-
-    void Update()
-    {
-        
-    }
 }
 #endif

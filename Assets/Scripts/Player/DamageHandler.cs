@@ -62,14 +62,17 @@ public class DamageHandler : MonoBehaviour
 
     public void Respawn()
     {
-        foreach (Rigidbody2D tmpBody in rbList)
+        foreach (Rigidbody2D body in rbList)
         {
-            tmpBody.position = checkpointLatest.position;
-            tmpBody.velocity = Vector2.zero;
-            tmpBody.angularVelocity = 0;
+            body.position = checkpointLatest.position;
+            body.velocity = Vector2.zero;
+            body.angularVelocity = 0;
+            body.rotation = 0;
         }
 
         GetComponent<PlayerMovement>().LetGo();
         currHealth = fullHealth;
+
+        checkpointLatest.GetComponent<TriggerCheckpoint>().onRespawn.Invoke();
     }
 }

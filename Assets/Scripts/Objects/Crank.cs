@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.VirtualTexturing.Debugging;
+using UnityEngine.UIElements;
 
 public class Crank : MonoBehaviour
 {
@@ -23,10 +25,12 @@ public class Crank : MonoBehaviour
     private float startAngle;
     private float prevClampedAngle;
     private float prevTurns;
+    float length;
 
     void Start()
     {
         startAngle = GetAbsAngle();
+        length = Vector2.Distance(crankBase.position, crankHead.position);
 
         turnSubscribers = new List<IFloatAcceptor>(turnSubscriberObjects.Length);
         foreach (var sub in turnSubscriberObjects)
