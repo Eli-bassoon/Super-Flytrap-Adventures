@@ -14,7 +14,7 @@ public class LevelLoader : MonoBehaviour
     static List<List<string>> levelScenes = new List<List<string>>
     {
         // Level 1
-        new List<string> {"Intro", "Hub", "Hanging Pots" },
+        new List<string> {"Intro", "Hub", "Hanging Pots", "Toxic" },
         
         // Level 2
         new List<string> {"Hub", "Light1"},
