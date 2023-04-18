@@ -37,7 +37,12 @@ public class Sludgefall : Toggleable
     {
         if (other.CompareTag("Player"))
         {
-            print("Hit player");
+            DamageHandler.instance.Respawn();
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawIcon(transform.position, "Sludgefall.png", true);
     }
 }
