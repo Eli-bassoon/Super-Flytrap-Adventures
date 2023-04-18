@@ -7,22 +7,34 @@ public class Weedkill : MonoBehaviour, IFloatAcceptor
     Rigidbody2D rb;
     float rotation;
     [SerializeField] float gearRatio = -45;
-    // Start is called before the first frame update
+    [SerializeField][Range(0, 90)] float disableSludgeAngle = 45f;
+    [SerializeField] Sludgefall sludgefall;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rotation = rb.rotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        rb.SetRotation(rotation);
+        
     }
 
     public void TakeFloat(float f) // float is the amount that the crank has cranked
     {
         rotation += gearRatio * f;
         rotation = Mathf.Clamp(rotation, -90, 0);
+
+        if (rotation < -disableSludgeAngle)
+        {
+            sludgefall.TurnOff();
+        }
+        else
+        {
+            sludgefall.TurnOn();
+        }
+
+        rb.SetRotation(rotation);
     }
 }
