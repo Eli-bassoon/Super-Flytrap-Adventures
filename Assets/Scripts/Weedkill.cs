@@ -25,7 +25,6 @@ public class Weedkill : MonoBehaviour, IFloatAcceptor
 
     public void TakeFloat(float f) // float is the amount that the crank has cranked
     {
-        print(f.ToString());
         rotation += gearRatio * f;
         rotation = Mathf.Clamp(rotation, moveRange.x, moveRange.y);
         if (sludgefall != null)
