@@ -52,6 +52,7 @@ public class PauseManager : MonoBehaviour
     public void ResetToCheckpoint()
     {
         //clytie plz help  D:
+        DamageHandler.instance.Respawn(); // is this what u mean
     }
     public void GoToMainMenu()
     {
