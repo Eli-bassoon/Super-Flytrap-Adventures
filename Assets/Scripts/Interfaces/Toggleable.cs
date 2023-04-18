@@ -9,7 +9,7 @@ public abstract class Toggleable: MonoBehaviour, IBoolAcceptor
     [OnValueChanged("SetOnEditor")][SerializeField] protected bool on = false;
     [SerializeField] protected bool invertReceivedBool = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         SetOn(on);
     }
