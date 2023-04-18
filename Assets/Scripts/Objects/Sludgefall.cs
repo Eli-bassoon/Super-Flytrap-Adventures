@@ -13,13 +13,6 @@ public class Sludgefall : Toggleable
         emissionModule = particles.emission;
     }
 
-    protected override void Start()
-    {
-        GetComponent<SpriteRenderer>().enabled = false;
-
-        base.Start();
-    }
-
     public override void SetOn(bool state)
     {
         base.SetOn(state);
