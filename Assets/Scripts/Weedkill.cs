@@ -5,13 +5,13 @@ using UnityEngine;
 public class Weedkill : MonoBehaviour, IFloatAcceptor
 {
     Rigidbody2D rb;
-    float rotation = -90f;
+    float rotation;
     [SerializeField] float gearRatio = -45;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.SetRotation(rotation);
+        rotation = rb.rotation;
     }
 
     // Update is called once per frame
