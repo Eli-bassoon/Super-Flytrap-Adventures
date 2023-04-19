@@ -53,6 +53,7 @@ public class PauseManager : MonoBehaviour
     {
         //clytie plz help  D:
         DamageHandler.instance.Respawn(); // is this what u mean
+        Unpause();
     }
     public void GoToMainMenu()
     {
