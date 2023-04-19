@@ -9,7 +9,8 @@ public class TriggerCheckpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        // Only save checkpoint when the flowerpot hits it
+        if (collision.gameObject.CompareTag("Player") && collision.TryGetComponent(out Flowerpot _))
         {
             DamageHandler.instance.SaveCheckpoint(transform);
         }
