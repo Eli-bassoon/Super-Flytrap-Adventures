@@ -323,23 +323,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &357648037 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1615993911643782222, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-  m_PrefabInstance: {fileID: 1615993911744812243}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &357648043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 357648037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed4812eec2f5d114fa998488eb53e236, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &358408646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1589,23 +1572,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1118299130 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1615993912969288473, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-  m_PrefabInstance: {fileID: 1615993911744812243}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1118299139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118299130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed4812eec2f5d114fa998488eb53e236, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1125896692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4279,60 +4245,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3197382264876941048, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
+      propertyPath: chompyIndicator
+      value: 
+      objectReference: {fileID: 43433770}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1615993913322844170, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1615993911744812245}
-    - targetCorrespondingSourceObject: {fileID: 1615993913322844170, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1615993911744812246}
-    - targetCorrespondingSourceObject: {fileID: 1615993913322844170, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1615993911744812264}
-    - targetCorrespondingSourceObject: {fileID: 1615993912969288473, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1118299139}
-    - targetCorrespondingSourceObject: {fileID: 1615993911643782222, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 357648043}
   m_SourcePrefab: {fileID: 100100000, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
 --- !u!1 &1615993911744812244 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1615993913322844170, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
   m_PrefabInstance: {fileID: 1615993911744812243}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1615993911744812245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615993911744812244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed4812eec2f5d114fa998488eb53e236, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1615993911744812246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615993911744812244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a165a4fed8b30dd4aa0ada067dc54ccf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fullHealth: 100
-  currHealth: 0
-  checkpointPrefab: {fileID: 4933152143070529459, guid: d11c4f8a6b9f9e14ab96ef653fcf174c, type: 3}
-  checkpointLatest: {fileID: 0}
-  chompyIndicator: {fileID: 43433770}
 --- !u!58 &1615993911744812264
 CircleCollider2D:
   m_ObjectHideFlags: 0
