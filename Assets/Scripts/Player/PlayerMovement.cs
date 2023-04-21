@@ -127,6 +127,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (PauseManager.GameIsPaused) return;
+
         mousePressed = false;
         // Presses the mouse
         if (Input.GetMouseButtonDown(0))
@@ -450,7 +452,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref zeroVelocity, movementSmoothing);
 
             // Fully retract the tongue
-            if (Vector2.Distance(tongue.position, mouthCollider.bounds.center) < (mouthCollider.radius + 0.05f))
+            if (Vector2.Distance(tongue.position, mouthCollider.bounds.center) < (mouthCollider.radius + 0.1f))
             {
                 PointAt(retractingDirection);
 

@@ -27,6 +27,7 @@ public class PauseManager : MonoBehaviour
 
     public void Pause()
     {
+        PlayerMovement.instance.LetGo();
         Time.timeScale = 0f;
         pauseButton.SetActive(false);
         pauseMenuUI.SetActive(true);
@@ -43,10 +44,24 @@ public class PauseManager : MonoBehaviour
         fade.FadeOut(pauseTime);
     }
 
+    public void TogglePause()
+    {
+        if (GameIsPaused)
+        {
+            Unpause();
+        } else
+        {
+            Pause();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        {
+            TogglePause();
+        }
     }
 
     public void ResetToCheckpoint()
