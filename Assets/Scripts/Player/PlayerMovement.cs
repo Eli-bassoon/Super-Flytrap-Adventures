@@ -135,7 +135,6 @@ public class PlayerMovement : MonoBehaviour
         {
             ExtendTongue();
             canMove = true;
-            canGrab = true;
         }
         // Gets a vector to the mouse's position in world if pressed down
         if (Input.GetMouseButton(0))
@@ -172,8 +171,6 @@ public class PlayerMovement : MonoBehaviour
             LetGo();
             mouseButtonUp = false;
             canMove = true;
-            canGrab = false;
-            Timer.Register(grabCooldownTime, () => { canGrab = true; });
         }
 
         CheckForSleep();
@@ -555,6 +552,7 @@ public class PlayerMovement : MonoBehaviour
 
         canMove = false;
         canGrab = false;
+        Timer.Register(grabCooldownTime, () => { canGrab = true; });
 
         DisableTongue();
         GetFreeDelt();
