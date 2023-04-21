@@ -10543,7 +10543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2228484921327044686, guid: 716dafa634eb154489383ebc4d8d335a, type: 3}
       propertyPath: m_Name
-      value: Light1 Tilemap (ONLY GAMEOBJECTS)
+      value: ZLight1 Tilemap (ONLY GAMEOBJECTS)
       objectReference: {fileID: 0}
     - target: {fileID: 2228484921429608836, guid: 716dafa634eb154489383ebc4d8d335a, type: 3}
       propertyPath: m_Name
