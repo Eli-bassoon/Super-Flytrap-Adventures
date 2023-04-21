@@ -16528,7 +16528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regurgitable: 1
-  constrained: 1
+  constrained: 0
 --- !u!50 &1941262292 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 862636902583170499, guid: aa4ba054c33fe134989d8c0790921677, type: 3}
