@@ -6,40 +6,41 @@ using UnityEngine.Events;
 public class MultiCondition : Toggleable
 {
     [SerializeField] int numConditions = 2;
-    int conditionsFilled = 0;
+    public int conditionsFilled = 0;
+    public int filledValue = 0;
 
     public UnityEvent onActivate;
     public UnityEvent onDeactivate;
 
-    public void FillCondition()
+    void Awake()
     {
-        conditionsFilled++;
+        for (int i = 0; i < numConditions; i++)
+        {
+            filledValue |= 1 << i;
+        }
+    }
+
+    public void FillCondition(int condNum)
+    {
+        conditionsFilled |= 1 << condNum;
         CheckFilled();
     }
 
-    public void UnfillCondition()
+    public void UnfillCondition(int condNum)
     {
-        conditionsFilled--;
+        conditionsFilled ^= 1 << condNum;
         CheckFilled();
     }
 
     public override void TakeBool(bool value)
     {
-        if (value)
-        {
-            conditionsFilled++;
-        }
-        else
-        {
-            conditionsFilled--;
-        }
-        CheckFilled();
+        throw new System.Exception("Do not use TakeBool with MultiCondition.cs!");
     }
 
     // When something changes, check if everything is filled
     void CheckFilled()
     {
-        if (conditionsFilled >= numConditions && !on)
+        if (conditionsFilled == filledValue && !on)
         {
             TurnOn();
         }
