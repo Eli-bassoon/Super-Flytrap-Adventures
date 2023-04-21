@@ -386,6 +386,7 @@ public class PlayerMovement : MonoBehaviour
         if (!stuck && canGrab)
         {
             Vector2 moveDirection = (Vector2)mousePosition - tongue.position;
+
             // Tongue test for wall
             RaycastHit2D[] tongueHits = Physics2D.RaycastAll(tongue.position, moveDirection,
                 tongueCollider.radius + extraWallCheckRadius, grabbableLayers);
@@ -443,6 +444,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
         // Moves towards the tongue if retracting, and sticks to wall
         if (retractingTongue)
         {
