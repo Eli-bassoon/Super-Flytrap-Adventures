@@ -583,8 +583,8 @@ public class PlayerMovement : MonoBehaviour
     // Disables the tongue completely
     void FinishDisableTongue()
     {
-        tongue.position = rb.position;
         tongue.transform.parent = transform;
+        tongue.position = rb.position;
         tongue.gameObject.SetActive(false);
         tongueOut = false;
     }
@@ -646,15 +646,18 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator RetractTongue()
     {
         float initialDist = (tongue.position - rb.position).magnitude;
-        float timeLeft = tongueRetractTime;
-        while (timeLeft > 0)
+        if (initialDist > 0.05f)
         {
-            // Move tongue to new position in front of mouth
-            float newDist = initialDist * (timeLeft / tongueRetractTime);
-            Vector2 newPos = transform.TransformPoint(Vector2.up * newDist);
-            tongue.MovePosition(newPos);
-            timeLeft -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            float timeLeft = tongueRetractTime;
+            while (timeLeft > 0)
+            {
+                // Move tongue to new position in front of mouth
+                float newDist = initialDist * (timeLeft / tongueRetractTime);
+                Vector2 newPos = transform.TransformPoint(Vector2.up * newDist);
+                tongue.MovePosition(newPos);
+                timeLeft -= Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
         }
 
         FinishDisableTongue();

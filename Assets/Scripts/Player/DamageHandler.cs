@@ -70,6 +70,8 @@ public class DamageHandler : MonoBehaviour
             body.rotation = 0;
         }
 
+        tongue.position = rb.position;
+
         GetComponent<PlayerMovement>().LetGo();
         currHealth = fullHealth;
 
