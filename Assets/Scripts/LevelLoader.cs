@@ -22,9 +22,18 @@ public class LevelLoader : MonoBehaviour
 
     const string SCENE_PATH = "Assets/Scenes/Levels/Level";
 
+    public static bool levelLoaded = false;
+
+    public static void LoadLevelFade(int level)
+    {
+        LevelFader.instance.LoadLevel(level);
+    }
+
     // Load a level consisting of multiple scenes. This works in both edit mode and play mode
     public static void LoadLevel(int level)
     {
+        levelLoaded = false;
+
         List<string> thisLevelScenes = levelScenes[level - 1];
 
         // Load the main scene of the level
@@ -77,6 +86,7 @@ public class LevelLoader : MonoBehaviour
             SceneManager.LoadSceneAsync(scenePath, LoadSceneMode.Additive);
 #endif
         }
+        levelLoaded = true;
     }
 
     static string JoinScenePath(int level, string sceneName)

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
-
+    public static bool canPause = true;
     public static bool GameIsPaused = false;
     public static float pauseTime = .5f;
     [Scene] public string mainMenuScene;
@@ -27,6 +27,8 @@ public class PauseManager : MonoBehaviour
 
     public void Pause()
     {
+        if (!canPause) return;
+
         PlayerMovement.instance.LetGo();
         Time.timeScale = 0f;
         pauseButton.SetActive(false);
@@ -37,6 +39,8 @@ public class PauseManager : MonoBehaviour
 
     public void Unpause()
     {
+        if (!canPause) return;
+
         Time.timeScale = 1f;
         pauseButton.SetActive(true);
         pauseMenuUI.SetActive(false);
