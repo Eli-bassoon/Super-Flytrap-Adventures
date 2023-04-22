@@ -1572,7 +1572,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_text
-      value: Click and hold to bite onto the ground and objects
+      value: Pull yourself along the ground or ceiling to move
       objectReference: {fileID: 0}
     - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_margin.z
