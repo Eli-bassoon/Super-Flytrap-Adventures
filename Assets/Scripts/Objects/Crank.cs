@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 using UnityEngine.UIElements;
 
 public class Crank : MonoBehaviour
