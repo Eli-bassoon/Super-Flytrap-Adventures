@@ -5,9 +5,9 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 
-    [SerializeField] private AudioSource _musicSource, _effectsSource;
+    private AudioSource[] audioSources;
 
-    public static SoundManager Instance;
+    public static SoundManager SM;
 
 
     void Awake()
@@ -38,9 +38,12 @@ public class SoundManager : MonoBehaviour
         _effectsSource.mute = !_effectsSource.mute;
     }
 
-    public void ToggleMusic()
+
+    public void ChangeVolume(float value)
     {
-        _musicSource.mute = !_musicSource.mute;
+
     }
+
+
 
 }

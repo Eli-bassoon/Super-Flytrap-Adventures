@@ -227,7 +227,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 111.802734, y: 36.93477}
+  m_Size: {x: 114.67867, y: 51.69794}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -241,7 +241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319946733}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 87.0114, y: 12.9098, z: 0}
+  m_LocalPosition: {x: 84.6, y: 20.4, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -340,7 +340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_text
-      value: To easily grapple up walls, aim high, move your mouse down and towards
+      value: To easily grapple up walls, aim high, move your mouse up and away from
         the wall, then let go when your pot has built up speed
       objectReference: {fileID: 0}
     - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
@@ -437,7 +437,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7736542471920920478, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 34.59375
+      value: 34.4375
       objectReference: {fileID: 0}
     - target: {fileID: 7736542471920920478, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1263,8 +1263,8 @@ PrefabInstance:
       propertyPath: m_text
       value: '^
 
-        While biting, move your mouse in a direction to apply an
-        opposing force to the pot. Use it to swing.'
+        While biting, move your mouse in a direction to apply a
+        force to the pot. Use it to swing.'
       objectReference: {fileID: 0}
     - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -1572,7 +1572,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_text
-      value: Click and hold to bite onto the ground and objects
+      value: Pull yourself along the ground or ceiling to move
       objectReference: {fileID: 0}
     - target: {fileID: 7736542471428726192, guid: 306f36eda1a2fd64cb320aea69f43ca7, type: 3}
       propertyPath: m_margin.z
@@ -76051,11 +76051,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1615993913322844210, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.1875
+      value: -13.03125
       objectReference: {fileID: 0}
     - target: {fileID: 1615993913322844210, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4375
+      value: -0.28125
       objectReference: {fileID: 0}
     - target: {fileID: 1615993913322844210, guid: adbf0d9c698ceec42abd6c009feadf8b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -76334,11 +76334,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7565527650071115465, guid: e9bc027c5784f9a4986300ed2929ca43, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8125
+      value: 1.96875
       objectReference: {fileID: 0}
     - target: {fileID: 7565527650071115465, guid: e9bc027c5784f9a4986300ed2929ca43, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.43749988
+      value: -0.28124988
       objectReference: {fileID: 0}
     - target: {fileID: 7565527650071115465, guid: e9bc027c5784f9a4986300ed2929ca43, type: 3}
       propertyPath: m_LocalPosition.z
@@ -76358,11 +76358,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7565527650389109682, guid: e9bc027c5784f9a4986300ed2929ca43, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8125
+      value: 1.96875
       objectReference: {fileID: 0}
     - target: {fileID: 7565527650389109682, guid: e9bc027c5784f9a4986300ed2929ca43, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.43749988
+      value: -0.28124988
       objectReference: {fileID: 0}
     - target: {fileID: 7565527650389109682, guid: e9bc027c5784f9a4986300ed2929ca43, type: 3}
       propertyPath: m_LocalPosition.z

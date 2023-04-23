@@ -228,7 +228,12 @@ public class PlayerMovement : MonoBehaviour
                 potToMouseDist -= minMousePotSwingDist;
                 potToMouseDist = Mathf.Clamp01(potToMouseDist / (mousePotSwingRadius));
 
-                Vector2 potSwingForce = maxPotSwingForce * potToMouseDist * -potToMouseDir;
+                if (GameManager.GM.invertedSwinging)
+                {
+                    potToMouseDir *= -1;
+                }
+
+                Vector2 potSwingForce = maxPotSwingForce * potToMouseDist * potToMouseDir;
 
                 flowerpot.AddForce(potSwingForce);
             }
