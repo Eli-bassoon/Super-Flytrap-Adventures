@@ -50,6 +50,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioSource snoreSource;
     [SerializeField] ParticleSystem zzzParticles;
 
+    [Header("Sound Effects")]
+    [SerializeField] AudioClip chompClip;
+
     [Header("References")]
     public Transform neck;
     public Rigidbody2D flowerpot;
@@ -135,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
         {
             ExtendTongue();
             canMove = true;
+            SoundManager.SM.PlaySound(chompClip);
         }
         // Gets a vector to the mouse's position in world if pressed down
         if (Input.GetMouseButton(0))

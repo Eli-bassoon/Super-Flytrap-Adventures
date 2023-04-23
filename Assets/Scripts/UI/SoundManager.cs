@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 
-    private AudioSource[] audioSources;
+    [SerializeField] AudioSource[] audioSources;
 
     public static SoundManager SM;
 
@@ -21,16 +21,29 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
     }
 
     public void PlaySound(AudioClip clip)
     {
-        //_effectsSource.PlayOneShot(clip);
+        foreach (AudioSource audioSource in audioSources)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = clip;
+                audioSource.Play();
+                return;
+            }
+        }
     }
 
-    public void ChangeMasterVolume(float value)
+    public void ChangeVolume(float value)
     {
-        AudioListener.volume = value;
+        foreach (AudioSource audioSource in audioSources)
+        {
+            audioSource.volume = value;
+        }
     }
 
     public void ToggleEffects()
@@ -38,11 +51,6 @@ public class SoundManager : MonoBehaviour
         //_effectsSource.mute = !_effectsSource.mute;
     }
 
-
-    public void ChangeVolume(float value)
-    {
-
-    }
 
 
 

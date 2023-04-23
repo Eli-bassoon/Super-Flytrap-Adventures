@@ -764,6 +764,7 @@ MonoBehaviour:
   joltAwakeVelocity: 0.5
   snoreSource: {fileID: 3051810246998540214}
   zzzParticles: {fileID: 8707135051367881665}
+  chompClip: {fileID: 8300000, guid: 94c29dee31d0062479756df03d388c5f, type: 3}
   neck: {fileID: 5403534888202816348}
   flowerpot: {fileID: 1615993911643782221}
   tongue: {fileID: 1615993912969288472}
