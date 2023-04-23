@@ -9,7 +9,7 @@ public abstract class Toggleable: MonoBehaviour, IBoolAcceptor
     [OnValueChanged("SetOnEditor")][SerializeField] protected bool on = false;
     [SerializeField] protected bool invertReceivedBool = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         SetOn(on);
     }
@@ -34,7 +34,7 @@ public abstract class Toggleable: MonoBehaviour, IBoolAcceptor
         SetOn(!on);
     }
 
-    public void TakeBool(bool value)
+    public virtual void TakeBool(bool value)
     {
         // We XOR the received value and whether we invert it to get the new on value
         SetOn(value ^ invertReceivedBool);

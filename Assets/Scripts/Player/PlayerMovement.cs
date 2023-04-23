@@ -127,6 +127,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (PauseManager.GameIsPaused) return;
+
         mousePressed = false;
         // Presses the mouse
         if (Input.GetMouseButtonDown(0))
@@ -169,8 +171,6 @@ public class PlayerMovement : MonoBehaviour
             LetGo();
             mouseButtonUp = false;
             canMove = true;
-            canGrab = false;
-            Timer.Register(grabCooldownTime, () => { canGrab = true; });
         }
 
         CheckForSleep();
@@ -228,7 +228,12 @@ public class PlayerMovement : MonoBehaviour
                 potToMouseDist -= minMousePotSwingDist;
                 potToMouseDist = Mathf.Clamp01(potToMouseDist / (mousePotSwingRadius));
 
-                Vector2 potSwingForce = maxPotSwingForce * potToMouseDist * -potToMouseDir;
+                if (GameManager.GM.invertedSwinging)
+                {
+                    potToMouseDir *= -1;
+                }
+
+                Vector2 potSwingForce = maxPotSwingForce * potToMouseDist * potToMouseDir;
 
                 flowerpot.AddForce(potSwingForce);
             }
@@ -383,12 +388,13 @@ public class PlayerMovement : MonoBehaviour
         if (!stuck && canGrab)
         {
             Vector2 moveDirection = (Vector2)mousePosition - tongue.position;
+
             // Tongue test for wall
             RaycastHit2D[] tongueHits = Physics2D.RaycastAll(tongue.position, moveDirection,
                 tongueCollider.radius + extraWallCheckRadius, grabbableLayers);
             foreach (RaycastHit2D hit in tongueHits)
             {
-                if (hit.collider != null && hit.collider.gameObject != gameObject && !hit.collider.isTrigger)
+                if (hit.collider != null && hit.collider.gameObject != gameObject)
                 {
                     // Don't grab onto //
 
@@ -440,6 +446,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
         // Moves towards the tongue if retracting, and sticks to wall
         if (retractingTongue)
         {
@@ -449,7 +456,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref zeroVelocity, movementSmoothing);
 
             // Fully retract the tongue
-            if (Vector2.Distance(tongue.position, mouthCollider.bounds.center) < (mouthCollider.radius + 0.05f))
+            if (Vector2.Distance(tongue.position, mouthCollider.bounds.center) < (mouthCollider.radius + 0.1f))
             {
                 PointAt(retractingDirection);
 
@@ -550,6 +557,7 @@ public class PlayerMovement : MonoBehaviour
 
         canMove = false;
         canGrab = false;
+        Timer.Register(grabCooldownTime, () => { canGrab = true; });
 
         DisableTongue();
         GetFreeDelt();
@@ -580,8 +588,8 @@ public class PlayerMovement : MonoBehaviour
     // Disables the tongue completely
     void FinishDisableTongue()
     {
-        tongue.position = rb.position;
         tongue.transform.parent = transform;
+        tongue.position = rb.position;
         tongue.gameObject.SetActive(false);
         tongueOut = false;
     }
@@ -643,15 +651,18 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator RetractTongue()
     {
         float initialDist = (tongue.position - rb.position).magnitude;
-        float timeLeft = tongueRetractTime;
-        while (timeLeft > 0)
+        if (initialDist > 0.05f)
         {
-            // Move tongue to new position in front of mouth
-            float newDist = initialDist * (timeLeft / tongueRetractTime);
-            Vector2 newPos = transform.TransformPoint(Vector2.up * newDist);
-            tongue.MovePosition(newPos);
-            timeLeft -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            float timeLeft = tongueRetractTime;
+            while (timeLeft > 0)
+            {
+                // Move tongue to new position in front of mouth
+                float newDist = initialDist * (timeLeft / tongueRetractTime);
+                Vector2 newPos = transform.TransformPoint(Vector2.up * newDist);
+                tongue.MovePosition(newPos);
+                timeLeft -= Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
         }
 
         FinishDisableTongue();

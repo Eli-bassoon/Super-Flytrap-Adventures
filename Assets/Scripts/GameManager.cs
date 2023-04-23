@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     // Variables
     [HideInInspector] public bool gameIsRunning = true;
+    public bool invertedSwinging = false;
 
     // Runs before a scene gets loaded
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

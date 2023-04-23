@@ -7,16 +7,15 @@ using UnityEngine.Splines;
 public class SplineFollowToggle : Toggleable
 {
     [SerializeField] SplineContainer splineContainer;
+    [SerializeField][Label("Moving Rigidbody")] Rigidbody2D rb;
     [SerializeField] float moveTime = 1f;
-
-    Rigidbody2D rb;
 
     float along = 0;
     Coroutine cr;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
     }
 
     public override void SetOn(bool state)

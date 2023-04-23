@@ -12,7 +12,7 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
     [SerializeField] MoveTypes moveType = MoveTypes.ConstantSpeed;
     [SerializeField] [ShowIf("moveType", MoveTypes.ConstantSpeed)] [Tooltip("Units per crank")] float gearRatio;
 
-    float along = 0;
+    [ShowNonSerializedField] float along = 0;
 
     enum CrankDirs
     {
@@ -52,5 +52,11 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
         along = Mathf.Clamp01(along);
         var pos = (Vector3)splineContainer.EvaluatePosition(along);
         rb.MovePosition(pos);
+    }
+
+    public void SetAlong(float newAlong)
+    {
+        along = newAlong;
+        TakeFloat(0);
     }
 }

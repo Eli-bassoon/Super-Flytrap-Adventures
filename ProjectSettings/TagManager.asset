@@ -24,7 +24,7 @@ TagManager:
   - Only See Player
   - Opaque Ineffable
   - Grabbable Transparent
-  - 
+  - Everything but Player
   - 
   - 
   - 
@@ -47,9 +47,6 @@ TagManager:
     locked: 0
   - name: Background1
     uniqueID: 3612053125
-    locked: 0
-  - name: Behind Ground
-    uniqueID: 3503833511
     locked: 0
   - name: Ground
     uniqueID: 270800943
