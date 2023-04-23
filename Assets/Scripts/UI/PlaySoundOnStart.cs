@@ -10,6 +10,6 @@ public class PlaySoundOnStart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SoundManager.Instance.PlaySound(_clip);
+        SoundManager.SM.PlaySound(_clip);
     }
 }

@@ -8,7 +8,7 @@ public class ToggleAudio : MonoBehaviour
 
     public void Toggle()
     {
-        if (_toggleEffects) SoundManager.Instance.ToggleEffects();
-        if (_toggleMusic) SoundManager.Instance.ToggleMusic();
+        //if (_toggleEffects) SoundManager.SM.ToggleEffects();
+        //if (_toggleMusic) SoundManager.SM.ToggleMusic();
     }
 }

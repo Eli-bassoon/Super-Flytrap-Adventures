@@ -12,9 +12,9 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
+        if (SM == null)
         {
-            Instance = this;
+            SM = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(AudioClip clip)
     {
-        _effectsSource.PlayOneShot(clip);
+        //_effectsSource.PlayOneShot(clip);
     }
 
     public void ChangeMasterVolume(float value)
@@ -35,7 +35,7 @@ public class SoundManager : MonoBehaviour
 
     public void ToggleEffects()
     {
-        _effectsSource.mute = !_effectsSource.mute;
+        //_effectsSource.mute = !_effectsSource.mute;
     }
 
 
