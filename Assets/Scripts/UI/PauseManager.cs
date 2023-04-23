@@ -91,4 +91,10 @@ public class PauseManager : MonoBehaviour
        float vol = musicSlider.value;
        MusicManager.MM.SetMusicVolume(vol);
     }
+
+    public void ChangeSoundVolume()
+    {
+        float vol = soundSlider.value;
+        SoundManager.SM.ChangeVolume(vol);
+    }
 }
