@@ -24,6 +24,14 @@ public class ChompCursor : MonoBehaviour
 
     void Update()
     {
+        // Don't show if paused
+        if (PauseManager.GameIsPaused)
+        {
+            cursor.enabled = false;
+            clampedCursor.enabled = false;
+            return;
+        }
+
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         cursor.transform.position = mousePosition;
