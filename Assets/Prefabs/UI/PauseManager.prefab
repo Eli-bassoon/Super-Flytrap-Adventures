@@ -391,8 +391,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -46.556, y: -6}
-  m_SizeDelta: {x: 66.887, y: 67.128}
+  m_AnchoredPosition: {x: 72, y: -6}
+  m_SizeDelta: {x: 66.9895, y: 68.8704}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4421459097060323376
 MonoBehaviour:
@@ -477,7 +477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -46.505287, y: 5}
+  m_AnchoredPosition: {x: 72, y: 5}
   m_SizeDelta: {x: 66.9895, y: 68.8704}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3180736869406380705
@@ -3883,7 +3883,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -508.375, y: 1.0625}
+  m_AnchoredPosition: {x: -377, y: 1.0625}
   m_SizeDelta: {x: 291.06982, y: 59.294067}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3884741458479897817
@@ -3914,9 +3914,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Inverted
-
-    swing'
+  m_text: Inverted swing
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 34cb8586980e97d419032327a0dc709e, type: 2}
   m_sharedMaterial: {fileID: -5354136144036398901, guid: 34cb8586980e97d419032327a0dc709e, type: 2}
@@ -4195,7 +4193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -508.375, y: 1.0625}
+  m_AnchoredPosition: {x: -379, y: 1.0625}
   m_SizeDelta: {x: 291.06982, y: 59.294067}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2641165787454358077
@@ -4226,7 +4224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Death \ncounter"
+  m_text: Death counter
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 34cb8586980e97d419032327a0dc709e, type: 2}
   m_sharedMaterial: {fileID: -5354136144036398901, guid: 34cb8586980e97d419032327a0dc709e, type: 2}
