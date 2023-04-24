@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class Toggleable: MonoBehaviour, IBoolAcceptor
 {
     [OnValueChanged("SetOnEditor")][SerializeField] protected bool on = false;
-    [SerializeField] protected bool invertReceivedBool = false;
+    [SerializeField] public bool invertReceivedBool = false;
 
     protected virtual void Start()
     {
