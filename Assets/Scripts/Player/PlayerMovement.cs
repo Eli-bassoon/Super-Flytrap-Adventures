@@ -413,6 +413,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         if (enemy.edible)
                         {
+                            enemy.OnEaten();
                             Destroy(hit.collider.gameObject);
                         }
                         continue;
