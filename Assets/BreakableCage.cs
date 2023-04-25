@@ -1,42 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class BreakableCage : MonoBehaviour
 {
-    [SerializeField] int maxHealth = 5;
+    [SerializeField] int maxHealth = 1;
     [SerializeField] int health;
-    [SerializeField] int dmg = 0;
     [SerializeField] float speedThreshold = 1.0f;
+    [SerializeField] float explodeSpeed = 0.5f;
+    [SerializeField] float beforeFadeTime = 2f;
+    [SerializeField] float fadeTime = 1f;
 
+    bool exploded = false;
     int numChildren;
+    LayerMask ghostLayer;
 
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth - dmg;
+        health = maxHealth;
         numChildren = gameObject.transform.childCount;
-        for (int i = 0; i < numChildren; i++)
-        {
-            GameObject child = gameObject.transform.GetChild(i).GameObject();
-            child.SetActive(false);
-        }
+        ghostLayer = LayerMask.NameToLayer("Ghost");
     }
 
     // Update is called once per frame
     void Update()
     {
-        health = maxHealth - dmg;
-        if (health <= 0)
+        if (!exploded && health <= 0)
         {
-            //gameObject.SetActive(false);
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            Destroy(GetComponent<CompositeCollider2D>());
+
             for (int i = 0; i < numChildren; i++)
             {
                 GameObject child = gameObject.transform.GetChild(i).gameObject;
-                child.SetActive(true);
+                child.layer = ghostLayer;
+                child.GetComponent<Collider2D>().usedByComposite = false;
+
+                Rigidbody2D childRb = child.AddComponent<Rigidbody2D>();
+                childRb.velocity = child.transform.localPosition.normalized * explodeSpeed;
+                Timer.Register(beforeFadeTime, () => child.GetComponent<SpriteFader>().FadeOut(fadeTime));
             }
+
+            exploded = true;
         }
     }
 
@@ -45,9 +52,10 @@ public class BreakableCage : MonoBehaviour
         if (collision == null) return;
         GameObject obj = collision.gameObject;
         Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+
         if (obj.CompareTag("Center in Mouth") && rb.velocity.magnitude >= speedThreshold)
         {
-            dmg++;
+            health--;
         }
     }
 }
