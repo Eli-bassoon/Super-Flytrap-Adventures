@@ -949,8 +949,8 @@ MonoBehaviour:
           w: 1
     - Position:
         x: 112.46875
-        y: 0
-        z: -15.512064
+        y: 0.0000005639571
+        z: -10.781249
       TangentIn:
         x: 0
         y: 0
