@@ -8,6 +8,7 @@ using UnityEngine.U2D;
 public class CrankPlatform : MonoBehaviour, IFloatAcceptor
 {
     [SerializeField] SplineContainer splineContainer;
+    [SerializeField] Rigidbody2D crankHead;
     [SerializeField] CrankDirs forwardDir = CrankDirs.Clockwise; // Make clockwise considered "forward"
     [SerializeField] MoveTypes moveType = MoveTypes.ConstantSpeed;
     [SerializeField] [ShowIf("moveType", MoveTypes.ConstantSpeed)] [Tooltip("Units per crank")] float gearRatio;
@@ -27,6 +28,8 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
 
     Rigidbody2D rb;
 
+    Vector2 prevPos;
+    Vector2 posDelta;
     float splineLength;
     float crankSign;
 
@@ -36,6 +39,13 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
 
         splineLength = splineContainer.CalculateLength();
         crankSign = (int)forwardDir;
+        prevPos = rb.position;
+    }
+
+    void FixedUpdate()
+    {
+        posDelta = rb.position - prevPos;
+        prevPos = rb.position;
     }
 
     public void TakeFloat(float f)
@@ -58,5 +68,15 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
     {
         along = newAlong;
         TakeFloat(0);
+    }
+
+    // Stop the pot from bouncing
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && PlayerMovement.instance.stuckTo == crankHead)
+        {
+            PlayerMovement.instance.flowerpot.MovePosition(PlayerMovement.instance.flowerpot.position + posDelta);
+            PlayerMovement.instance.flowerpot.velocity = Vector2.zero;
+        }
     }
 }
