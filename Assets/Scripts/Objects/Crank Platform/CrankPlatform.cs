@@ -70,27 +70,4 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
         along = newAlong;
         TakeFloat(0);
     }
-
-    // Stop the pot from bouncing
-    //void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject == PlayerMovement.instance.flowerpot.gameObject && PlayerMovement.instance.stuckTo == crankHead)
-    //    {
-    //        if (potRelPos == null)
-    //        {
-    //            potRelPos = PlayerMovement.instance.flowerpot.position - rb.position;
-    //        }
-
-    //        PlayerMovement.instance.flowerpot.MovePosition(rb.position + (Vector2)potRelPos);
-    //        //PlayerMovement.instance.flowerpot.velocity = Vector2.zero;
-    //    }
-    //}
-
-    //void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject == PlayerMovement.instance.flowerpot.gameObject)
-    //    {
-    //        potRelPos = null;
-    //    }
-    //}
 }

@@ -8458,6 +8458,10 @@ PrefabInstance:
       propertyPath: m_UsedByComposite
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9113602817566319603, guid: 67d75a38ca40f8440815a504a96349a6, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9113602817566319604, guid: 67d75a38ca40f8440815a504a96349a6, type: 3}
       propertyPath: forwardDir
       value: 1
