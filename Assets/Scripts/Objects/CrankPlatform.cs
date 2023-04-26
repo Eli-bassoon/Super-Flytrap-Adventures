@@ -28,6 +28,7 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
 
     Rigidbody2D rb;
 
+    Vector2? potRelPos;
     Vector2 prevPos;
     Vector2 posDelta;
     float splineLength;
@@ -71,12 +72,25 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
     }
 
     // Stop the pot from bouncing
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && PlayerMovement.instance.stuckTo == crankHead)
-        {
-            PlayerMovement.instance.flowerpot.MovePosition(PlayerMovement.instance.flowerpot.position + posDelta);
-            PlayerMovement.instance.flowerpot.velocity = Vector2.zero;
-        }
-    }
+    //void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject == PlayerMovement.instance.flowerpot.gameObject && PlayerMovement.instance.stuckTo == crankHead)
+    //    {
+    //        if (potRelPos == null)
+    //        {
+    //            potRelPos = PlayerMovement.instance.flowerpot.position - rb.position;
+    //        }
+
+    //        PlayerMovement.instance.flowerpot.MovePosition(rb.position + (Vector2)potRelPos);
+    //        //PlayerMovement.instance.flowerpot.velocity = Vector2.zero;
+    //    }
+    //}
+
+    //void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject == PlayerMovement.instance.flowerpot.gameObject)
+    //    {
+    //        potRelPos = null;
+    //    }
+    //}
 }

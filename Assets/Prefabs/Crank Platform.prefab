@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3776710832938369887}
   - component: {fileID: 5354615626606827157}
   - component: {fileID: 5800799283290109412}
-  - component: {fileID: 4048647931319293446}
+  - component: {fileID: 6258817746779665840}
   m_Layer: 0
   m_Name: Freeze Area
   m_TagString: Untagged
@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6325210438013428637}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0015, y: -0.0084, z: 0}
-  m_LocalScale: {x: 2.691099, y: 0.115824595, z: 1}
+  m_LocalPosition: {x: -0.0015, y: 0.021, z: 0}
+  m_LocalScale: {x: 2.691099, y: 0.17458242, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9113602817566319613}
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4048647931319293446
+--- !u!114 &6258817746779665840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6325210438013428637}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0093c34c6ca34d845a932743edeee2e4, type: 3}
+  m_Script: {fileID: 11500000, guid: c1a39b678353d1f488ba080551be3939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   crankHead: {fileID: 9113602819302376195}
@@ -232,7 +232,7 @@ MonoBehaviour:
   - {x: 1.5, y: -0.25, z: 0}
   m_ShapePathHash: 23982885
   m_Mesh: {fileID: 0}
-  m_InstanceId: 65374
+  m_InstanceId: 54702
 --- !u!212 &9113602817566319602
 SpriteRenderer:
   m_ObjectHideFlags: 0
