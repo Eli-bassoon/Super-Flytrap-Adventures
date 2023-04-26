@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     { 
-        LevelLoader.LoadLevel(1);
+        LevelLoader.LoadLevelFade(1);
     }
 
 }
