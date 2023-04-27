@@ -9,12 +9,12 @@ public class ToggleLight : Toggleable
     private Animator anim;
     private Light2D lamp;
 
-    void Start()
+    protected override void Start()
     {
         anim = GetComponent<Animator>();
         lamp = GetComponentInChildren<Light2D>();
-        anim.SetBool("activated", on);
-        lamp.enabled = on;
+
+        base.Start();
     }
 
     public override void SetOn(bool state)

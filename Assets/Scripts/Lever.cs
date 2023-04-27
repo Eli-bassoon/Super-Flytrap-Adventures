@@ -138,6 +138,6 @@ public class Lever : MonoBehaviour
 
     void UpdateVisuals()
     {
-        handle.SetRotation(angle - 90);
+        handle.SetRotation(rb.rotation + angle - 90);
     }
 }

@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Floodlight
+  m_Controller: {fileID: 9100000, guid: 892fbf115a08762408cb0240dfa3beb3, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 6def3b7076599ba4aba762ae5991c4f2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 411238fcb1e967b43b3b1f3d0eea8a90, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 001b04a08020c014e93f0945ec5d85c4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6fff080461af2b14697f1119dadb0719, type: 2}
