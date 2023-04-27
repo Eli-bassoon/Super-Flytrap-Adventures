@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class LevelFader : MonoBehaviour
 {
@@ -49,5 +50,17 @@ public class LevelFader : MonoBehaviour
         // Fading into the level
         spriteFader.FadeOut(fadeInTime);
         //yield return new WaitForSeconds(fadeInTime);
+    }
+
+    public void FadeOutIn(float fadeOutTime, float fadeInTime)
+    {
+        StartCoroutine(FadeOutInCR(fadeOutTime, fadeInTime));
+    }
+
+    IEnumerator FadeOutInCR(float fadeOutTime, float fadeInTime)
+    {
+        spriteFader.FadeIn(fadeOutTime);
+        yield return new WaitForSeconds(fadeOutTime);
+        spriteFader.FadeOut(fadeInTime);
     }
 }
