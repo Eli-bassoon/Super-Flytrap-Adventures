@@ -22,7 +22,17 @@ public class PauseManager : MonoBehaviour
 
     public void Start()
     {
-        Unpause();
+        //Unpause();
+        pauseButton.SetActive(true);
+        pauseMenuUI.SetActive(false);
+        GameIsPaused = false;
+
+        // Load & enforce player prefs
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume", 1f);
+        soundSlider.value = PlayerPrefs.GetFloat("soundVolume", 1f);
+
+        ChangeMusicVolume();
+        ChangeSoundVolume();
     }
 
     public void Pause()
@@ -46,6 +56,7 @@ public class PauseManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         GameIsPaused = false;
         fade.FadeOut(pauseTime);
+        PlayerPrefs.Save();
     }
 
     public void TogglePause()
@@ -88,13 +99,15 @@ public class PauseManager : MonoBehaviour
 
     public void ChangeMusicVolume()
     {
-       float vol = musicSlider.value;
-       MusicManager.MM.SetMusicVolume(vol);
+        float vol = musicSlider.value;
+        MusicManager.MM.SetMusicVolume(vol);
+        PlayerPrefs.SetFloat("musicVolume", vol);
     }
 
     public void ChangeSoundVolume()
     {
         float vol = soundSlider.value;
         SoundManager.SM.ChangeVolume(vol);
+        PlayerPrefs.SetFloat("soundVolume", vol);
     }
 }
