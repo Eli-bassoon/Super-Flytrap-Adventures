@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D flowerpot;
     public Rigidbody2D tongue;
     public GameObject rightMouthHalf;
+    public GameObject leftMouthHalf;
 
     CircleCollider2D tongueCollider;
     CircleCollider2D mouthCollider;
@@ -516,7 +517,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CanGrabOnto(RaycastHit2D hit)
     {
-        if (hit.collider.gameObject.CompareTag("Not Grabbable"))
+        if (hit.collider.gameObject.CompareTag("Not Grabbable") || hit.collider.gameObject.CompareTag("Instant Death"))
         {
             return false;
         }
