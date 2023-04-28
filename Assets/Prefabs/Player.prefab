@@ -5060,6 +5060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comOffset: -0.25
+  thunkSound: {fileID: 8300000, guid: 918dbc0358a828443ad2f0529e12673f, type: 3}
   head: {fileID: 1615993913322844211}
 --- !u!114 &8715910408759864881
 MonoBehaviour:
@@ -5653,6 +5654,7 @@ MonoBehaviour:
   snoreSource: {fileID: 3051810246998540214}
   zzzParticles: {fileID: 8707135051367881665}
   chompClip: {fileID: 8300000, guid: 94c29dee31d0062479756df03d388c5f, type: 3}
+  thunkSound: {fileID: 8300000, guid: 918dbc0358a828443ad2f0529e12673f, type: 3}
   neck: {fileID: 5403534888202816348}
   flowerpot: {fileID: 1615993911643782221}
   tongue: {fileID: 1615993912969288472}
@@ -5695,6 +5697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a165a4fed8b30dd4aa0ada067dc54ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deaths: 0
   fullHealth: 100
   currHealth: 0
   respawnTime: 1.5

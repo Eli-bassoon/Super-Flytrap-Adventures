@@ -5,6 +5,7 @@ using UnityEngine;
 public class Flowerpot : MonoBehaviour
 {
     [Range(-.3f, 0)] [SerializeField] private float comOffset = -0.25f;
+    [SerializeField] AudioClip thunkSound;
 
     public Rigidbody2D head;
 
@@ -25,6 +26,11 @@ public class Flowerpot : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         PlayerMovement.instance.CheckJoltAwakeCollision(collision);
+
+        if (collision.relativeVelocity.magnitude > 2f)
+        {
+            //SoundManager.SM.PlaySound(thunkSound);
+        }
     }
 
     private void OnDrawGizmosSelected()

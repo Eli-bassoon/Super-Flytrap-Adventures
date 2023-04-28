@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] AudioClip chompClip;
+    [SerializeField] AudioClip thunkSound;
 
     [Header("References")]
     public Transform neck;
@@ -686,6 +687,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         CheckJoltAwakeCollision(collision);
+
+        if (collision.relativeVelocity.magnitude > 2f)
+        {
+            //SoundManager.SM.PlaySound(thunkSound);
+        }
     }
 
     private void OnJointBreak2D(Joint2D joint)
