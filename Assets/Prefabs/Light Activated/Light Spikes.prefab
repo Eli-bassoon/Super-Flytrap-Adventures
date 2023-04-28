@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1827796759160360588}
   m_Layer: 10
   m_Name: Light Spikes
-  m_TagString: Not Grabbable
+  m_TagString: Instant Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8180825471074441666
 MonoBehaviour:
