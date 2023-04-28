@@ -10,15 +10,18 @@ public class DamageHandler : MonoBehaviour
 
     [SerializeField] float fullHealth = 100f;
     [SerializeField] float currHealth; // = fullHealth;
+    [SerializeField] float respawnTime = 1.5f;
     [SerializeField] GameObject checkpointPrefab; // drag prefab here 
     [SerializeField] Transform checkpointLatest;
     [SerializeField] Image chompyIndicator;
+    [SerializeField] List<ParticleSystem> deathParticles;
     Rigidbody2D rb;
     Rigidbody2D flowerpot;
     Rigidbody2D tongue;
     List<Rigidbody2D> rbList;
 
     bool damageable = true;
+    [HideInInspector] public bool respawning = false;
 
     private void Awake()
     {
@@ -64,6 +67,24 @@ public class DamageHandler : MonoBehaviour
 
     public void Respawn()
     {
+        if (!respawning)
+        {
+            respawning = true;
+            StartCoroutine(RespawnCR());
+        }
+    }
+
+    IEnumerator RespawnCR()
+    {
+        print("Respawning");
+        ChangeVisibility(false);
+        ChangeStatic(true);
+        foreach (var system in deathParticles) system.Play();
+        Camera.main.GetComponent<CameraShaker>().Shake();
+
+        yield return new WaitForSeconds(respawnTime);
+
+        // Reset position and velocity
         foreach (Rigidbody2D body in rbList)
         {
             body.position = checkpointLatest.position;
@@ -74,9 +95,41 @@ public class DamageHandler : MonoBehaviour
 
         tongue.position = rb.position;
 
+        // Reset more things
         GetComponent<PlayerMovement>().LetGo();
         currHealth = fullHealth;
-
         checkpointLatest.GetComponent<TriggerCheckpoint>().onRespawn.Invoke();
+        ChangeStatic(false);
+
+        // Wait to stop graphical glitches
+        yield return new WaitForFixedUpdate();
+        ChangeVisibility(true);
+        respawning = false;
+    }
+
+    void ChangeVisibility(bool visible)
+    {
+        PlayerMovement.instance.flowerpot.GetComponent<SpriteRenderer>().enabled = visible;
+        PlayerMovement.instance.rightMouthHalf.GetComponent<SpriteRenderer>().enabled = visible;
+        PlayerMovement.instance.leftMouthHalf.GetComponent<SpriteRenderer>().enabled = visible;
+        PlayerMovement.instance.tongue.GetComponent<SpriteRenderer>().enabled = visible;
+
+        PlayerMovement.instance.tongue.GetComponent<LineRenderer>().enabled = visible;
+        PlayerMovement.instance.neck.GetComponent<LineRenderer>().enabled = visible;
+    }
+
+    void ChangeStatic(bool isStatic)
+    {
+        rb.isKinematic = isStatic;
+        flowerpot.isKinematic = isStatic;
+
+        if (isStatic)
+        {
+            rb.velocity = Vector2.zero;
+            flowerpot.velocity = Vector2.zero;
+
+            rb.angularVelocity = 0;
+            flowerpot.angularVelocity = 0;
+        }
     }
 }

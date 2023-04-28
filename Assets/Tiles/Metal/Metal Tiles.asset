@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dcf1ede0e9996e4593d98a662bd4fd5, type: 3}
+  m_Name: Metal Tiles
+  m_EditorClassIdentifier: 
+  sharedConnectingTiles:
+  - {fileID: 11400000, guid: 67ebb8c6a001df64fa5f046e32584a1e, type: 2}
+  - {fileID: 11400000, guid: 7195d040c6050f34d82fcaa005f1192f, type: 2}
+  - {fileID: 11400000, guid: a111f66745496b14f80d9f12ac30153b, type: 2}
