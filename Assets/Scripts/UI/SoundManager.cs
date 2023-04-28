@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-
-    [SerializeField] AudioSource[] audioSources;
+    AudioSource[] audioSources;
 
     public static SoundManager SM;
-
 
     void Awake()
     {
@@ -21,11 +19,14 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
     }
 
-    public void PlaySound(AudioClip clip)
+    void Start()
+    {
+        audioSources = GetComponentsInChildren<AudioSource>();
+    }
+
+    public AudioSource PlaySound(AudioClip clip)
     {
         foreach (AudioSource audioSource in audioSources)
         {
@@ -33,9 +34,10 @@ public class SoundManager : MonoBehaviour
             {
                 audioSource.clip = clip;
                 audioSource.Play();
-                return;
+                return audioSource;
             }
         }
+        return null;
     }
 
     public void ChangeVolume(float value)
@@ -50,8 +52,4 @@ public class SoundManager : MonoBehaviour
     {
         //_effectsSource.mute = !_effectsSource.mute;
     }
-
-
-
-
 }

@@ -139,7 +139,6 @@ public class PlayerMovement : MonoBehaviour
         {
             ExtendTongue();
             canMove = true;
-            SoundManager.SM.PlaySound(chompClip);
         }
         // Gets a vector to the mouse's position in world if pressed down
         if (Input.GetMouseButton(0))
@@ -505,6 +504,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 rb.rotation = Mathf.Atan2(retractingDirection.y, retractingDirection.x) * Mathf.Rad2Deg - 90;
+                SoundManager.SM.PlaySound(chompClip);
                 DisableTongue();
                 anim.SetInteger(mouthStateAnim, (int)MouthStates.Grabbing);
             }

@@ -6,6 +6,8 @@ using UnityEngine.Rendering.Universal;
 
 public class ToggleLight : Toggleable
 {
+    [SerializeField] AudioClip lightSound;
+
     private Animator anim;
     private Light2D lamp;
 
@@ -22,6 +24,9 @@ public class ToggleLight : Toggleable
         base.SetOn(state);
         anim.SetBool("activated", on);
         lamp.enabled = on;
+
+        if (Vector2.Distance(transform.position, PlayerMovement.instance.transform.position) < 15f)
+            SoundManager.SM.PlaySound(lightSound);
     }
 
     protected override void SetOnEditor()

@@ -51,6 +51,7 @@ MonoBehaviour:
   splineContainer: {fileID: 5112168176324690547}
   rb: {fileID: 5112168175574692383}
   moveTime: 1
+  moveClip: {fileID: 8300000, guid: 36b7bc3ceb9a97c4e8e3553fb67be0ce, type: 3}
 --- !u!1 &5112168175574692380
 GameObject:
   m_ObjectHideFlags: 0

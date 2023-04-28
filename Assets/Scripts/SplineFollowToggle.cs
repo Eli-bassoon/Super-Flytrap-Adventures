@@ -9,6 +9,7 @@ public class SplineFollowToggle : Toggleable
     [SerializeField] SplineContainer splineContainer;
     [SerializeField][Label("Moving Rigidbody")] Rigidbody2D rb;
     [SerializeField] float moveTime = 1f;
+    [SerializeField] AudioClip moveClip;
 
     float along = 0;
     Coroutine cr;
@@ -27,6 +28,8 @@ public class SplineFollowToggle : Toggleable
 
     IEnumerator Move()
     {
+        AudioSource sound = SoundManager.SM.PlaySound(moveClip);
+
         while ((on && along < 1) || (!on && along > 0))
         {
             // Change along position
@@ -42,6 +45,8 @@ public class SplineFollowToggle : Toggleable
 
             yield return new WaitForFixedUpdate();
         }
+
+        if (sound.isPlaying) sound.Stop();
     }
 
     public void GoToStart()

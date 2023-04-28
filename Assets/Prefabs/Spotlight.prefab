@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   on: 1
   invertReceivedBool: 0
+  lightSound: {fileID: 8300000, guid: 5eb52f0a296312749a1cd70dafcc1220, type: 3}
 --- !u!212 &32778261714494671
 SpriteRenderer:
   m_ObjectHideFlags: 0
