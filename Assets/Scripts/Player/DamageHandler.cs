@@ -78,6 +78,7 @@ public class DamageHandler : MonoBehaviour
         ChangeVisibility(false);
         ChangeStatic(true);
         foreach (var system in deathParticles) system.Play();
+        Camera.main.GetComponent<CameraShaker>().Shake();
 
         yield return new WaitForSeconds(respawnTime);
 
