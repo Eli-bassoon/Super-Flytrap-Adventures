@@ -17,7 +17,7 @@ public class LevelLoader : MonoBehaviour
         new List<string> {"Intro", "Hub", "Hanging Pots", "Toxic" },
         
         // Level 2
-        new List<string> {"Hub", "Light1"},
+        new List<string> {"Hub", "Light1", "Light2" },
     };
 
     const string SCENE_PATH = "Assets/Scenes/Levels/Level";
