@@ -10,7 +10,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] public string firstLevelFilepath = "";
 
 
-
     public void StartGame()
     { 
         LevelLoader.LoadLevelFade(1);

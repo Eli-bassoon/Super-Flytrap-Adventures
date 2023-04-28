@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DamageHandler : MonoBehaviour
 {
     public static DamageHandler instance;
+    public int deaths = 0;
 
     [SerializeField] float fullHealth = 100f;
     [SerializeField] float currHealth; // = fullHealth;
@@ -56,6 +57,7 @@ public class DamageHandler : MonoBehaviour
         currHealth -= dmg;
         if (currHealth <= 0)
         {
+            deaths++;
             Respawn();
         }
     }

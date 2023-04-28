@@ -5,7 +5,7 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     public static MusicManager MM;
-    AudioSource a;
+    [SerializeField] AudioSource a;
 
     // Start is called before the first frame update
 
@@ -15,7 +15,7 @@ public class MusicManager : MonoBehaviour
     }
     void Start()
     {
-        a = GetComponent<AudioSource>();
+        // a = GetComponent<AudioSource>();
     }
 
     public void SetMusicTrack(AudioClip track)

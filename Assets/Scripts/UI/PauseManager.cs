@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,11 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseButton;
     public Fader fade;
 
+    [SerializeField] GameObject deathCounter;
+    [SerializeField] Toggle deathCounterToggle;
+
+    [SerializeField] Toggle invertedSwingingToggle;
+
     public Slider musicSlider;
     public Slider soundSlider;
 
@@ -30,9 +36,15 @@ public class PauseManager : MonoBehaviour
         // Load & enforce player prefs
         musicSlider.value = PlayerPrefs.GetFloat("musicVolume", 1f);
         soundSlider.value = PlayerPrefs.GetFloat("soundVolume", 1f);
-
         ChangeMusicVolume();
         ChangeSoundVolume();
+    }
+
+    public void Awake()
+    {
+        bool deathCounterOn = (PlayerPrefs.GetInt("deathCounterOn", 0) == 1) ? true : false;
+        deathCounter.SetActive(deathCounterOn);
+        deathCounterToggle.SetIsOnWithoutNotify(deathCounterOn);
     }
 
     public void Pause()
@@ -89,6 +101,7 @@ public class PauseManager : MonoBehaviour
     {
         Unpause();
         SceneManager.LoadScene(mainMenuScene);
+        deathCounter.SetActive(false);
     }
 
     public void QuitGame()
@@ -109,5 +122,21 @@ public class PauseManager : MonoBehaviour
         float vol = soundSlider.value;
         SoundManager.SM.ChangeVolume(vol);
         PlayerPrefs.SetFloat("soundVolume", vol);
+    }
+
+    public void UpdateDeathCounter()
+    {
+        if (deathCounterToggle.isOn)
+        {
+            deathCounter.SetActive(true);
+        }
+        else deathCounter.SetActive(false);
+        PlayerPrefs.SetInt("deathCounterOn", deathCounterToggle.isOn ? 1 : 0);
+    }
+
+    public void UpdateInvertedSwinging()
+    {
+        GameManager.GM.invertedSwinging = invertedSwingingToggle.isOn;
+        //print("inverted swinging is" +  invertedSwingingToggle.isOn);
     }
 }
