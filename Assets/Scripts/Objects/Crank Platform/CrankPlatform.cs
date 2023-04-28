@@ -28,9 +28,6 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
 
     Rigidbody2D rb;
 
-    Vector2? potRelPos;
-    Vector2 prevPos;
-    Vector2 posDelta;
     float splineLength;
     float crankSign;
 
@@ -40,13 +37,6 @@ public class CrankPlatform : MonoBehaviour, IFloatAcceptor
 
         splineLength = splineContainer.CalculateLength();
         crankSign = (int)forwardDir;
-        prevPos = rb.position;
-    }
-
-    void FixedUpdate()
-    {
-        posDelta = rb.position - prevPos;
-        prevPos = rb.position;
     }
 
     public void TakeFloat(float f)

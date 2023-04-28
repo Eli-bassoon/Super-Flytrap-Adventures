@@ -34,7 +34,6 @@ public class CrankPlatformDebounce : MonoBehaviour
             PlayerMovement.instance.flowerpot.position = (Vector2)transform.position + potRelPos;
             PlayerMovement.instance.flowerpot.rotation = 0;
 
-            //PlayerMovement.instance.flowerpot.velocity = Vector2.zero;
             PlayerMovement.instance.flowerpot.angularVelocity = 0;
         }
     }
