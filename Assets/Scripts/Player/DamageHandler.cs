@@ -60,7 +60,6 @@ public class DamageHandler : MonoBehaviour
         currHealth -= dmg;
         if (currHealth <= 0)
         {
-            deaths++;
             Respawn();
         }
     }
@@ -69,6 +68,7 @@ public class DamageHandler : MonoBehaviour
     {
         if (!respawning)
         {
+            deaths++;
             respawning = true;
             StartCoroutine(RespawnCR());
         }
