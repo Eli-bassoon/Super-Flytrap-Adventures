@@ -45,6 +45,17 @@ public class DoomController : MonoBehaviour
         StartCoroutine(DoomWall());
     }
 
+    public void ResetDoomWall()
+    {
+        StopAllCoroutines();
+        progress = 0;
+
+        foreach (var obj in toggleObjects)
+        {
+            obj.TurnOn();
+        }
+    }
+
     // Runs the wall of doom
     IEnumerator DoomWall()
     {

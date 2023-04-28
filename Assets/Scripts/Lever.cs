@@ -82,9 +82,9 @@ public class Lever : MonoBehaviour
     public void SetAngle(float newAngle)
     {
         angle = newAngle;
-        Vector3 newHandleRelPos = Quaternion.Euler(0, 0, angle) * transform.right * length;
+        Vector3 newHandleRelPos = Quaternion.Euler(0, 0, transform.eulerAngles.z + angle) * Vector2.right * length;
         handle.transform.localPosition = newHandleRelPos;
-        handle.transform.localEulerAngles = new Vector3(0, 0, angle - 90);
+        handle.transform.localEulerAngles = new Vector3(0, 0, transform.eulerAngles.z + angle - 90);
     }
 
     public void SetState(LeverStates newState)

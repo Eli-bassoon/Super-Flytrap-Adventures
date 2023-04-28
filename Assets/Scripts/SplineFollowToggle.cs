@@ -43,4 +43,11 @@ public class SplineFollowToggle : Toggleable
             yield return new WaitForFixedUpdate();
         }
     }
+
+    public void GoToStart()
+    {
+        along = 0;
+        var pos = (Vector3)splineContainer.EvaluatePosition(along);
+        rb.MovePosition(pos);
+    }
 }
