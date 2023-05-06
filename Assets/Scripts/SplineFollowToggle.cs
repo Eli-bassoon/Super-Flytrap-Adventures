@@ -46,7 +46,11 @@ public class SplineFollowToggle : Toggleable
             yield return new WaitForFixedUpdate();
         }
 
-        if (sound.isPlaying) sound.Stop();
+        if (sound != null)
+        {
+            if (sound.isPlaying) 
+                sound.Stop();
+        }
     }
 
     public void GoToStart()

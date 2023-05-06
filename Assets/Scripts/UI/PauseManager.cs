@@ -36,6 +36,7 @@ public class PauseManager : MonoBehaviour
         // Load & enforce player prefs
         musicSlider.value = PlayerPrefs.GetFloat("musicVolume", 1f);
         soundSlider.value = PlayerPrefs.GetFloat("soundVolume", 1f);
+        SoundManager.SM.GetAudioSources();
         ChangeMusicVolume();
         ChangeSoundVolume();
     }

@@ -21,7 +21,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public void GetAudioSources()
     {
         audioSources = GetComponentsInChildren<AudioSource>();
     }
