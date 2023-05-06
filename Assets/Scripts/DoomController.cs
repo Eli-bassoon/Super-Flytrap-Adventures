@@ -70,7 +70,7 @@ public class DoomController : MonoBehaviour
             {
                 if (obj.transform.position.x < maxX)
                 {
-                    obj.TurnOff();
+                    if (obj.IsOn) obj.TurnOff();
                 }
             }
 
