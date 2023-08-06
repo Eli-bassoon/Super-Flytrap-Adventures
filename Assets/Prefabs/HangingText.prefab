@@ -175,7 +175,7 @@ FixedJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.4575831, y: -0.3864503}
+  m_ConnectedAnchor: {x: -0.45758334, y: -0.38645014}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!1 &862636901971626271
@@ -353,7 +353,7 @@ FixedJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.4570999, y: -0.38845015}
+  m_ConnectedAnchor: {x: 0.4571003, y: -0.38845}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!1 &862636902037408006
@@ -531,7 +531,7 @@ FixedJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.45758376, y: 0.3947997}
+  m_ConnectedAnchor: {x: -0.4575837, y: 0.39479986}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!1 &862636902583170510
@@ -709,7 +709,7 @@ FixedJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.4570999, y: 0.39279985}
+  m_ConnectedAnchor: {x: 0.4571, y: 0.3928}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!1 &862636902823011342
@@ -875,7 +875,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 862636902892910882}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.4665, y: 3.5427, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -885,7 +885,7 @@ Transform:
   - {fileID: 862636901971626270}
   - {fileID: 862636901739124574}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &862636902892910886
 SpriteRenderer:
