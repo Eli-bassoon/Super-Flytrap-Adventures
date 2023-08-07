@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     public void SetLevel(int level)
     {
         this.level = level;
-        SpeedrunManager.instance.StartLevel(level);
+        SpeedrunManager.instance.StartLevel();
     }
 
     public void Exit()

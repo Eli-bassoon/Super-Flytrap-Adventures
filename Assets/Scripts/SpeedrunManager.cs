@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,16 +31,31 @@ public class SpeedrunManager : MonoBehaviour
         levelTimes = new List<float>(new float[2]);
     }
 
-    public void StopLevel(int level)
+    public void StopLevel()
     {
-        levelTimes[level] = levelTime;
+        levelTimes[GameManager.GM.level] = levelTime;
         savedTime = levelTime;
         running = false;
     }
 
-    public void StartLevel(int level)
+    public void StartLevel()
     {
         running = true;
         levelStartTime = Time.time;
+    }
+
+    // Turns a time in seconds into a string depending on how long it took
+    public static string FormatTime(float timeSeconds)
+    {
+        TimeSpan time = TimeSpan.FromSeconds(timeSeconds);
+
+        if (time.Hours > 0)
+        {
+            return time.ToString("h':'mm':'ss'.'ff");
+        }
+        else
+        {
+            return time.ToString("m':'ss'.'ff");
+        }
     }
 }

@@ -44,7 +44,6 @@ public class LevelLoader : MonoBehaviour
 #if UNITY_EDITOR
         if (Application.isPlaying)
         {
-            SpeedrunManager.instance.StopLevel(GameManager.GM.level);
             SceneManager.LoadScene(firstScenePath);
             GameManager.GM.SetLevel(level - 1);
         }
@@ -71,9 +70,6 @@ public class LevelLoader : MonoBehaviour
 
         // Game mode
 #else
-        // Stop and save the current time
-        SpeedrunManager.instance.StopLevel(GameManager.GM.level);
-
         // Load the scene in the game
         SceneManager.LoadScene(firstScenePath);
 

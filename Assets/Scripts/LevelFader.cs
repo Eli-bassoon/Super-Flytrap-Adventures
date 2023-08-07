@@ -34,6 +34,9 @@ public class LevelFader : MonoBehaviour
     {
         // This is swapped because level "fading out" is black panel "fading in"
         spriteFader.FadeIn(fadeOutTime);
+        // Stop and save the current time
+        SpeedrunManager.instance.StopLevel();
+
         yield return new WaitForSeconds(fadeOutTime);
 
         // Loading the level

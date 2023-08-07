@@ -15,15 +15,6 @@ public class SpeedrunTimer : MonoBehaviour
 
     void Update()
     {
-        TimeSpan time = TimeSpan.FromSeconds(SpeedrunManager.instance.levelTime);
-
-        if (time.Hours > 0)
-        {
-            text.text = time.ToString("h':'mm':'ss'.'ff");
-        }
-        else
-        {
-            text.text = time.ToString("m':'ss'.'ff");
-        }
+        text.text = SpeedrunManager.FormatTime(SpeedrunManager.instance.levelTime);
     }
 }
