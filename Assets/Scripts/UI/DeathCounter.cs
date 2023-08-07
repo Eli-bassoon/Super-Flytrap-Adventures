@@ -7,17 +7,17 @@ using UnityEngine.UI;
 public class DeathCounter : MonoBehaviour
 {
     int deaths;
-    [SerializeField] TextMeshProUGUI deathCounter;
-    // Start is called before the first frame update
-    void Start()
-    {
+    TextMeshProUGUI text;
 
+    private void Awake()
+    {
+        text = GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         deaths = DamageHandler.instance.deaths;
-        deathCounter.SetText(deaths.ToString() + "\nDEATHS");
+        string plural = deaths == 1 ? "" : "S";
+        text.SetText($"{deaths}\nDEATH{plural}");
     }
 }
