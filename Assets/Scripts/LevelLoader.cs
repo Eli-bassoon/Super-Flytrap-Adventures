@@ -74,7 +74,7 @@ public class LevelLoader : MonoBehaviour
         SceneManager.LoadScene(firstScenePath);
 
         // Change the level the game thinks it's on
-        GameManager.GM.SetLevel(level);
+        GameManager.GM.SetLevel(level - 1);
 #endif
 
         // Load the extra scenes of the level
