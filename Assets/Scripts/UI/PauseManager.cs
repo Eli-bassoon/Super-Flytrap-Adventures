@@ -46,6 +46,10 @@ public class PauseManager : MonoBehaviour
 
     public void Awake()
     {
+        bool invertedSwingingOn = (PlayerPrefs.GetInt("invertedSwingingOn", 0) == 1) ? true : false;
+        GameManager.GM.invertedSwinging = invertedSwingingOn;
+        invertedSwingingToggle.SetIsOnWithoutNotify(invertedSwingingOn);
+
         bool deathCounterOn = (PlayerPrefs.GetInt("deathCounterOn", 0) == 1) ? true : false;
         deathCounter.SetActive(deathCounterOn);
         deathCounterToggle.SetIsOnWithoutNotify(deathCounterOn);
@@ -145,6 +149,7 @@ public class PauseManager : MonoBehaviour
     public void UpdateInvertedSwinging(bool isOn)
     {
         GameManager.GM.invertedSwinging = isOn;
+        PlayerPrefs.SetInt("invertedSwingingOn", isOn ? 1 : 0);
     }
 
     public void UpdateSpeedrunTimer(bool isOn)
