@@ -474,7 +474,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 // Thing we're stuck to fits in mouth
-                if (stuckTo != null && stuckTo.gameObject.TryGetComponent(out FitsInMouth _))
+                if (stuckTo != null && stuckTo.gameObject.TryGetComponent(out FitsInMouth fim))
                 {
                     stuckTo.excludeLayers = LayerMask.GetMask(new string[] { "Player" });
                     mouthFull = true;
@@ -484,6 +484,12 @@ public class PlayerMovement : MonoBehaviour
                     {
                         fixedJoint.connectedBody = tongueFixedJoint.connectedBody;
                         fixedJoint.connectedAnchor = Vector2.zero;
+                    }
+
+                    // Fix some jittering
+                    if (!fim.constrained)
+                    {
+                        fixedJoint.frequency = 1;
                     }
                 }
                 else
@@ -561,6 +567,7 @@ public class PlayerMovement : MonoBehaviour
         springJoint.enabled = false;
         fixedJoint.enabled = false;
         fixedJoint.connectedBody = null;
+        fixedJoint.frequency = 0;
 
         canMove = false;
         canGrab = false;
