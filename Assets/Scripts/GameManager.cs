@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     // Variables
     [HideInInspector] public bool gameIsRunning = true;
     public bool invertedSwinging = false;
+    public const int NUM_LEVELS = 2;
+    public int level = 0;
 
     // Runs before a scene gets loaded
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -47,6 +49,12 @@ public class GameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
 
+    }
+
+    public void SetLevel(int level)
+    {
+        this.level = level;
+        SpeedrunManager.instance.StartLevel(level);
     }
 
     public void Exit()

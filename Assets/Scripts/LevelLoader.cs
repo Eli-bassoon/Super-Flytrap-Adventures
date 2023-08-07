@@ -32,6 +32,7 @@ public class LevelLoader : MonoBehaviour
     // Load a level consisting of multiple scenes. This works in both edit mode and play mode
     public static void LoadLevel(int level)
     {
+        // Start loading the level
         levelLoaded = false;
 
         List<string> thisLevelScenes = levelScenes[level - 1];
@@ -39,10 +40,13 @@ public class LevelLoader : MonoBehaviour
         // Load the main scene of the level
         string firstScenePath = JoinScenePath(level, thisLevelScenes[0]);
 
+        // Editor only
 #if UNITY_EDITOR
         if (Application.isPlaying)
         {
+            SpeedrunManager.instance.StopLevel(GameManager.GM.level);
             SceneManager.LoadScene(firstScenePath);
+            GameManager.GM.SetLevel(level - 1);
         }
         else
         {
@@ -64,8 +68,17 @@ public class LevelLoader : MonoBehaviour
                 }
             }
         }
+
+        // Game mode
 #else
+        // Stop and save the current time
+        SpeedrunManager.instance.StopLevel(GameManager.GM.level);
+
+        // Load the scene in the game
         SceneManager.LoadScene(firstScenePath);
+
+        // Change the level the game thinks it's on
+        GameManager.GM.SetLevel(level);
 #endif
 
         // Load the extra scenes of the level

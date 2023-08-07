@@ -13,6 +13,8 @@ public class TabManager : MonoBehaviour
     [SerializeField] Button gameplayTabButton;
     [SerializeField] Color tabColor;
 
+    Color inactiveColor = new Color(0.6f, 0.6f, 0.6f);
+
     TextMeshProUGUI audioButtonText;
     TextMeshProUGUI gameplayButtonText;
 
@@ -36,11 +38,11 @@ public class TabManager : MonoBehaviour
         if (viewingAudio)
         {
             audioButtonText.color = tabColor;
-            gameplayButtonText.color = Color.gray; 
+            gameplayButtonText.color = inactiveColor; 
         }
         else
         {
-            audioButtonText.color = Color.gray;
+            audioButtonText.color = inactiveColor;
             gameplayButtonText.color = tabColor;
         }
     }

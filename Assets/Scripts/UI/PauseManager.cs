@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
@@ -19,9 +20,11 @@ public class PauseManager : MonoBehaviour
     public Fader fade;
 
     [SerializeField] GameObject deathCounter;
-    [SerializeField] Toggle deathCounterToggle;
+    [SerializeField] GameObject speedrunTimer;
 
+    [SerializeField] Toggle deathCounterToggle;
     [SerializeField] Toggle invertedSwingingToggle;
+    [SerializeField] Toggle speedrunTimerToggle;
 
     public Slider musicSlider;
     public Slider soundSlider;
@@ -46,6 +49,10 @@ public class PauseManager : MonoBehaviour
         bool deathCounterOn = (PlayerPrefs.GetInt("deathCounterOn", 0) == 1) ? true : false;
         deathCounter.SetActive(deathCounterOn);
         deathCounterToggle.SetIsOnWithoutNotify(deathCounterOn);
+
+        bool speedrunTimerOn = (PlayerPrefs.GetInt("speedrunTimerOn", 0) == 1) ? true : false;
+        speedrunTimer.SetActive(speedrunTimerOn);
+        speedrunTimerToggle.SetIsOnWithoutNotify(speedrunTimerOn);
     }
 
     public void Pause()
@@ -125,19 +132,20 @@ public class PauseManager : MonoBehaviour
         PlayerPrefs.SetFloat("soundVolume", vol);
     }
 
-    public void UpdateDeathCounter()
+    public void UpdateDeathCounter(bool isOn)
     {
-        if (deathCounterToggle.isOn)
-        {
-            deathCounter.SetActive(true);
-        }
-        else deathCounter.SetActive(false);
-        PlayerPrefs.SetInt("deathCounterOn", deathCounterToggle.isOn ? 1 : 0);
+        deathCounter.SetActive(isOn);
+        PlayerPrefs.SetInt("deathCounterOn", isOn ? 1 : 0);
     }
 
-    public void UpdateInvertedSwinging()
+    public void UpdateInvertedSwinging(bool isOn)
     {
-        GameManager.GM.invertedSwinging = invertedSwingingToggle.isOn;
-        //print("inverted swinging is" +  invertedSwingingToggle.isOn);
+        GameManager.GM.invertedSwinging = isOn;
+    }
+
+    public void UpdateSpeedrunTimer(bool isOn)
+    {
+        speedrunTimer.SetActive(isOn);
+        PlayerPrefs.SetInt("speedrunTimerOn", isOn ? 1 : 0);
     }
 }
