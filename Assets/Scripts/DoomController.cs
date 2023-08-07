@@ -6,6 +6,7 @@ public class DoomController : MonoBehaviour
 {
     [SerializeField] Transform allObjectParent;
     [SerializeField] float approachDelay = 1f;
+    [SerializeField] int playerSlack = 9;
 
     List<Toggleable> toggleObjects;
 
@@ -65,6 +66,11 @@ public class DoomController : MonoBehaviour
         {
             // Turn off everything that falls too far behind
             progress++;
+
+            // Makes sure the progress is closeish to the player
+            int playerBoundary = Mathf.FloorToInt(PlayerMovement.instance.transform.position.x - startX - playerSlack);
+            progress = Mathf.Clamp(progress, playerBoundary, maxProgress);
+
             float maxX = startX + progress;
             foreach (var obj in toggleObjects)
             {
