@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        // It is save to remove listeners even if they
+        // It is safe to remove listeners even if they
         // didn't exist so far.
         // This makes sure it is added only once
         SceneManager.sceneLoaded -= OnSceneLoaded;
