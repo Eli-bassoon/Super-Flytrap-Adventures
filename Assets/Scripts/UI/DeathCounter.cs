@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DeathCounter : MonoBehaviour
 {
-    int deaths;
+    public int deaths;
     TextMeshProUGUI text;
 
     private void Awake()

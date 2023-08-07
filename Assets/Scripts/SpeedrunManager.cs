@@ -28,7 +28,7 @@ public class SpeedrunManager : MonoBehaviour
     {
         instance = this;
 
-        levelTimes = new List<float>(new float[2]);
+        ResetTimes();
     }
 
     public void StopLevel()
@@ -42,6 +42,13 @@ public class SpeedrunManager : MonoBehaviour
     {
         running = true;
         levelStartTime = Time.time;
+    }
+
+    public void ResetTimes()
+    {
+        running = false;
+        savedTime = 0;
+        levelTimes = new List<float>(new float[GameManager.NUM_LEVELS]);
     }
 
     // Turns a time in seconds into a string depending on how long it took

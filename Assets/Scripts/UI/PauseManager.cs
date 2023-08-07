@@ -105,11 +105,15 @@ public class PauseManager : MonoBehaviour
         DamageHandler.instance.Respawn(); // is this what u mean
         Unpause();
     }
+
     public void GoToMainMenu()
     {
         Unpause();
         SceneManager.LoadScene(mainMenuScene);
-        deathCounter.SetActive(false);
+
+        // Reset deaths and times
+        deathCounter.GetComponent<DeathCounter>().deaths = 0;
+        SpeedrunManager.instance.ResetTimes();
     }
 
     public void QuitGame()
