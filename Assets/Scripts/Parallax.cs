@@ -11,13 +11,13 @@ public class Parallax : MonoBehaviour
 
     void Start()
     {
-        playerStartPos = PlayerMovement.instance.transform.position;
+        playerStartPos = Camera.main.transform.position;
         startPos = transform.position;
     }
 
     void Update()
     {
-        Vector2 playerDelt = (Vector2)PlayerMovement.instance.transform.position - playerStartPos;
+        Vector2 playerDelt = (Vector2)Camera.main.transform.position - playerStartPos;
         transform.position = startPos - playerDelt * parallaxFactor;
     }
 }
