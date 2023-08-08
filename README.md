@@ -1,14 +1,16 @@
-# Super-Flytrap-Adventures
+# Super Flytrap Adventures
+
+A 2D platformer game with a unique movement scheme. Control Chompy the Venus flytrap and grapple onto the world around you in this 2D platformer, solving puzzles and surviving platforming challenges.
+
+Made over the course of the spring 2023 semester with the [Game Creation Society](https://www.gamecreation.org/) at Carnegie Mellon University. Created with Unity 2022.2.5f1.
+
+Also out on [itch.io](https://kequals.itch.io/super-flytrap-adventures-gcs).
+
+## For Developers
 
 **BEFORE YOU BEGIN**
 
 Here's how to get set up: [Setup](Setup.md)
-
-## Getting Visual Studio to Recognize Unity
-
-* Go to Edit > Preferences
-* Go to the "External Tools" tab
-* Change the External Script Editor from "Open by file extension" to "Microsoft Visual Studio 2022"
 
 ## Code Style
 
