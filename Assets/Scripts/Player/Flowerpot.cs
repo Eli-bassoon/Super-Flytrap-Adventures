@@ -6,6 +6,8 @@ public class Flowerpot : MonoBehaviour
 {
     [Range(-.3f, 0)] [SerializeField] private float comOffset = -0.25f;
     [SerializeField] AudioClip thunkSound;
+    [Range(0, 2f)][SerializeField] float thunkDelay = 0.5f;
+    bool canThunk = true;
 
     public Rigidbody2D head;
 
@@ -27,10 +29,18 @@ public class Flowerpot : MonoBehaviour
     {
         PlayerMovement.instance.CheckJoltAwakeCollision(collision);
 
-        if (collision.relativeVelocity.magnitude > 2f)
+        if (collision.relativeVelocity.magnitude > 2f && canThunk)
         {
-            //SoundManager.SM.PlaySound(thunkSound);
+            SoundManager.SM.PlaySound(thunkSound);
+            StartCoroutine(ThunkDelayCR());
         }
+    }
+
+    IEnumerator ThunkDelayCR()
+    {
+        canThunk = false;
+        yield return new WaitForSeconds(thunkDelay);
+        canThunk = true;
     }
 
     private void OnDrawGizmosSelected()
