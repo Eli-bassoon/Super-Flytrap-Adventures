@@ -14,6 +14,7 @@ public class DamageHandler : MonoBehaviour
     [SerializeField] GameObject checkpointPrefab; // drag prefab here 
     [SerializeField] Transform checkpointLatest;
     [SerializeField] Image chompyIndicator;
+    [SerializeField] AudioClip deathSound;
     [SerializeField] List<ParticleSystem> deathParticles;
     Rigidbody2D rb;
     Rigidbody2D flowerpot;
@@ -68,8 +69,6 @@ public class DamageHandler : MonoBehaviour
     {
         if (!respawning)
         {
-            deaths++;
-            respawning = true;
             StartCoroutine(RespawnCR());
         }
     }
@@ -77,10 +76,13 @@ public class DamageHandler : MonoBehaviour
     IEnumerator RespawnCR()
     {
         print("Respawning");
+        deaths++;
+        respawning = true;
         ChangeVisibility(false);
         ChangeStatic(true);
         foreach (var system in deathParticles) system.Play();
         Camera.main.GetComponent<CameraShaker>().Shake();
+        SoundManager.SM.PlaySound(deathSound);
 
         yield return new WaitForSeconds(respawnTime);
 

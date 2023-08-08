@@ -5704,6 +5704,7 @@ MonoBehaviour:
   checkpointPrefab: {fileID: 4933152143070529459, guid: d11c4f8a6b9f9e14ab96ef653fcf174c, type: 3}
   checkpointLatest: {fileID: 0}
   chompyIndicator: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 223cbe197acfd094389b1fe0cd9c18d6, type: 3}
   deathParticles:
   - {fileID: 8538654843656523249}
   - {fileID: 2474821993432746159}
