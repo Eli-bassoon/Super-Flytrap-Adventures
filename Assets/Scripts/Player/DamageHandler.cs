@@ -15,7 +15,7 @@ public class DamageHandler : MonoBehaviour
     [SerializeField] Transform checkpointLatest;
     [SerializeField] Image chompyIndicator;
     [SerializeField] AudioClip deathSound;
-    [SerializeField] List<ParticleSystem> deathParticles;
+    [SerializeField] GameObject deathParticles;
     Rigidbody2D rb;
     Rigidbody2D flowerpot;
     Rigidbody2D tongue;
@@ -78,9 +78,16 @@ public class DamageHandler : MonoBehaviour
         print("Respawning");
         deaths++;
         respawning = true;
+
+        // Make invisible and static
         ChangeVisibility(false);
         ChangeStatic(true);
-        foreach (var system in deathParticles) system.Play();
+
+        // Spawn death particles
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
+        Instantiate(deathParticles, flowerpot.position, Quaternion.identity);
+
+        // Camera effect and sounds
         Camera.main.GetComponent<CameraShaker>().Shake();
         SoundManager.SM.PlaySound(deathSound);
 
@@ -122,9 +129,6 @@ public class DamageHandler : MonoBehaviour
 
     void ChangeStatic(bool isStatic)
     {
-        rb.isKinematic = isStatic;
-        flowerpot.isKinematic = isStatic;
-
         if (isStatic)
         {
             rb.velocity = Vector2.zero;
@@ -132,6 +136,14 @@ public class DamageHandler : MonoBehaviour
 
             rb.angularVelocity = 0;
             flowerpot.angularVelocity = 0;
+
+            rb.bodyType = RigidbodyType2D.Static;
+            flowerpot.bodyType = RigidbodyType2D.Static;
+        }
+        else
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            flowerpot.bodyType = RigidbodyType2D.Dynamic;
         }
     }
 }
