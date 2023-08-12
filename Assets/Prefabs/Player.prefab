@@ -174,6 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comOffset: -0.25
   thunkSound: {fileID: 8300000, guid: 2b82d294bb9072c4c8e6891616417a17, type: 3}
+  thunkParticle: {fileID: 7969834101505304600, guid: dd4150a06e8d2a34588c61cbafe0e9b4, type: 3}
   thunkDelay: 0.5
   head: {fileID: 1615993913322844211}
 --- !u!114 &8715910408759864881

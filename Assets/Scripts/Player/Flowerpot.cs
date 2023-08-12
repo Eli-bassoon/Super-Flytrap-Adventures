@@ -6,6 +6,7 @@ public class Flowerpot : MonoBehaviour
 {
     [Range(-.3f, 0)] [SerializeField] private float comOffset = -0.25f;
     [SerializeField] AudioClip thunkSound;
+    [SerializeField] GameObject thunkParticle;
     [Range(0, 2f)][SerializeField] float thunkDelay = 0.5f;
     bool canThunk = true;
 
@@ -32,6 +33,7 @@ public class Flowerpot : MonoBehaviour
         if (collision.relativeVelocity.magnitude > 2f && canThunk)
         {
             SoundManager.SM.PlaySound(thunkSound);
+            Instantiate(thunkParticle, collision.GetContact(0).point, Quaternion.identity);
             StartCoroutine(ThunkDelayCR());
         }
     }
