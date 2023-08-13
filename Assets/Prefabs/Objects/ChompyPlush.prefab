@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2157982035083237796}
   - component: {fileID: 2157982035083237795}
   - component: {fileID: 2157982035083237792}
+  - component: {fileID: 940420526718223008}
   m_Layer: 0
   m_Name: ChompyPlush
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2157982035083237794
 SpriteRenderer:
@@ -163,3 +164,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   regurgitable: 1
   constrained: 0
+--- !u!114 &940420526718223008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157982035083237798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16126a790b52837458702a221d3cd846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thunkSound: {fileID: 8300000, guid: 2d322cadb03a5ea40860eb7cb72956fd, type: 3}
+  thunkDelay: 0.5
