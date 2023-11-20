@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tracks:
-  - {fileID: 8300000, guid: 36c902a56798a644bb55df190a93e415, type: 3}
+  - {fileID: 0}
   trackNum: 0

@@ -741,6 +741,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1443448855898848603, guid: ca98d8eab5fe16d4e9e6f94831ef60fb, type: 3}
+      propertyPath: tracks.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 36c902a56798a644bb55df190a93e415, type: 3}
     - target: {fileID: 2014600131431470844, guid: ca98d8eab5fe16d4e9e6f94831ef60fb, type: 3}
       propertyPath: m_Name
       value: Level Objects

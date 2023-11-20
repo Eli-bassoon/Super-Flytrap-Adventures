@@ -5,29 +5,27 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     public static MusicManager MM;
-    [SerializeField] AudioSource a;
+    [HideInInspector] public AudioSource audioSource;
 
     // Start is called before the first frame update
 
     private void Awake()
     {
         if (MM == null) MM = this;
-    }
-    void Start()
-    {
-        // a = GetComponent<AudioSource>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void SetMusicTrack(AudioClip track)
     {
-        a.clip = track;
+        audioSource.clip = track;
+        audioSource.Play();
     }
+
     public void SetMusicVolume(float volume)
     {
-        a.volume = volume;
+        audioSource.volume = volume;
     }
-
-
 
     private string GetMusicFilepath(string trackName)
     {

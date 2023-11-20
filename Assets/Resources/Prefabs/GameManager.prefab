@@ -66,7 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb856098dc03da4a852e3b79ec39c29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToQuit: 1
 --- !u!114 &3489433786425624751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +79,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTimes: []
-  running: 0
 --- !u!1 &1021756126676119411
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949c94ab227fb0a48bbfafc58520bc93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a: {fileID: 1347235974777400139}
+  audioSource: {fileID: 0}
 --- !u!82 &1347235974777400139
 AudioSource:
   m_ObjectHideFlags: 0
@@ -393,8 +391,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 36c902a56798a644bb55df190a93e415, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
