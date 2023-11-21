@@ -49,7 +49,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 0.9622642, g: 0.79372346, b: 0.0944108, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 49e5a2ac858e4bd70000000027e9c958a3131273
@@ -144,7 +144,7 @@ Transform:
   m_Children:
   - {fileID: 32778261608869253}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &32778261714494665
 MonoBehaviour:

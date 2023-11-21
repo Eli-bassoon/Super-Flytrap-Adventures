@@ -793,8 +793,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 209113144092221374, guid: ca98d8eab5fe16d4e9e6f94831ef60fb, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3334,14 +3333,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1459966764}
+        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
+        m_MethodName: LoadLevelFade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -40084,6 +40083,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstLevelFilepath: Assets/Scenes/Levels/Level1/Intro.unity
+--- !u!114 &1459966764 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3684183494975054847, guid: ca98d8eab5fe16d4e9e6f94831ef60fb, type: 3}
+  m_PrefabInstance: {fileID: 102739577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e05fc50f27a4342877e43874890d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1506865958
 GameObject:
   m_ObjectHideFlags: 0
